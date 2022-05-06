@@ -1,18 +1,18 @@
 [PreviousGenFiles]
 AdvancedFolderStructure=true
 HeaderFileListSize=3
-HeaderFiles#0=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/second_mouse/Core/Inc/stm32f4xx_it.h
-HeaderFiles#1=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/second_mouse/Core/Inc/stm32f4xx_hal_conf.h
-HeaderFiles#2=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/second_mouse/Core/Inc/main.h
+HeaderFiles#0=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/Core/Inc/stm32f4xx_it.h
+HeaderFiles#1=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/Core/Inc/stm32f4xx_hal_conf.h
+HeaderFiles#2=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/Core/Inc/main.h
 HeaderFolderListSize=1
-HeaderPath#0=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/second_mouse/Core/Inc
+HeaderPath#0=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/Core/Inc
 HeaderFiles=;
 SourceFileListSize=3
-SourceFiles#0=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/second_mouse/Core/Src/stm32f4xx_it.c
-SourceFiles#1=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/second_mouse/Core/Src/stm32f4xx_hal_msp.c
-SourceFiles#2=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/second_mouse/Core/Src/main.c
+SourceFiles#0=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/Core/Src/stm32f4xx_it.c
+SourceFiles#1=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/Core/Src/stm32f4xx_hal_msp.c
+SourceFiles#2=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/Core/Src/main.c
 SourceFolderListSize=1
-SourcePath#0=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/second_mouse/Core/Src
+SourcePath#0=//wsl$/Ubuntu-20.04/home/rs/github.com/S-Reo/mouse_second/Core/Src
 SourceFiles=;
 
 [PreviousLibFiles]
