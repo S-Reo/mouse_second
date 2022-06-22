@@ -1,0 +1,1109 @@
+ARM GAS  /tmp/cc23II90.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"AS5047P.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.as5047p_dev_num_select,"ax",%progbits
+  18              		.align	1
+  19              		.global	as5047p_dev_num_select
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	as5047p_dev_num_select:
+  27              	.LVL0:
+  28              	.LFB216:
+  29              		.file 1 "Core/Src/AS5047P.c"
+   1:Core/Src/AS5047P.c **** 
+   2:Core/Src/AS5047P.c **** #include "AS5047P.h"
+   3:Core/Src/AS5047P.c **** 
+   4:Core/Src/AS5047P.c **** //読み書き対象のアドレスのビットとr/wのビットから偶数parityビットを計�
+   5:Core/Src/AS5047P.c **** //15bit中の1の個数が偶数なら0そうでなければ1
+   6:Core/Src/AS5047P.c **** 
+   7:Core/Src/AS5047P.c **** //パリティビットを含めたコマンド値を求めてTransmitに投げる
+   8:Core/Src/AS5047P.c **** #if 0
+   9:Core/Src/AS5047P.c **** uint16_t as5047p_read(uint16_t reg, int dev_num){
+  10:Core/Src/AS5047P.c ****     uint16_t ret,val;
+  11:Core/Src/AS5047P.c **** 
+  12:Core/Src/AS5047P.c ****     CS_RESET_1
+  13:Core/Src/AS5047P.c **** 	HAL_SPI_Transmit(&hspi3,&ret,1,100);
+  14:Core/Src/AS5047P.c **** 	HAL_SPI_Receive(&hspi3,&val,1,100);
+  15:Core/Src/AS5047P.c **** 	CS_SET_1
+  16:Core/Src/AS5047P.c **** }
+  17:Core/Src/AS5047P.c **** uint16_t as5047p_write(uint16_t reg){
+  18:Core/Src/AS5047P.c ****     uint16_t ret,val;
+  19:Core/Src/AS5047P.c ****     CS_RESET_2
+  20:Core/Src/AS5047P.c **** 	HAL_SPI_Transmit(&hspi3,&ret,1,100);
+  21:Core/Src/AS5047P.c **** 	HAL_SPI_Receive(&hspi3,&val,1,100);
+  22:Core/Src/AS5047P.c **** 	CS_SET_2
+  23:Core/Src/AS5047P.c **** }
+  24:Core/Src/AS5047P.c **** uint8_t ENC_init(){
+  25:Core/Src/AS5047P.c ****     return 0;
+  26:Core/Src/AS5047P.c **** }
+  27:Core/Src/AS5047P.c **** #else
+  28:Core/Src/AS5047P.c **** /**
+  29:Core/Src/AS5047P.c ****  * @file as5047p.c
+ARM GAS  /tmp/cc23II90.s 			page 2
+
+
+  30:Core/Src/AS5047P.c ****  * @author ZiTe (honmonoh@gmail.com)
+  31:Core/Src/AS5047P.c ****  * @brief  A library for AMS AS5047P rotary position sensor/magnetic encoder.
+  32:Core/Src/AS5047P.c ****  * @copyright MIT License, Copyright (c) 2022 ZiTe
+  33:Core/Src/AS5047P.c ****  *
+  34:Core/Src/AS5047P.c ****  */
+  35:Core/Src/AS5047P.c **** 
+  36:Core/Src/AS5047P.c **** //#include "as5047p.h"
+  37:Core/Src/AS5047P.c **** 
+  38:Core/Src/AS5047P.c **** #define BIT_MODITY(src, n, val) ((src) ^= (-(val) ^ (src)) & (1UL << (n)))
+  39:Core/Src/AS5047P.c **** #define BIT_READ(src, n) (((src) >> (n)&1U))
+  40:Core/Src/AS5047P.c **** #define BIT_TOGGLE(src, n) ((src) ^= 1UL << (n))
+  41:Core/Src/AS5047P.c **** 
+  42:Core/Src/AS5047P.c **** bool is_even_parity(uint16_t data);
+  43:Core/Src/AS5047P.c **** void as5047p_spi_transmit(uint16_t data);
+  44:Core/Src/AS5047P.c **** uint16_t as5047p_spi_receive();
+  45:Core/Src/AS5047P.c **** void delay(volatile uint16_t t);
+  46:Core/Src/AS5047P.c **** int spi3_dev_num=0;
+  47:Core/Src/AS5047P.c **** 
+  48:Core/Src/AS5047P.c **** void as5047p_dev_num_select(int n){
+  30              		.loc 1 48 35 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  49:Core/Src/AS5047P.c ****     spi3_dev_num = n;
+  35              		.loc 1 49 5 view .LVU1
+  36              		.loc 1 49 18 is_stmt 0 view .LVU2
+  37 0000 014B     		ldr	r3, .L2
+  38 0002 1860     		str	r0, [r3]
+  50:Core/Src/AS5047P.c **** }
+  39              		.loc 1 50 1 view .LVU3
+  40 0004 7047     		bx	lr
+  41              	.L3:
+  42 0006 00BF     		.align	2
+  43              	.L2:
+  44 0008 00000000 		.word	.LANCHOR0
+  45              		.cfi_endproc
+  46              	.LFE216:
+  48              		.section	.text.as5047p_spi_send,"ax",%progbits
+  49              		.align	1
+  50              		.weak	as5047p_spi_send
+  51              		.syntax unified
+  52              		.thumb
+  53              		.thumb_func
+  54              		.fpu fpv4-sp-d16
+  56              	as5047p_spi_send:
+  57              	.LVL1:
+  58              	.LFB217:
+  51:Core/Src/AS5047P.c **** 
+  52:Core/Src/AS5047P.c **** __attribute__((weak)) void as5047p_spi_send(uint16_t data)
+  53:Core/Src/AS5047P.c **** {
+  59              		.loc 1 53 1 is_stmt 1 view -0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  54:Core/Src/AS5047P.c ****   /* NOTE: This function should not be modified,
+ARM GAS  /tmp/cc23II90.s 			page 3
+
+
+  55:Core/Src/AS5047P.c ****            it can be implemented in the user file.
+  56:Core/Src/AS5047P.c **** 
+  57:Core/Src/AS5047P.c ****      EXAMPLE:
+  58:Core/Src/AS5047P.c ****      HAL_SPI_Transmit(&hspi1, (uint8_t *)&data, 1, HAL_MAX_DELAY);
+  59:Core/Src/AS5047P.c ****    */
+  60:Core/Src/AS5047P.c **** }
+  64              		.loc 1 60 1 view .LVU5
+  65 0000 7047     		bx	lr
+  66              		.cfi_endproc
+  67              	.LFE217:
+  69              		.section	.text.as5047p_spi_read,"ax",%progbits
+  70              		.align	1
+  71              		.weak	as5047p_spi_read
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  75              		.fpu fpv4-sp-d16
+  77              	as5047p_spi_read:
+  78              	.LFB218:
+  61:Core/Src/AS5047P.c **** 
+  62:Core/Src/AS5047P.c **** __attribute__((weak)) uint16_t as5047p_spi_read(void)
+  63:Core/Src/AS5047P.c **** {
+  79              		.loc 1 63 1 view -0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              		@ link register save eliminated.
+  64:Core/Src/AS5047P.c ****     uint16_t data = 0;
+  84              		.loc 1 64 5 view .LVU7
+  85              	.LVL2:
+  65:Core/Src/AS5047P.c ****   /* NOTE: This function should not be modified,
+  66:Core/Src/AS5047P.c ****            it can be implemented in the user file.
+  67:Core/Src/AS5047P.c **** 
+  68:Core/Src/AS5047P.c ****      EXAMPLE:
+  69:Core/Src/AS5047P.c ****      uint16_t data = 0;
+  70:Core/Src/AS5047P.c ****      HAL_SPI_Receive(&hspi1, (uint8_t *)&data, 1, HAL_MAX_DELAY);
+  71:Core/Src/AS5047P.c ****     return data;
+  72:Core/Src/AS5047P.c ****    */
+  73:Core/Src/AS5047P.c ****   return data;
+  86              		.loc 1 73 3 view .LVU8
+  74:Core/Src/AS5047P.c **** }
+  87              		.loc 1 74 1 is_stmt 0 view .LVU9
+  88 0000 0020     		movs	r0, #0
+  89 0002 7047     		bx	lr
+  90              		.cfi_endproc
+  91              	.LFE218:
+  93              		.section	.text.as5047p_spi_select,"ax",%progbits
+  94              		.align	1
+  95              		.weak	as5047p_spi_select
+  96              		.syntax unified
+  97              		.thumb
+  98              		.thumb_func
+  99              		.fpu fpv4-sp-d16
+ 101              	as5047p_spi_select:
+ 102              	.LFB219:
+  75:Core/Src/AS5047P.c **** 
+  76:Core/Src/AS5047P.c **** __attribute__((weak)) void as5047p_spi_select(void)
+ARM GAS  /tmp/cc23II90.s 			page 4
+
+
+  77:Core/Src/AS5047P.c **** {
+ 103              		.loc 1 77 1 is_stmt 1 view -0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107              		@ link register save eliminated.
+  78:Core/Src/AS5047P.c ****   /* NOTE: This function should not be modified,
+  79:Core/Src/AS5047P.c ****            it can be implemented in the user file.
+  80:Core/Src/AS5047P.c **** 
+  81:Core/Src/AS5047P.c ****      EXAMPLE:
+  82:Core/Src/AS5047P.c ****      HAL_GPIO_WritePin(AS5047P_SS_GPIO_Port, AS5047P_SS_Pin, GPIO_PIN_RESET);
+  83:Core/Src/AS5047P.c ****    */
+  84:Core/Src/AS5047P.c **** }
+ 108              		.loc 1 84 1 view .LVU11
+ 109 0000 7047     		bx	lr
+ 110              		.cfi_endproc
+ 111              	.LFE219:
+ 113              		.section	.text.as5047p_spi_deselect,"ax",%progbits
+ 114              		.align	1
+ 115              		.weak	as5047p_spi_deselect
+ 116              		.syntax unified
+ 117              		.thumb
+ 118              		.thumb_func
+ 119              		.fpu fpv4-sp-d16
+ 121              	as5047p_spi_deselect:
+ 122              	.LFB220:
+  85:Core/Src/AS5047P.c **** 
+  86:Core/Src/AS5047P.c **** __attribute__((weak)) void as5047p_spi_deselect(void)
+  87:Core/Src/AS5047P.c **** {
+ 123              		.loc 1 87 1 view -0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127              		@ link register save eliminated.
+  88:Core/Src/AS5047P.c ****   /* NOTE: This function should not be modified,
+  89:Core/Src/AS5047P.c ****            it can be implemented in the user file.
+  90:Core/Src/AS5047P.c **** 
+  91:Core/Src/AS5047P.c ****      EXAMPLE:
+  92:Core/Src/AS5047P.c ****      HAL_GPIO_WritePin(AS5047P_SS_GPIO_Port, AS5047P_SS_Pin, GPIO_PIN_SET);
+  93:Core/Src/AS5047P.c ****    */
+  94:Core/Src/AS5047P.c **** }
+ 128              		.loc 1 94 1 view .LVU13
+ 129 0000 7047     		bx	lr
+ 130              		.cfi_endproc
+ 131              	.LFE220:
+ 133              		.section	.text.delay,"ax",%progbits
+ 134              		.align	1
+ 135              		.global	delay
+ 136              		.syntax unified
+ 137              		.thumb
+ 138              		.thumb_func
+ 139              		.fpu fpv4-sp-d16
+ 141              	delay:
+ 142              	.LVL3:
+ 143              	.LFB230:
+  95:Core/Src/AS5047P.c **** 
+  96:Core/Src/AS5047P.c **** void as5047p_send_command(bool is_read_cmd, uint16_t address)
+ARM GAS  /tmp/cc23II90.s 			page 5
+
+
+  97:Core/Src/AS5047P.c **** {
+  98:Core/Src/AS5047P.c ****   uint16_t frame = address & 0x3FFF;
+  99:Core/Src/AS5047P.c **** 
+ 100:Core/Src/AS5047P.c ****   /* R/W: 0 for write, 1 for read. */
+ 101:Core/Src/AS5047P.c ****   BIT_MODITY(frame, 14, is_read_cmd ? 1 : 0);
+ 102:Core/Src/AS5047P.c **** 
+ 103:Core/Src/AS5047P.c ****   /* Parity bit(even) calculated on the lower 15 bits. */
+ 104:Core/Src/AS5047P.c ****   if (!is_even_parity(frame))
+ 105:Core/Src/AS5047P.c ****   {
+ 106:Core/Src/AS5047P.c ****     BIT_TOGGLE(frame, 15);
+ 107:Core/Src/AS5047P.c ****   }
+ 108:Core/Src/AS5047P.c **** 
+ 109:Core/Src/AS5047P.c ****   as5047p_spi_transmit(frame);
+ 110:Core/Src/AS5047P.c **** }
+ 111:Core/Src/AS5047P.c **** 
+ 112:Core/Src/AS5047P.c **** void as5047p_send_data(uint16_t address, uint16_t data)
+ 113:Core/Src/AS5047P.c **** {
+ 114:Core/Src/AS5047P.c ****   uint16_t frame = data & 0x3FFF;
+ 115:Core/Src/AS5047P.c **** 
+ 116:Core/Src/AS5047P.c ****   /* Data frame bit 14 always low(0). */
+ 117:Core/Src/AS5047P.c ****   BIT_MODITY(frame, 14, 0);
+ 118:Core/Src/AS5047P.c **** 
+ 119:Core/Src/AS5047P.c ****   /* Parity bit(even) calculated on the lower 15 bits. */
+ 120:Core/Src/AS5047P.c ****   if (!is_even_parity(frame))
+ 121:Core/Src/AS5047P.c ****   {
+ 122:Core/Src/AS5047P.c ****     BIT_TOGGLE(frame, 15);
+ 123:Core/Src/AS5047P.c ****   }
+ 124:Core/Src/AS5047P.c **** 
+ 125:Core/Src/AS5047P.c ****   as5047p_send_command(false, address);
+ 126:Core/Src/AS5047P.c ****   as5047p_spi_transmit(frame);
+ 127:Core/Src/AS5047P.c **** }
+ 128:Core/Src/AS5047P.c **** 
+ 129:Core/Src/AS5047P.c **** uint16_t as5047p_read_data(uint16_t address)
+ 130:Core/Src/AS5047P.c **** {
+ 131:Core/Src/AS5047P.c ****   as5047p_send_command(true, address);
+ 132:Core/Src/AS5047P.c ****   uint16_t received_data = as5047p_spi_receive();
+ 133:Core/Src/AS5047P.c ****   return received_data;
+ 134:Core/Src/AS5047P.c **** }
+ 135:Core/Src/AS5047P.c **** 
+ 136:Core/Src/AS5047P.c **** int as5047p_init(uint8_t settings1, uint8_t settings2)
+ 137:Core/Src/AS5047P.c **** {
+ 138:Core/Src/AS5047P.c ****   /* SETTINGS1 bit 0 --> Factory Setting: Pre-Programmed to 1. */
+ 139:Core/Src/AS5047P.c ****   BIT_MODITY(settings1, 0, 1);
+ 140:Core/Src/AS5047P.c **** 
+ 141:Core/Src/AS5047P.c ****   /* SETTINGS1 bit 1 --> Not Used: Pre-Programmed to 0, must not be overwritten. */
+ 142:Core/Src/AS5047P.c ****   BIT_MODITY(settings1, 1, 0);
+ 143:Core/Src/AS5047P.c **** 
+ 144:Core/Src/AS5047P.c ****   as5047p_send_data(AS5047P_SETTINGS1, (uint16_t)(settings1 & 0x00FF));
+ 145:Core/Src/AS5047P.c ****   as5047p_send_data(AS5047P_SETTINGS2, (uint16_t)(settings2 & 0x00FF));
+ 146:Core/Src/AS5047P.c **** 
+ 147:Core/Src/AS5047P.c ****   if (as5047p_read_data(AS5047P_ERRFL) != 0)
+ 148:Core/Src/AS5047P.c ****   {
+ 149:Core/Src/AS5047P.c ****     return -1; /* Error occurred. */
+ 150:Core/Src/AS5047P.c ****   }
+ 151:Core/Src/AS5047P.c ****   return 0; /* No error occurred. */
+ 152:Core/Src/AS5047P.c **** }
+ 153:Core/Src/AS5047P.c **** 
+ARM GAS  /tmp/cc23II90.s 			page 6
+
+
+ 154:Core/Src/AS5047P.c **** int as5047p_get_angle(bool with_daec, float *angle_degree)
+ 155:Core/Src/AS5047P.c **** {
+ 156:Core/Src/AS5047P.c ****   uint16_t address;
+ 157:Core/Src/AS5047P.c ****   if (with_daec)
+ 158:Core/Src/AS5047P.c ****   {
+ 159:Core/Src/AS5047P.c ****     /* Measured angle WITH dynamic angle error compensation(DAEC). */
+ 160:Core/Src/AS5047P.c ****     address = AS5047P_ANGLECOM;
+ 161:Core/Src/AS5047P.c ****   }
+ 162:Core/Src/AS5047P.c ****   else
+ 163:Core/Src/AS5047P.c ****   {
+ 164:Core/Src/AS5047P.c ****     /* Measured angle WITHOUT dynamic angle error compensation(DAEC). */
+ 165:Core/Src/AS5047P.c ****     address = AS5047P_ANGLEUNC;
+ 166:Core/Src/AS5047P.c ****   }
+ 167:Core/Src/AS5047P.c **** 
+ 168:Core/Src/AS5047P.c ****   uint16_t data = as5047p_read_data(address);
+ 169:Core/Src/AS5047P.c ****   if (BIT_READ(data, 14) == 0)
+ 170:Core/Src/AS5047P.c ****   {
+ 171:Core/Src/AS5047P.c ****     /* Angle in degree = value * ( 360 / 2^14). */
+ 172:Core/Src/AS5047P.c ****     *angle_degree = (data & 0x3FFF) * (360.0 / 0x4000);
+ 173:Core/Src/AS5047P.c ****     return 0; /* No error occurred. */
+ 174:Core/Src/AS5047P.c ****   }
+ 175:Core/Src/AS5047P.c ****   return -1; /* Error occurred. */
+ 176:Core/Src/AS5047P.c **** }
+ 177:Core/Src/AS5047P.c **** 
+ 178:Core/Src/AS5047P.c **** void as5047p_set_zero(uint16_t position)
+ 179:Core/Src/AS5047P.c **** {
+ 180:Core/Src/AS5047P.c ****   /* 8 most significant bits of the zero position. */
+ 181:Core/Src/AS5047P.c ****   as5047p_send_data(AS5047P_ZPOSM, ((position >> 6) & 0x00FF));
+ 182:Core/Src/AS5047P.c **** 
+ 183:Core/Src/AS5047P.c ****   /* 6 least significant bits of the zero position. */
+ 184:Core/Src/AS5047P.c ****   as5047p_send_data(AS5047P_ZPOSL, (position & 0x003F));
+ 185:Core/Src/AS5047P.c **** 
+ 186:Core/Src/AS5047P.c ****   as5047p_nop();
+ 187:Core/Src/AS5047P.c **** }
+ 188:Core/Src/AS5047P.c **** 
+ 189:Core/Src/AS5047P.c **** inline void as5047p_nop(void)
+ 190:Core/Src/AS5047P.c **** {
+ 191:Core/Src/AS5047P.c ****   /*
+ 192:Core/Src/AS5047P.c ****    * Reading the NOP register is equivalent to a nop (no operation)
+ 193:Core/Src/AS5047P.c ****    * instruction for the AS5047P.
+ 194:Core/Src/AS5047P.c ****    */
+ 195:Core/Src/AS5047P.c ****   as5047p_send_command(true, AS5047P_NOP);
+ 196:Core/Src/AS5047P.c **** }
+ 197:Core/Src/AS5047P.c **** 
+ 198:Core/Src/AS5047P.c **** void as5047p_spi_transmit(uint16_t data)
+ 199:Core/Src/AS5047P.c **** {
+ 200:Core/Src/AS5047P.c ****   delay(T_CSN_DELAY);
+ 201:Core/Src/AS5047P.c ****   as5047p_spi_select();
+ 202:Core/Src/AS5047P.c ****   as5047p_spi_send(data);
+ 203:Core/Src/AS5047P.c ****   as5047p_spi_deselect();
+ 204:Core/Src/AS5047P.c **** }
+ 205:Core/Src/AS5047P.c **** 
+ 206:Core/Src/AS5047P.c **** uint16_t as5047p_spi_receive()
+ 207:Core/Src/AS5047P.c **** {
+ 208:Core/Src/AS5047P.c ****   delay(T_CSN_DELAY);
+ 209:Core/Src/AS5047P.c ****   as5047p_spi_select();
+ 210:Core/Src/AS5047P.c ****   uint16_t data = as5047p_spi_read();
+ARM GAS  /tmp/cc23II90.s 			page 7
+
+
+ 211:Core/Src/AS5047P.c ****   as5047p_spi_deselect();
+ 212:Core/Src/AS5047P.c ****   return data;
+ 213:Core/Src/AS5047P.c **** }
+ 214:Core/Src/AS5047P.c **** 
+ 215:Core/Src/AS5047P.c **** void delay(volatile uint16_t t)
+ 216:Core/Src/AS5047P.c **** {
+ 144              		.loc 1 216 1 view -0
+ 145              		.cfi_startproc
+ 146              		@ args = 0, pretend = 0, frame = 8
+ 147              		@ frame_needed = 0, uses_anonymous_args = 0
+ 148              		@ link register save eliminated.
+ 149              		.loc 1 216 1 is_stmt 0 view .LVU15
+ 150 0000 82B0     		sub	sp, sp, #8
+ 151              	.LCFI0:
+ 152              		.cfi_def_cfa_offset 8
+ 153 0002 ADF80600 		strh	r0, [sp, #6]	@ movhi
+ 217:Core/Src/AS5047P.c ****   while (t--)
+ 154              		.loc 1 217 3 is_stmt 1 view .LVU16
+ 155              	.L9:
+ 156              		.loc 1 217 9 view .LVU17
+ 157              		.loc 1 217 11 is_stmt 0 view .LVU18
+ 158 0006 BDF80630 		ldrh	r3, [sp, #6]
+ 159 000a 9BB2     		uxth	r3, r3
+ 160 000c 5A1E     		subs	r2, r3, #1
+ 161 000e 92B2     		uxth	r2, r2
+ 162 0010 ADF80620 		strh	r2, [sp, #6]	@ movhi
+ 163              		.loc 1 217 9 view .LVU19
+ 164 0014 0BB1     		cbz	r3, .L12
+ 218:Core/Src/AS5047P.c ****   {
+ 219:Core/Src/AS5047P.c ****     __asm__("nop"); /* Do nothing. */
+ 165              		.loc 1 219 5 is_stmt 1 view .LVU20
+ 166              		.syntax unified
+ 167              	@ 219 "Core/Src/AS5047P.c" 1
+ 168 0016 00BF     		nop
+ 169              	@ 0 "" 2
+ 170              		.thumb
+ 171              		.syntax unified
+ 172 0018 F5E7     		b	.L9
+ 173              	.L12:
+ 220:Core/Src/AS5047P.c ****   }
+ 221:Core/Src/AS5047P.c **** }
+ 174              		.loc 1 221 1 is_stmt 0 view .LVU21
+ 175 001a 02B0     		add	sp, sp, #8
+ 176              	.LCFI1:
+ 177              		.cfi_def_cfa_offset 0
+ 178              		@ sp needed
+ 179 001c 7047     		bx	lr
+ 180              		.cfi_endproc
+ 181              	.LFE230:
+ 183              		.section	.text.as5047p_spi_transmit,"ax",%progbits
+ 184              		.align	1
+ 185              		.global	as5047p_spi_transmit
+ 186              		.syntax unified
+ 187              		.thumb
+ 188              		.thumb_func
+ 189              		.fpu fpv4-sp-d16
+ 191              	as5047p_spi_transmit:
+ARM GAS  /tmp/cc23II90.s 			page 8
+
+
+ 192              	.LVL4:
+ 193              	.LFB228:
+ 199:Core/Src/AS5047P.c ****   delay(T_CSN_DELAY);
+ 194              		.loc 1 199 1 is_stmt 1 view -0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 0
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199:Core/Src/AS5047P.c ****   delay(T_CSN_DELAY);
+ 198              		.loc 1 199 1 is_stmt 0 view .LVU23
+ 199 0000 10B5     		push	{r4, lr}
+ 200              	.LCFI2:
+ 201              		.cfi_def_cfa_offset 8
+ 202              		.cfi_offset 4, -8
+ 203              		.cfi_offset 14, -4
+ 204 0002 0446     		mov	r4, r0
+ 200:Core/Src/AS5047P.c ****   as5047p_spi_select();
+ 205              		.loc 1 200 3 is_stmt 1 view .LVU24
+ 206 0004 0520     		movs	r0, #5
+ 207              	.LVL5:
+ 200:Core/Src/AS5047P.c ****   as5047p_spi_select();
+ 208              		.loc 1 200 3 is_stmt 0 view .LVU25
+ 209 0006 FFF7FEFF 		bl	delay
+ 210              	.LVL6:
+ 201:Core/Src/AS5047P.c ****   as5047p_spi_send(data);
+ 211              		.loc 1 201 3 is_stmt 1 view .LVU26
+ 212 000a FFF7FEFF 		bl	as5047p_spi_select
+ 213              	.LVL7:
+ 202:Core/Src/AS5047P.c ****   as5047p_spi_deselect();
+ 214              		.loc 1 202 3 view .LVU27
+ 215 000e 2046     		mov	r0, r4
+ 216 0010 FFF7FEFF 		bl	as5047p_spi_send
+ 217              	.LVL8:
+ 203:Core/Src/AS5047P.c **** }
+ 218              		.loc 1 203 3 view .LVU28
+ 219 0014 FFF7FEFF 		bl	as5047p_spi_deselect
+ 220              	.LVL9:
+ 204:Core/Src/AS5047P.c **** 
+ 221              		.loc 1 204 1 is_stmt 0 view .LVU29
+ 222 0018 10BD     		pop	{r4, pc}
+ 223              		.cfi_endproc
+ 224              	.LFE228:
+ 226              		.section	.text.as5047p_spi_receive,"ax",%progbits
+ 227              		.align	1
+ 228              		.global	as5047p_spi_receive
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 232              		.fpu fpv4-sp-d16
+ 234              	as5047p_spi_receive:
+ 235              	.LFB229:
+ 207:Core/Src/AS5047P.c ****   delay(T_CSN_DELAY);
+ 236              		.loc 1 207 1 is_stmt 1 view -0
+ 237              		.cfi_startproc
+ 238              		@ args = 0, pretend = 0, frame = 0
+ 239              		@ frame_needed = 0, uses_anonymous_args = 0
+ 240 0000 10B5     		push	{r4, lr}
+ 241              	.LCFI3:
+ARM GAS  /tmp/cc23II90.s 			page 9
+
+
+ 242              		.cfi_def_cfa_offset 8
+ 243              		.cfi_offset 4, -8
+ 244              		.cfi_offset 14, -4
+ 208:Core/Src/AS5047P.c ****   as5047p_spi_select();
+ 245              		.loc 1 208 3 view .LVU31
+ 246 0002 0520     		movs	r0, #5
+ 247 0004 FFF7FEFF 		bl	delay
+ 248              	.LVL10:
+ 209:Core/Src/AS5047P.c ****   uint16_t data = as5047p_spi_read();
+ 249              		.loc 1 209 3 view .LVU32
+ 250 0008 FFF7FEFF 		bl	as5047p_spi_select
+ 251              	.LVL11:
+ 210:Core/Src/AS5047P.c ****   as5047p_spi_deselect();
+ 252              		.loc 1 210 3 view .LVU33
+ 210:Core/Src/AS5047P.c ****   as5047p_spi_deselect();
+ 253              		.loc 1 210 19 is_stmt 0 view .LVU34
+ 254 000c FFF7FEFF 		bl	as5047p_spi_read
+ 255              	.LVL12:
+ 256 0010 0446     		mov	r4, r0
+ 257              	.LVL13:
+ 211:Core/Src/AS5047P.c ****   return data;
+ 258              		.loc 1 211 3 is_stmt 1 view .LVU35
+ 259 0012 FFF7FEFF 		bl	as5047p_spi_deselect
+ 260              	.LVL14:
+ 212:Core/Src/AS5047P.c **** }
+ 261              		.loc 1 212 3 view .LVU36
+ 213:Core/Src/AS5047P.c **** 
+ 262              		.loc 1 213 1 is_stmt 0 view .LVU37
+ 263 0016 2046     		mov	r0, r4
+ 264 0018 10BD     		pop	{r4, pc}
+ 213:Core/Src/AS5047P.c **** 
+ 265              		.loc 1 213 1 view .LVU38
+ 266              		.cfi_endproc
+ 267              	.LFE229:
+ 269              		.section	.text.is_even_parity,"ax",%progbits
+ 270              		.align	1
+ 271              		.global	is_even_parity
+ 272              		.syntax unified
+ 273              		.thumb
+ 274              		.thumb_func
+ 275              		.fpu fpv4-sp-d16
+ 277              	is_even_parity:
+ 278              	.LVL15:
+ 279              	.LFB231:
+ 222:Core/Src/AS5047P.c **** 
+ 223:Core/Src/AS5047P.c **** bool is_even_parity(uint16_t data)
+ 224:Core/Src/AS5047P.c **** {
+ 280              		.loc 1 224 1 is_stmt 1 view -0
+ 281              		.cfi_startproc
+ 282              		@ args = 0, pretend = 0, frame = 0
+ 283              		@ frame_needed = 0, uses_anonymous_args = 0
+ 284              		@ link register save eliminated.
+ 225:Core/Src/AS5047P.c ****   uint8_t shift = 1;
+ 285              		.loc 1 225 3 view .LVU40
+ 226:Core/Src/AS5047P.c ****   while (shift < (sizeof(data) * 8))
+ 286              		.loc 1 226 3 view .LVU41
+ 225:Core/Src/AS5047P.c ****   uint8_t shift = 1;
+ARM GAS  /tmp/cc23II90.s 			page 10
+
+
+ 287              		.loc 1 225 11 is_stmt 0 view .LVU42
+ 288 0000 0123     		movs	r3, #1
+ 289              		.loc 1 226 9 view .LVU43
+ 290 0002 05E0     		b	.L18
+ 291              	.LVL16:
+ 292              	.L19:
+ 227:Core/Src/AS5047P.c ****   {
+ 228:Core/Src/AS5047P.c ****     data ^= (data >> shift);
+ 293              		.loc 1 228 5 is_stmt 1 view .LVU44
+ 294              		.loc 1 228 19 is_stmt 0 view .LVU45
+ 295 0004 40FA03F2 		asr	r2, r0, r3
+ 296              		.loc 1 228 10 view .LVU46
+ 297 0008 5040     		eors	r0, r0, r2
+ 298              	.LVL17:
+ 299              		.loc 1 228 10 view .LVU47
+ 300 000a 80B2     		uxth	r0, r0
+ 301              	.LVL18:
+ 229:Core/Src/AS5047P.c ****     shift <<= 1;
+ 302              		.loc 1 229 5 is_stmt 1 view .LVU48
+ 303              		.loc 1 229 11 is_stmt 0 view .LVU49
+ 304 000c 5B00     		lsls	r3, r3, #1
+ 305              	.LVL19:
+ 306              		.loc 1 229 11 view .LVU50
+ 307 000e DBB2     		uxtb	r3, r3
+ 308              	.LVL20:
+ 309              	.L18:
+ 226:Core/Src/AS5047P.c ****   while (shift < (sizeof(data) * 8))
+ 310              		.loc 1 226 9 is_stmt 1 view .LVU51
+ 311 0010 0F2B     		cmp	r3, #15
+ 312 0012 F7D9     		bls	.L19
+ 230:Core/Src/AS5047P.c ****   }
+ 231:Core/Src/AS5047P.c ****   return !(data & 0x1);
+ 313              		.loc 1 231 3 view .LVU52
+ 314              		.loc 1 231 10 is_stmt 0 view .LVU53
+ 315 0014 80F00100 		eor	r0, r0, #1
+ 316              	.LVL21:
+ 232:Core/Src/AS5047P.c **** }
+ 317              		.loc 1 232 1 view .LVU54
+ 318 0018 00F00100 		and	r0, r0, #1
+ 319 001c 7047     		bx	lr
+ 320              		.cfi_endproc
+ 321              	.LFE231:
+ 323              		.section	.text.as5047p_send_command,"ax",%progbits
+ 324              		.align	1
+ 325              		.global	as5047p_send_command
+ 326              		.syntax unified
+ 327              		.thumb
+ 328              		.thumb_func
+ 329              		.fpu fpv4-sp-d16
+ 331              	as5047p_send_command:
+ 332              	.LVL22:
+ 333              	.LFB221:
+  97:Core/Src/AS5047P.c ****   uint16_t frame = address & 0x3FFF;
+ 334              		.loc 1 97 1 is_stmt 1 view -0
+ 335              		.cfi_startproc
+ 336              		@ args = 0, pretend = 0, frame = 0
+ 337              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cc23II90.s 			page 11
+
+
+  97:Core/Src/AS5047P.c ****   uint16_t frame = address & 0x3FFF;
+ 338              		.loc 1 97 1 is_stmt 0 view .LVU56
+ 339 0000 10B5     		push	{r4, lr}
+ 340              	.LCFI4:
+ 341              		.cfi_def_cfa_offset 8
+ 342              		.cfi_offset 4, -8
+ 343              		.cfi_offset 14, -4
+  98:Core/Src/AS5047P.c **** 
+ 344              		.loc 1 98 3 is_stmt 1 view .LVU57
+  98:Core/Src/AS5047P.c **** 
+ 345              		.loc 1 98 12 is_stmt 0 view .LVU58
+ 346 0002 C1F30D01 		ubfx	r1, r1, #0, #14
+ 347              	.LVL23:
+ 101:Core/Src/AS5047P.c **** 
+ 348              		.loc 1 101 3 is_stmt 1 view .LVU59
+ 349 0006 4442     		rsbs	r4, r0, #0
+ 350 0008 04F48044 		and	r4, r4, #16384
+ 351 000c 0C43     		orrs	r4, r4, r1
+ 352              	.LVL24:
+ 104:Core/Src/AS5047P.c ****   {
+ 353              		.loc 1 104 3 view .LVU60
+ 104:Core/Src/AS5047P.c ****   {
+ 354              		.loc 1 104 8 is_stmt 0 view .LVU61
+ 355 000e 2046     		mov	r0, r4
+ 356              	.LVL25:
+ 104:Core/Src/AS5047P.c ****   {
+ 357              		.loc 1 104 8 view .LVU62
+ 358 0010 FFF7FEFF 		bl	is_even_parity
+ 359              	.LVL26:
+ 104:Core/Src/AS5047P.c ****   {
+ 360              		.loc 1 104 6 view .LVU63
+ 361 0014 08B9     		cbnz	r0, .L21
+ 106:Core/Src/AS5047P.c ****   }
+ 362              		.loc 1 106 5 is_stmt 1 view .LVU64
+ 363 0016 44F40044 		orr	r4, r4, #32768
+ 364              	.LVL27:
+ 365              	.L21:
+ 109:Core/Src/AS5047P.c **** }
+ 366              		.loc 1 109 3 view .LVU65
+ 367 001a 2046     		mov	r0, r4
+ 368 001c FFF7FEFF 		bl	as5047p_spi_transmit
+ 369              	.LVL28:
+ 110:Core/Src/AS5047P.c **** 
+ 370              		.loc 1 110 1 is_stmt 0 view .LVU66
+ 371 0020 10BD     		pop	{r4, pc}
+ 110:Core/Src/AS5047P.c **** 
+ 372              		.loc 1 110 1 view .LVU67
+ 373              		.cfi_endproc
+ 374              	.LFE221:
+ 376              		.section	.text.as5047p_read_data,"ax",%progbits
+ 377              		.align	1
+ 378              		.global	as5047p_read_data
+ 379              		.syntax unified
+ 380              		.thumb
+ 381              		.thumb_func
+ 382              		.fpu fpv4-sp-d16
+ 384              	as5047p_read_data:
+ARM GAS  /tmp/cc23II90.s 			page 12
+
+
+ 385              	.LVL29:
+ 386              	.LFB223:
+ 130:Core/Src/AS5047P.c ****   as5047p_send_command(true, address);
+ 387              		.loc 1 130 1 is_stmt 1 view -0
+ 388              		.cfi_startproc
+ 389              		@ args = 0, pretend = 0, frame = 0
+ 390              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130:Core/Src/AS5047P.c ****   as5047p_send_command(true, address);
+ 391              		.loc 1 130 1 is_stmt 0 view .LVU69
+ 392 0000 08B5     		push	{r3, lr}
+ 393              	.LCFI5:
+ 394              		.cfi_def_cfa_offset 8
+ 395              		.cfi_offset 3, -8
+ 396              		.cfi_offset 14, -4
+ 397 0002 0146     		mov	r1, r0
+ 131:Core/Src/AS5047P.c ****   uint16_t received_data = as5047p_spi_receive();
+ 398              		.loc 1 131 3 is_stmt 1 view .LVU70
+ 399 0004 0120     		movs	r0, #1
+ 400              	.LVL30:
+ 131:Core/Src/AS5047P.c ****   uint16_t received_data = as5047p_spi_receive();
+ 401              		.loc 1 131 3 is_stmt 0 view .LVU71
+ 402 0006 FFF7FEFF 		bl	as5047p_send_command
+ 403              	.LVL31:
+ 132:Core/Src/AS5047P.c ****   return received_data;
+ 404              		.loc 1 132 3 is_stmt 1 view .LVU72
+ 132:Core/Src/AS5047P.c ****   return received_data;
+ 405              		.loc 1 132 28 is_stmt 0 view .LVU73
+ 406 000a FFF7FEFF 		bl	as5047p_spi_receive
+ 407              	.LVL32:
+ 133:Core/Src/AS5047P.c **** }
+ 408              		.loc 1 133 3 is_stmt 1 view .LVU74
+ 134:Core/Src/AS5047P.c **** 
+ 409              		.loc 1 134 1 is_stmt 0 view .LVU75
+ 410 000e 08BD     		pop	{r3, pc}
+ 411              		.cfi_endproc
+ 412              	.LFE223:
+ 414              		.global	__aeabi_i2d
+ 415              		.global	__aeabi_dmul
+ 416              		.global	__aeabi_d2f
+ 417              		.section	.text.as5047p_get_angle,"ax",%progbits
+ 418              		.align	1
+ 419              		.global	as5047p_get_angle
+ 420              		.syntax unified
+ 421              		.thumb
+ 422              		.thumb_func
+ 423              		.fpu fpv4-sp-d16
+ 425              	as5047p_get_angle:
+ 426              	.LVL33:
+ 427              	.LFB225:
+ 155:Core/Src/AS5047P.c ****   uint16_t address;
+ 428              		.loc 1 155 1 is_stmt 1 view -0
+ 429              		.cfi_startproc
+ 430              		@ args = 0, pretend = 0, frame = 0
+ 431              		@ frame_needed = 0, uses_anonymous_args = 0
+ 155:Core/Src/AS5047P.c ****   uint16_t address;
+ 432              		.loc 1 155 1 is_stmt 0 view .LVU77
+ 433 0000 10B5     		push	{r4, lr}
+ARM GAS  /tmp/cc23II90.s 			page 13
+
+
+ 434              	.LCFI6:
+ 435              		.cfi_def_cfa_offset 8
+ 436              		.cfi_offset 4, -8
+ 437              		.cfi_offset 14, -4
+ 438 0002 0C46     		mov	r4, r1
+ 156:Core/Src/AS5047P.c ****   if (with_daec)
+ 439              		.loc 1 156 3 is_stmt 1 view .LVU78
+ 157:Core/Src/AS5047P.c ****   {
+ 440              		.loc 1 157 3 view .LVU79
+ 157:Core/Src/AS5047P.c ****   {
+ 441              		.loc 1 157 6 is_stmt 0 view .LVU80
+ 442 0004 98B1     		cbz	r0, .L28
+ 160:Core/Src/AS5047P.c ****   }
+ 443              		.loc 1 160 13 view .LVU81
+ 444 0006 43F6FF70 		movw	r0, #16383
+ 445              	.LVL34:
+ 446              	.L26:
+ 168:Core/Src/AS5047P.c ****   if (BIT_READ(data, 14) == 0)
+ 447              		.loc 1 168 3 is_stmt 1 view .LVU82
+ 168:Core/Src/AS5047P.c ****   if (BIT_READ(data, 14) == 0)
+ 448              		.loc 1 168 19 is_stmt 0 view .LVU83
+ 449 000a FFF7FEFF 		bl	as5047p_read_data
+ 450              	.LVL35:
+ 169:Core/Src/AS5047P.c ****   {
+ 451              		.loc 1 169 3 is_stmt 1 view .LVU84
+ 169:Core/Src/AS5047P.c ****   {
+ 452              		.loc 1 169 6 is_stmt 0 view .LVU85
+ 453 000e 10F4804F 		tst	r0, #16384
+ 454 0012 0FD1     		bne	.L29
+ 172:Core/Src/AS5047P.c ****     return 0; /* No error occurred. */
+ 455              		.loc 1 172 5 is_stmt 1 view .LVU86
+ 172:Core/Src/AS5047P.c ****     return 0; /* No error occurred. */
+ 456              		.loc 1 172 37 is_stmt 0 view .LVU87
+ 457 0014 C0F30D00 		ubfx	r0, r0, #0, #14
+ 458              	.LVL36:
+ 172:Core/Src/AS5047P.c ****     return 0; /* No error occurred. */
+ 459              		.loc 1 172 37 view .LVU88
+ 460 0018 FFF7FEFF 		bl	__aeabi_i2d
+ 461              	.LVL37:
+ 462 001c 0022     		movs	r2, #0
+ 463 001e 074B     		ldr	r3, .L31
+ 464 0020 FFF7FEFF 		bl	__aeabi_dmul
+ 465              	.LVL38:
+ 466 0024 FFF7FEFF 		bl	__aeabi_d2f
+ 467              	.LVL39:
+ 172:Core/Src/AS5047P.c ****     return 0; /* No error occurred. */
+ 468              		.loc 1 172 19 view .LVU89
+ 469 0028 2060     		str	r0, [r4]	@ float
+ 173:Core/Src/AS5047P.c ****   }
+ 470              		.loc 1 173 5 is_stmt 1 view .LVU90
+ 173:Core/Src/AS5047P.c ****   }
+ 471              		.loc 1 173 12 is_stmt 0 view .LVU91
+ 472 002a 0020     		movs	r0, #0
+ 473              	.L25:
+ 176:Core/Src/AS5047P.c **** 
+ 474              		.loc 1 176 1 view .LVU92
+ 475 002c 10BD     		pop	{r4, pc}
+ARM GAS  /tmp/cc23II90.s 			page 14
+
+
+ 476              	.LVL40:
+ 477              	.L28:
+ 165:Core/Src/AS5047P.c ****   }
+ 478              		.loc 1 165 13 view .LVU93
+ 479 002e 43F6FE70 		movw	r0, #16382
+ 480              	.LVL41:
+ 165:Core/Src/AS5047P.c ****   }
+ 481              		.loc 1 165 13 view .LVU94
+ 482 0032 EAE7     		b	.L26
+ 483              	.LVL42:
+ 484              	.L29:
+ 175:Core/Src/AS5047P.c **** }
+ 485              		.loc 1 175 10 view .LVU95
+ 486 0034 4FF0FF30 		mov	r0, #-1
+ 487              	.LVL43:
+ 175:Core/Src/AS5047P.c **** }
+ 488              		.loc 1 175 10 view .LVU96
+ 489 0038 F8E7     		b	.L25
+ 490              	.L32:
+ 491 003a 00BF     		.align	2
+ 492              	.L31:
+ 493 003c 0080963F 		.word	1066827776
+ 494              		.cfi_endproc
+ 495              	.LFE225:
+ 497              		.section	.text.as5047p_nop,"ax",%progbits
+ 498              		.align	1
+ 499              		.global	as5047p_nop
+ 500              		.syntax unified
+ 501              		.thumb
+ 502              		.thumb_func
+ 503              		.fpu fpv4-sp-d16
+ 505              	as5047p_nop:
+ 506              	.LFB227:
+ 190:Core/Src/AS5047P.c ****   /*
+ 507              		.loc 1 190 1 is_stmt 1 view -0
+ 508              		.cfi_startproc
+ 509              		@ args = 0, pretend = 0, frame = 0
+ 510              		@ frame_needed = 0, uses_anonymous_args = 0
+ 511 0000 08B5     		push	{r3, lr}
+ 512              	.LCFI7:
+ 513              		.cfi_def_cfa_offset 8
+ 514              		.cfi_offset 3, -8
+ 515              		.cfi_offset 14, -4
+ 195:Core/Src/AS5047P.c **** }
+ 516              		.loc 1 195 3 view .LVU98
+ 517 0002 0021     		movs	r1, #0
+ 518 0004 0120     		movs	r0, #1
+ 519 0006 FFF7FEFF 		bl	as5047p_send_command
+ 520              	.LVL44:
+ 196:Core/Src/AS5047P.c **** 
+ 521              		.loc 1 196 1 is_stmt 0 view .LVU99
+ 522 000a 08BD     		pop	{r3, pc}
+ 523              		.cfi_endproc
+ 524              	.LFE227:
+ 526              		.section	.text.as5047p_send_data,"ax",%progbits
+ 527              		.align	1
+ 528              		.global	as5047p_send_data
+ARM GAS  /tmp/cc23II90.s 			page 15
+
+
+ 529              		.syntax unified
+ 530              		.thumb
+ 531              		.thumb_func
+ 532              		.fpu fpv4-sp-d16
+ 534              	as5047p_send_data:
+ 535              	.LVL45:
+ 536              	.LFB222:
+ 113:Core/Src/AS5047P.c ****   uint16_t frame = data & 0x3FFF;
+ 537              		.loc 1 113 1 is_stmt 1 view -0
+ 538              		.cfi_startproc
+ 539              		@ args = 0, pretend = 0, frame = 0
+ 540              		@ frame_needed = 0, uses_anonymous_args = 0
+ 113:Core/Src/AS5047P.c ****   uint16_t frame = data & 0x3FFF;
+ 541              		.loc 1 113 1 is_stmt 0 view .LVU101
+ 542 0000 38B5     		push	{r3, r4, r5, lr}
+ 543              	.LCFI8:
+ 544              		.cfi_def_cfa_offset 16
+ 545              		.cfi_offset 3, -16
+ 546              		.cfi_offset 4, -12
+ 547              		.cfi_offset 5, -8
+ 548              		.cfi_offset 14, -4
+ 549 0002 0546     		mov	r5, r0
+ 114:Core/Src/AS5047P.c **** 
+ 550              		.loc 1 114 3 is_stmt 1 view .LVU102
+ 114:Core/Src/AS5047P.c **** 
+ 551              		.loc 1 114 12 is_stmt 0 view .LVU103
+ 552 0004 C1F30D04 		ubfx	r4, r1, #0, #14
+ 553              	.LVL46:
+ 117:Core/Src/AS5047P.c **** 
+ 554              		.loc 1 117 3 is_stmt 1 view .LVU104
+ 120:Core/Src/AS5047P.c ****   {
+ 555              		.loc 1 120 3 view .LVU105
+ 120:Core/Src/AS5047P.c ****   {
+ 556              		.loc 1 120 8 is_stmt 0 view .LVU106
+ 557 0008 2046     		mov	r0, r4
+ 558              	.LVL47:
+ 120:Core/Src/AS5047P.c ****   {
+ 559              		.loc 1 120 8 view .LVU107
+ 560 000a FFF7FEFF 		bl	is_even_parity
+ 561              	.LVL48:
+ 120:Core/Src/AS5047P.c ****   {
+ 562              		.loc 1 120 6 view .LVU108
+ 563 000e 08B9     		cbnz	r0, .L36
+ 122:Core/Src/AS5047P.c ****   }
+ 564              		.loc 1 122 5 is_stmt 1 view .LVU109
+ 565 0010 44F40044 		orr	r4, r4, #32768
+ 566              	.LVL49:
+ 567              	.L36:
+ 125:Core/Src/AS5047P.c ****   as5047p_spi_transmit(frame);
+ 568              		.loc 1 125 3 view .LVU110
+ 569 0014 2946     		mov	r1, r5
+ 570 0016 0020     		movs	r0, #0
+ 571 0018 FFF7FEFF 		bl	as5047p_send_command
+ 572              	.LVL50:
+ 126:Core/Src/AS5047P.c **** }
+ 573              		.loc 1 126 3 view .LVU111
+ 574 001c 2046     		mov	r0, r4
+ARM GAS  /tmp/cc23II90.s 			page 16
+
+
+ 575 001e FFF7FEFF 		bl	as5047p_spi_transmit
+ 576              	.LVL51:
+ 127:Core/Src/AS5047P.c **** 
+ 577              		.loc 1 127 1 is_stmt 0 view .LVU112
+ 578 0022 38BD     		pop	{r3, r4, r5, pc}
+ 127:Core/Src/AS5047P.c **** 
+ 579              		.loc 1 127 1 view .LVU113
+ 580              		.cfi_endproc
+ 581              	.LFE222:
+ 583              		.section	.text.as5047p_init,"ax",%progbits
+ 584              		.align	1
+ 585              		.global	as5047p_init
+ 586              		.syntax unified
+ 587              		.thumb
+ 588              		.thumb_func
+ 589              		.fpu fpv4-sp-d16
+ 591              	as5047p_init:
+ 592              	.LVL52:
+ 593              	.LFB224:
+ 137:Core/Src/AS5047P.c ****   /* SETTINGS1 bit 0 --> Factory Setting: Pre-Programmed to 1. */
+ 594              		.loc 1 137 1 is_stmt 1 view -0
+ 595              		.cfi_startproc
+ 596              		@ args = 0, pretend = 0, frame = 0
+ 597              		@ frame_needed = 0, uses_anonymous_args = 0
+ 137:Core/Src/AS5047P.c ****   /* SETTINGS1 bit 0 --> Factory Setting: Pre-Programmed to 1. */
+ 598              		.loc 1 137 1 is_stmt 0 view .LVU115
+ 599 0000 10B5     		push	{r4, lr}
+ 600              	.LCFI9:
+ 601              		.cfi_def_cfa_offset 8
+ 602              		.cfi_offset 4, -8
+ 603              		.cfi_offset 14, -4
+ 604 0002 0C46     		mov	r4, r1
+ 139:Core/Src/AS5047P.c **** 
+ 605              		.loc 1 139 3 is_stmt 1 view .LVU116
+ 606 0004 80F00103 		eor	r3, r0, #1
+ 607 0008 03F00103 		and	r3, r3, #1
+ 608 000c 5840     		eors	r0, r0, r3
+ 609              	.LVL53:
+ 142:Core/Src/AS5047P.c **** 
+ 610              		.loc 1 142 3 view .LVU117
+ 144:Core/Src/AS5047P.c ****   as5047p_send_data(AS5047P_SETTINGS2, (uint16_t)(settings2 & 0x00FF));
+ 611              		.loc 1 144 3 view .LVU118
+ 612 000e 00F0FD01 		and	r1, r0, #253
+ 613              	.LVL54:
+ 144:Core/Src/AS5047P.c ****   as5047p_send_data(AS5047P_SETTINGS2, (uint16_t)(settings2 & 0x00FF));
+ 614              		.loc 1 144 3 is_stmt 0 view .LVU119
+ 615 0012 1820     		movs	r0, #24
+ 616              	.LVL55:
+ 144:Core/Src/AS5047P.c ****   as5047p_send_data(AS5047P_SETTINGS2, (uint16_t)(settings2 & 0x00FF));
+ 617              		.loc 1 144 3 view .LVU120
+ 618 0014 FFF7FEFF 		bl	as5047p_send_data
+ 619              	.LVL56:
+ 145:Core/Src/AS5047P.c **** 
+ 620              		.loc 1 145 3 is_stmt 1 view .LVU121
+ 621 0018 2146     		mov	r1, r4
+ 622 001a 1920     		movs	r0, #25
+ 623 001c FFF7FEFF 		bl	as5047p_send_data
+ARM GAS  /tmp/cc23II90.s 			page 17
+
+
+ 624              	.LVL57:
+ 147:Core/Src/AS5047P.c ****   {
+ 625              		.loc 1 147 3 view .LVU122
+ 147:Core/Src/AS5047P.c ****   {
+ 626              		.loc 1 147 7 is_stmt 0 view .LVU123
+ 627 0020 0120     		movs	r0, #1
+ 628 0022 FFF7FEFF 		bl	as5047p_read_data
+ 629              	.LVL58:
+ 147:Core/Src/AS5047P.c ****   {
+ 630              		.loc 1 147 6 view .LVU124
+ 631 0026 00B9     		cbnz	r0, .L42
+ 632              	.L38:
+ 152:Core/Src/AS5047P.c **** 
+ 633              		.loc 1 152 1 view .LVU125
+ 634 0028 10BD     		pop	{r4, pc}
+ 635              	.L42:
+ 149:Core/Src/AS5047P.c ****   }
+ 636              		.loc 1 149 12 view .LVU126
+ 637 002a 4FF0FF30 		mov	r0, #-1
+ 638 002e FBE7     		b	.L38
+ 639              		.cfi_endproc
+ 640              	.LFE224:
+ 642              		.section	.text.as5047p_set_zero,"ax",%progbits
+ 643              		.align	1
+ 644              		.global	as5047p_set_zero
+ 645              		.syntax unified
+ 646              		.thumb
+ 647              		.thumb_func
+ 648              		.fpu fpv4-sp-d16
+ 650              	as5047p_set_zero:
+ 651              	.LVL59:
+ 652              	.LFB226:
+ 179:Core/Src/AS5047P.c ****   /* 8 most significant bits of the zero position. */
+ 653              		.loc 1 179 1 is_stmt 1 view -0
+ 654              		.cfi_startproc
+ 655              		@ args = 0, pretend = 0, frame = 0
+ 656              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179:Core/Src/AS5047P.c ****   /* 8 most significant bits of the zero position. */
+ 657              		.loc 1 179 1 is_stmt 0 view .LVU128
+ 658 0000 10B5     		push	{r4, lr}
+ 659              	.LCFI10:
+ 660              		.cfi_def_cfa_offset 8
+ 661              		.cfi_offset 4, -8
+ 662              		.cfi_offset 14, -4
+ 663 0002 0446     		mov	r4, r0
+ 181:Core/Src/AS5047P.c **** 
+ 664              		.loc 1 181 3 is_stmt 1 view .LVU129
+ 665 0004 C0F38711 		ubfx	r1, r0, #6, #8
+ 666 0008 1620     		movs	r0, #22
+ 667              	.LVL60:
+ 181:Core/Src/AS5047P.c **** 
+ 668              		.loc 1 181 3 is_stmt 0 view .LVU130
+ 669 000a FFF7FEFF 		bl	as5047p_send_data
+ 670              	.LVL61:
+ 184:Core/Src/AS5047P.c **** 
+ 671              		.loc 1 184 3 is_stmt 1 view .LVU131
+ 672 000e 04F03F01 		and	r1, r4, #63
+ARM GAS  /tmp/cc23II90.s 			page 18
+
+
+ 673 0012 1720     		movs	r0, #23
+ 674 0014 FFF7FEFF 		bl	as5047p_send_data
+ 675              	.LVL62:
+ 186:Core/Src/AS5047P.c **** }
+ 676              		.loc 1 186 3 view .LVU132
+ 677              	.LBB4:
+ 678              	.LBI4:
+ 189:Core/Src/AS5047P.c **** {
+ 679              		.loc 1 189 13 view .LVU133
+ 680              	.LBB5:
+ 195:Core/Src/AS5047P.c **** }
+ 681              		.loc 1 195 3 view .LVU134
+ 682 0018 0021     		movs	r1, #0
+ 683 001a 0120     		movs	r0, #1
+ 684 001c FFF7FEFF 		bl	as5047p_send_command
+ 685              	.LVL63:
+ 686              	.LBE5:
+ 687              	.LBE4:
+ 187:Core/Src/AS5047P.c **** 
+ 688              		.loc 1 187 1 is_stmt 0 view .LVU135
+ 689 0020 10BD     		pop	{r4, pc}
+ 690              		.cfi_endproc
+ 691              	.LFE226:
+ 693              		.global	spi3_dev_num
+ 694              		.section	.bss.spi3_dev_num,"aw",%nobits
+ 695              		.align	2
+ 696              		.set	.LANCHOR0,. + 0
+ 699              	spi3_dev_num:
+ 700 0000 00000000 		.space	4
+ 701              		.text
+ 702              	.Letext0:
+ 703              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 704              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
+ 705              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 706              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f412cx.h"
+ 707              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 708              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 709              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h"
+ 710              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 711              		.file 10 "Core/Inc/AS5047P.h"
+ARM GAS  /tmp/cc23II90.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 AS5047P.c
+     /tmp/cc23II90.s:18     .text.as5047p_dev_num_select:0000000000000000 $t
+     /tmp/cc23II90.s:26     .text.as5047p_dev_num_select:0000000000000000 as5047p_dev_num_select
+     /tmp/cc23II90.s:44     .text.as5047p_dev_num_select:0000000000000008 $d
+     /tmp/cc23II90.s:49     .text.as5047p_spi_send:0000000000000000 $t
+     /tmp/cc23II90.s:56     .text.as5047p_spi_send:0000000000000000 as5047p_spi_send
+     /tmp/cc23II90.s:70     .text.as5047p_spi_read:0000000000000000 $t
+     /tmp/cc23II90.s:77     .text.as5047p_spi_read:0000000000000000 as5047p_spi_read
+     /tmp/cc23II90.s:94     .text.as5047p_spi_select:0000000000000000 $t
+     /tmp/cc23II90.s:101    .text.as5047p_spi_select:0000000000000000 as5047p_spi_select
+     /tmp/cc23II90.s:114    .text.as5047p_spi_deselect:0000000000000000 $t
+     /tmp/cc23II90.s:121    .text.as5047p_spi_deselect:0000000000000000 as5047p_spi_deselect
+     /tmp/cc23II90.s:134    .text.delay:0000000000000000 $t
+     /tmp/cc23II90.s:141    .text.delay:0000000000000000 delay
+     /tmp/cc23II90.s:184    .text.as5047p_spi_transmit:0000000000000000 $t
+     /tmp/cc23II90.s:191    .text.as5047p_spi_transmit:0000000000000000 as5047p_spi_transmit
+     /tmp/cc23II90.s:227    .text.as5047p_spi_receive:0000000000000000 $t
+     /tmp/cc23II90.s:234    .text.as5047p_spi_receive:0000000000000000 as5047p_spi_receive
+     /tmp/cc23II90.s:270    .text.is_even_parity:0000000000000000 $t
+     /tmp/cc23II90.s:277    .text.is_even_parity:0000000000000000 is_even_parity
+     /tmp/cc23II90.s:324    .text.as5047p_send_command:0000000000000000 $t
+     /tmp/cc23II90.s:331    .text.as5047p_send_command:0000000000000000 as5047p_send_command
+     /tmp/cc23II90.s:377    .text.as5047p_read_data:0000000000000000 $t
+     /tmp/cc23II90.s:384    .text.as5047p_read_data:0000000000000000 as5047p_read_data
+     /tmp/cc23II90.s:418    .text.as5047p_get_angle:0000000000000000 $t
+     /tmp/cc23II90.s:425    .text.as5047p_get_angle:0000000000000000 as5047p_get_angle
+     /tmp/cc23II90.s:493    .text.as5047p_get_angle:000000000000003c $d
+     /tmp/cc23II90.s:498    .text.as5047p_nop:0000000000000000 $t
+     /tmp/cc23II90.s:505    .text.as5047p_nop:0000000000000000 as5047p_nop
+     /tmp/cc23II90.s:527    .text.as5047p_send_data:0000000000000000 $t
+     /tmp/cc23II90.s:534    .text.as5047p_send_data:0000000000000000 as5047p_send_data
+     /tmp/cc23II90.s:584    .text.as5047p_init:0000000000000000 $t
+     /tmp/cc23II90.s:591    .text.as5047p_init:0000000000000000 as5047p_init
+     /tmp/cc23II90.s:643    .text.as5047p_set_zero:0000000000000000 $t
+     /tmp/cc23II90.s:650    .text.as5047p_set_zero:0000000000000000 as5047p_set_zero
+     /tmp/cc23II90.s:699    .bss.spi3_dev_num:0000000000000000 spi3_dev_num
+     /tmp/cc23II90.s:695    .bss.spi3_dev_num:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_i2d
+__aeabi_dmul
+__aeabi_d2f

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc5gF65y.s 			page 1
+ARM GAS  /tmp/cc95jR3I.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -26,7 +26,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
   23              		.thumb_func
   24              		.fpu fpv4-sp-d16
   26              	HAL_PWREx_EnableBkUpReg:
-  27              	.LFB130:
+  27              	.LFB216:
   28              		.file 1 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c"
    1:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /**
    2:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   ******************************************************************************
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
   28:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
   29:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /** @defgroup PWREx PWREx
   30:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   * @brief PWR HAL module driver
-ARM GAS  /tmp/cc5gF65y.s 			page 2
+ARM GAS  /tmp/cc95jR3I.s 			page 2
 
 
   31:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   * @{
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
   85:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****           level 0 is requested. 
   86:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****       -@- Refer to the description of Read protection (RDP) in the Flash 
   87:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****           programming manual.
-ARM GAS  /tmp/cc5gF65y.s 			page 3
+ARM GAS  /tmp/cc95jR3I.s 			page 3
 
 
   88:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  142:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** {
   29              		.loc 1 142 1 view -0
   30              		.cfi_startproc
-ARM GAS  /tmp/cc5gF65y.s 			page 4
+ARM GAS  /tmp/cc95jR3I.s 			page 4
 
 
   31              		@ args = 0, pretend = 0, frame = 0
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
   72              	.L7:
  156:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****     } 
  157:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   }
-ARM GAS  /tmp/cc5gF65y.s 			page 5
+ARM GAS  /tmp/cc95jR3I.s 			page 5
 
 
  158:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   return HAL_OK;
@@ -256,7 +256,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
   83 002c A4000E42 		.word	1108213924
   84 0030 00700040 		.word	1073770496
   85              		.cfi_endproc
-  86              	.LFE130:
+  86              	.LFE216:
   88              		.section	.text.HAL_PWREx_DisableBkUpReg,"ax",%progbits
   89              		.align	1
   90              		.global	HAL_PWREx_DisableBkUpReg
@@ -265,7 +265,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
   93              		.thumb_func
   94              		.fpu fpv4-sp-d16
   96              	HAL_PWREx_DisableBkUpReg:
-  97              	.LFB131:
+  97              	.LFB217:
  160:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
  161:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /**
  162:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   * @brief Disables the Backup Regulator.
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  114              		.loc 1 172 3 is_stmt 1 view .LVU22
  115              		.loc 1 172 15 is_stmt 0 view .LVU23
  116 0008 FFF7FEFF 		bl	HAL_GetTick
-ARM GAS  /tmp/cc5gF65y.s 			page 6
+ARM GAS  /tmp/cc95jR3I.s 			page 6
 
 
  117              	.LVL6:
@@ -350,7 +350,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  152 002c A4000E42 		.word	1108213924
  153 0030 00700040 		.word	1073770496
  154              		.cfi_endproc
- 155              	.LFE131:
+ 155              	.LFE217:
  157              		.section	.text.HAL_PWREx_EnableFlashPowerDown,"ax",%progbits
  158              		.align	1
  159              		.global	HAL_PWREx_EnableFlashPowerDown
@@ -358,11 +358,11 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  161              		.thumb
  162              		.thumb_func
  163              		.fpu fpv4-sp-d16
-ARM GAS  /tmp/cc5gF65y.s 			page 7
+ARM GAS  /tmp/cc95jR3I.s 			page 7
 
 
  165              	HAL_PWREx_EnableFlashPowerDown:
- 166              	.LFB132:
+ 166              	.LFB218:
  184:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
  185:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /**
  186:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   * @brief Enables the Flash Power Down in Stop mode.
@@ -389,7 +389,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  181              	.L20:
  182 0008 24000E42 		.word	1108213796
  183              		.cfi_endproc
- 184              	.LFE132:
+ 184              	.LFE218:
  186              		.section	.text.HAL_PWREx_DisableFlashPowerDown,"ax",%progbits
  187              		.align	1
  188              		.global	HAL_PWREx_DisableFlashPowerDown
@@ -398,7 +398,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  191              		.thumb_func
  192              		.fpu fpv4-sp-d16
  194              	HAL_PWREx_DisableFlashPowerDown:
- 195              	.LFB133:
+ 195              	.LFB219:
  193:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
  194:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /**
  195:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   * @brief Disables the Flash Power Down in Stop mode.
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  204 0002 0022     		movs	r2, #0
  205 0004 1A60     		str	r2, [r3]
  201:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** }
-ARM GAS  /tmp/cc5gF65y.s 			page 8
+ARM GAS  /tmp/cc95jR3I.s 			page 8
 
 
  206              		.loc 1 201 1 view .LVU43
@@ -428,7 +428,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  210              	.L23:
  211 0008 24000E42 		.word	1108213796
  212              		.cfi_endproc
- 213              	.LFE133:
+ 213              	.LFE219:
  215              		.section	.text.HAL_PWREx_GetVoltageRange,"ax",%progbits
  216              		.align	1
  217              		.global	HAL_PWREx_GetVoltageRange
@@ -437,7 +437,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  220              		.thumb_func
  221              		.fpu fpv4-sp-d16
  223              	HAL_PWREx_GetVoltageRange:
- 224              	.LFB134:
+ 224              	.LFB220:
  202:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
  203:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /**
  204:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   * @brief Return Voltage Scaling Range.
@@ -468,7 +468,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  239              	.L26:
  240 000c 00700040 		.word	1073770496
  241              		.cfi_endproc
- 242              	.LFE134:
+ 242              	.LFE220:
  244              		.section	.text.HAL_PWREx_ControlVoltageScaling,"ax",%progbits
  245              		.align	1
  246              		.global	HAL_PWREx_ControlVoltageScaling
@@ -478,10 +478,10 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  250              		.fpu fpv4-sp-d16
  252              	HAL_PWREx_ControlVoltageScaling:
  253              	.LVL10:
-ARM GAS  /tmp/cc5gF65y.s 			page 9
+ARM GAS  /tmp/cc95jR3I.s 			page 9
 
 
- 254              	.LFB135:
+ 254              	.LFB221:
  215:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
  216:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** #if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx)
  217:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /**
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  268:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   *                                               the maximum value of fHCLK is 168 MHz. It can be 
  269:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   *                                               180 MHz by activating the over-drive mode.
  270:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   *            @arg PWR_REGULATOR_VOLTAGE_SCALE2: Regulator voltage output range 2 mode,
-ARM GAS  /tmp/cc5gF65y.s 			page 10
+ARM GAS  /tmp/cc95jR3I.s 			page 10
 
 
  271:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   *                                               the maximum value of fHCLK is 144 MHz. It can be 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  284 0014 02F08052 		and	r2, r2, #268435456
  285 0018 0092     		str	r2, [sp]
  286              		.loc 1 295 3 view .LVU56
-ARM GAS  /tmp/cc5gF65y.s 			page 11
+ARM GAS  /tmp/cc95jR3I.s 			page 11
 
 
  287 001a 009A     		ldr	r2, [sp]
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  310:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****         return HAL_TIMEOUT;
  327              		.loc 1 310 16 view .LVU73
  328 0048 0320     		movs	r0, #3
-ARM GAS  /tmp/cc5gF65y.s 			page 12
+ARM GAS  /tmp/cc95jR3I.s 			page 12
 
 
  329 004a 31E0     		b	.L29
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  370 007a 06D1     		bne	.L42
  324:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****     {
  325:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****       if((HAL_GetTick() - tickstart ) > PLL_TIMEOUT_VALUE)
-ARM GAS  /tmp/cc5gF65y.s 			page 13
+ARM GAS  /tmp/cc95jR3I.s 			page 13
 
 
  371              		.loc 1 325 7 is_stmt 1 view .LVU88
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  339:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****     }
  340:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   }
  341:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   else
-ARM GAS  /tmp/cc5gF65y.s 			page 14
+ARM GAS  /tmp/cc95jR3I.s 			page 14
 
 
  342:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   {
@@ -810,7 +810,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  431 00b8 60004742 		.word	1111949408
  432 00bc 00700040 		.word	1073770496
  433              		.cfi_endproc
- 434              	.LFE135:
+ 434              	.LFE221:
  436              		.section	.text.HAL_PWREx_EnableMainRegulatorLowVoltage,"ax",%progbits
  437              		.align	1
  438              		.global	HAL_PWREx_EnableMainRegulatorLowVoltage
@@ -819,7 +819,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  441              		.thumb_func
  442              		.fpu fpv4-sp-d16
  444              	HAL_PWREx_EnableMainRegulatorLowVoltage:
- 445              	.LFB136:
+ 445              	.LFB222:
  348:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** #endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx */
  349:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
  350:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** #if defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F410Tx) || defined(STM32F410Cx) ||
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  448              		@ args = 0, pretend = 0, frame = 0
  449              		@ frame_needed = 0, uses_anonymous_args = 0
  450              		@ link register save eliminated.
-ARM GAS  /tmp/cc5gF65y.s 			page 15
+ARM GAS  /tmp/cc95jR3I.s 			page 15
 
 
  361:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   *(__IO uint32_t *) CR_MRLVDS_BB = (uint32_t)ENABLE;
@@ -855,7 +855,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  460              	.L47:
  461 0008 2C000E42 		.word	1108213804
  462              		.cfi_endproc
- 463              	.LFE136:
+ 463              	.LFE222:
  465              		.section	.text.HAL_PWREx_DisableMainRegulatorLowVoltage,"ax",%progbits
  466              		.align	1
  467              		.global	HAL_PWREx_DisableMainRegulatorLowVoltage
@@ -864,7 +864,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  470              		.thumb_func
  471              		.fpu fpv4-sp-d16
  473              	HAL_PWREx_DisableMainRegulatorLowVoltage:
- 474              	.LFB137:
+ 474              	.LFB223:
  363:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
  364:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /**
  365:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   * @brief Disables Main Regulator low voltage mode.
@@ -893,19 +893,19 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  489              	.L50:
  490 0008 2C000E42 		.word	1108213804
  491              		.cfi_endproc
- 492              	.LFE137:
+ 492              	.LFE223:
  494              		.section	.text.HAL_PWREx_EnableLowRegulatorLowVoltage,"ax",%progbits
  495              		.align	1
  496              		.global	HAL_PWREx_EnableLowRegulatorLowVoltage
  497              		.syntax unified
-ARM GAS  /tmp/cc5gF65y.s 			page 16
+ARM GAS  /tmp/cc95jR3I.s 			page 16
 
 
  498              		.thumb
  499              		.thumb_func
  500              		.fpu fpv4-sp-d16
  502              	HAL_PWREx_EnableLowRegulatorLowVoltage:
- 503              	.LFB138:
+ 503              	.LFB224:
  374:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
  375:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /**
  376:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   * @brief Enables Low Power Regulator low voltage mode.
@@ -934,7 +934,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  518              	.L53:
  519 0008 28000E42 		.word	1108213800
  520              		.cfi_endproc
- 521              	.LFE138:
+ 521              	.LFE224:
  523              		.section	.text.HAL_PWREx_DisableLowRegulatorLowVoltage,"ax",%progbits
  524              		.align	1
  525              		.global	HAL_PWREx_DisableLowRegulatorLowVoltage
@@ -943,7 +943,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  528              		.thumb_func
  529              		.fpu fpv4-sp-d16
  531              	HAL_PWREx_DisableLowRegulatorLowVoltage:
- 532              	.LFB139:
+ 532              	.LFB225:
  385:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** 
  386:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c **** /**
  387:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   * @brief Disables Low Power Regulator low voltage mode.
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  535              		@ args = 0, pretend = 0, frame = 0
  536              		@ frame_needed = 0, uses_anonymous_args = 0
  537              		@ link register save eliminated.
-ARM GAS  /tmp/cc5gF65y.s 			page 17
+ARM GAS  /tmp/cc95jR3I.s 			page 17
 
 
  394:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c ****   *(__IO uint32_t *) CR_LPLVDS_BB = (uint32_t)DISABLE;
@@ -975,7 +975,7 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  547              	.L56:
  548 0008 28000E42 		.word	1108213800
  549              		.cfi_endproc
- 550              	.LFE139:
+ 550              	.LFE225:
  552              		.text
  553              	.Letext0:
  554              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
@@ -985,41 +985,41 @@ ARM GAS  /tmp/cc5gF65y.s 			page 1
  558              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
  559              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
  560              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/cc5gF65y.s 			page 18
+ARM GAS  /tmp/cc95jR3I.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_hal_pwr_ex.c
-     /tmp/cc5gF65y.s:18     .text.HAL_PWREx_EnableBkUpReg:0000000000000000 $t
-     /tmp/cc5gF65y.s:26     .text.HAL_PWREx_EnableBkUpReg:0000000000000000 HAL_PWREx_EnableBkUpReg
-     /tmp/cc5gF65y.s:83     .text.HAL_PWREx_EnableBkUpReg:000000000000002c $d
-     /tmp/cc5gF65y.s:89     .text.HAL_PWREx_DisableBkUpReg:0000000000000000 $t
-     /tmp/cc5gF65y.s:96     .text.HAL_PWREx_DisableBkUpReg:0000000000000000 HAL_PWREx_DisableBkUpReg
-     /tmp/cc5gF65y.s:152    .text.HAL_PWREx_DisableBkUpReg:000000000000002c $d
-     /tmp/cc5gF65y.s:158    .text.HAL_PWREx_EnableFlashPowerDown:0000000000000000 $t
-     /tmp/cc5gF65y.s:165    .text.HAL_PWREx_EnableFlashPowerDown:0000000000000000 HAL_PWREx_EnableFlashPowerDown
-     /tmp/cc5gF65y.s:182    .text.HAL_PWREx_EnableFlashPowerDown:0000000000000008 $d
-     /tmp/cc5gF65y.s:187    .text.HAL_PWREx_DisableFlashPowerDown:0000000000000000 $t
-     /tmp/cc5gF65y.s:194    .text.HAL_PWREx_DisableFlashPowerDown:0000000000000000 HAL_PWREx_DisableFlashPowerDown
-     /tmp/cc5gF65y.s:211    .text.HAL_PWREx_DisableFlashPowerDown:0000000000000008 $d
-     /tmp/cc5gF65y.s:216    .text.HAL_PWREx_GetVoltageRange:0000000000000000 $t
-     /tmp/cc5gF65y.s:223    .text.HAL_PWREx_GetVoltageRange:0000000000000000 HAL_PWREx_GetVoltageRange
-     /tmp/cc5gF65y.s:240    .text.HAL_PWREx_GetVoltageRange:000000000000000c $d
-     /tmp/cc5gF65y.s:245    .text.HAL_PWREx_ControlVoltageScaling:0000000000000000 $t
-     /tmp/cc5gF65y.s:252    .text.HAL_PWREx_ControlVoltageScaling:0000000000000000 HAL_PWREx_ControlVoltageScaling
-     /tmp/cc5gF65y.s:430    .text.HAL_PWREx_ControlVoltageScaling:00000000000000b4 $d
-     /tmp/cc5gF65y.s:437    .text.HAL_PWREx_EnableMainRegulatorLowVoltage:0000000000000000 $t
-     /tmp/cc5gF65y.s:444    .text.HAL_PWREx_EnableMainRegulatorLowVoltage:0000000000000000 HAL_PWREx_EnableMainRegulatorLowVoltage
-     /tmp/cc5gF65y.s:461    .text.HAL_PWREx_EnableMainRegulatorLowVoltage:0000000000000008 $d
-     /tmp/cc5gF65y.s:466    .text.HAL_PWREx_DisableMainRegulatorLowVoltage:0000000000000000 $t
-     /tmp/cc5gF65y.s:473    .text.HAL_PWREx_DisableMainRegulatorLowVoltage:0000000000000000 HAL_PWREx_DisableMainRegulatorLowVoltage
-     /tmp/cc5gF65y.s:490    .text.HAL_PWREx_DisableMainRegulatorLowVoltage:0000000000000008 $d
-     /tmp/cc5gF65y.s:495    .text.HAL_PWREx_EnableLowRegulatorLowVoltage:0000000000000000 $t
-     /tmp/cc5gF65y.s:502    .text.HAL_PWREx_EnableLowRegulatorLowVoltage:0000000000000000 HAL_PWREx_EnableLowRegulatorLowVoltage
-     /tmp/cc5gF65y.s:519    .text.HAL_PWREx_EnableLowRegulatorLowVoltage:0000000000000008 $d
-     /tmp/cc5gF65y.s:524    .text.HAL_PWREx_DisableLowRegulatorLowVoltage:0000000000000000 $t
-     /tmp/cc5gF65y.s:531    .text.HAL_PWREx_DisableLowRegulatorLowVoltage:0000000000000000 HAL_PWREx_DisableLowRegulatorLowVoltage
-     /tmp/cc5gF65y.s:548    .text.HAL_PWREx_DisableLowRegulatorLowVoltage:0000000000000008 $d
+     /tmp/cc95jR3I.s:18     .text.HAL_PWREx_EnableBkUpReg:0000000000000000 $t
+     /tmp/cc95jR3I.s:26     .text.HAL_PWREx_EnableBkUpReg:0000000000000000 HAL_PWREx_EnableBkUpReg
+     /tmp/cc95jR3I.s:83     .text.HAL_PWREx_EnableBkUpReg:000000000000002c $d
+     /tmp/cc95jR3I.s:89     .text.HAL_PWREx_DisableBkUpReg:0000000000000000 $t
+     /tmp/cc95jR3I.s:96     .text.HAL_PWREx_DisableBkUpReg:0000000000000000 HAL_PWREx_DisableBkUpReg
+     /tmp/cc95jR3I.s:152    .text.HAL_PWREx_DisableBkUpReg:000000000000002c $d
+     /tmp/cc95jR3I.s:158    .text.HAL_PWREx_EnableFlashPowerDown:0000000000000000 $t
+     /tmp/cc95jR3I.s:165    .text.HAL_PWREx_EnableFlashPowerDown:0000000000000000 HAL_PWREx_EnableFlashPowerDown
+     /tmp/cc95jR3I.s:182    .text.HAL_PWREx_EnableFlashPowerDown:0000000000000008 $d
+     /tmp/cc95jR3I.s:187    .text.HAL_PWREx_DisableFlashPowerDown:0000000000000000 $t
+     /tmp/cc95jR3I.s:194    .text.HAL_PWREx_DisableFlashPowerDown:0000000000000000 HAL_PWREx_DisableFlashPowerDown
+     /tmp/cc95jR3I.s:211    .text.HAL_PWREx_DisableFlashPowerDown:0000000000000008 $d
+     /tmp/cc95jR3I.s:216    .text.HAL_PWREx_GetVoltageRange:0000000000000000 $t
+     /tmp/cc95jR3I.s:223    .text.HAL_PWREx_GetVoltageRange:0000000000000000 HAL_PWREx_GetVoltageRange
+     /tmp/cc95jR3I.s:240    .text.HAL_PWREx_GetVoltageRange:000000000000000c $d
+     /tmp/cc95jR3I.s:245    .text.HAL_PWREx_ControlVoltageScaling:0000000000000000 $t
+     /tmp/cc95jR3I.s:252    .text.HAL_PWREx_ControlVoltageScaling:0000000000000000 HAL_PWREx_ControlVoltageScaling
+     /tmp/cc95jR3I.s:430    .text.HAL_PWREx_ControlVoltageScaling:00000000000000b4 $d
+     /tmp/cc95jR3I.s:437    .text.HAL_PWREx_EnableMainRegulatorLowVoltage:0000000000000000 $t
+     /tmp/cc95jR3I.s:444    .text.HAL_PWREx_EnableMainRegulatorLowVoltage:0000000000000000 HAL_PWREx_EnableMainRegulatorLowVoltage
+     /tmp/cc95jR3I.s:461    .text.HAL_PWREx_EnableMainRegulatorLowVoltage:0000000000000008 $d
+     /tmp/cc95jR3I.s:466    .text.HAL_PWREx_DisableMainRegulatorLowVoltage:0000000000000000 $t
+     /tmp/cc95jR3I.s:473    .text.HAL_PWREx_DisableMainRegulatorLowVoltage:0000000000000000 HAL_PWREx_DisableMainRegulatorLowVoltage
+     /tmp/cc95jR3I.s:490    .text.HAL_PWREx_DisableMainRegulatorLowVoltage:0000000000000008 $d
+     /tmp/cc95jR3I.s:495    .text.HAL_PWREx_EnableLowRegulatorLowVoltage:0000000000000000 $t
+     /tmp/cc95jR3I.s:502    .text.HAL_PWREx_EnableLowRegulatorLowVoltage:0000000000000000 HAL_PWREx_EnableLowRegulatorLowVoltage
+     /tmp/cc95jR3I.s:519    .text.HAL_PWREx_EnableLowRegulatorLowVoltage:0000000000000008 $d
+     /tmp/cc95jR3I.s:524    .text.HAL_PWREx_DisableLowRegulatorLowVoltage:0000000000000000 $t
+     /tmp/cc95jR3I.s:531    .text.HAL_PWREx_DisableLowRegulatorLowVoltage:0000000000000000 HAL_PWREx_DisableLowRegulatorLowVoltage
+     /tmp/cc95jR3I.s:548    .text.HAL_PWREx_DisableLowRegulatorLowVoltage:0000000000000008 $d
 
 UNDEFINED SYMBOLS
 HAL_GetTick

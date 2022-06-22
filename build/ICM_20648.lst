@@ -1,0 +1,1992 @@
+ARM GAS  /tmp/cc0dBqlD.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"ICM_20648.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.read_byte,"ax",%progbits
+  18              		.align	1
+  19              		.global	read_byte
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	read_byte:
+  27              	.LVL0:
+  28              	.LFB219:
+  29              		.file 1 "Core/Src/ICM_20648.c"
+   1:Core/Src/ICM_20648.c **** /*
+   2:Core/Src/ICM_20648.c ****  * ICM_20648.c
+   3:Core/Src/ICM_20648.c ****  *
+   4:Core/Src/ICM_20648.c ****  *  Created on: Jul 28, 2021
+   5:Core/Src/ICM_20648.c ****  *      Author: leopi
+   6:Core/Src/ICM_20648.c ****  */
+   7:Core/Src/ICM_20648.c **** //ICM_20648.c Ver.1.0
+   8:Core/Src/ICM_20648.c **** #include "ICM_20648.h"
+   9:Core/Src/ICM_20648.c **** #include <stdio.h>
+  10:Core/Src/ICM_20648.c **** volatile int16_t	xa, ya, za; // 加速度(16bitデータ)
+  11:Core/Src/ICM_20648.c **** volatile int16_t xg, yg, zg;	// 角加速度(16bitデータ)
+  12:Core/Src/ICM_20648.c **** float zg_offset=0, ya_offset=0;
+  13:Core/Src/ICM_20648.c **** //uint8_t val[2]={0};
+  14:Core/Src/ICM_20648.c **** //int16_t spi_dma_data;
+  15:Core/Src/ICM_20648.c **** float  ZGyro=0, YAccel=0;
+  16:Core/Src/ICM_20648.c **** //const uint8_t ret[2] = {
+  17:Core/Src/ICM_20648.c **** //		0x37 | 0x80,
+  18:Core/Src/ICM_20648.c **** //		0x38 | 0x80
+  19:Core/Src/ICM_20648.c **** //};
+  20:Core/Src/ICM_20648.c **** //const uint8_t ret2 =
+  21:Core/Src/ICM_20648.c **** 
+  22:Core/Src/ICM_20648.c **** //void IMU_DMA_Start()
+  23:Core/Src/ICM_20648.c **** //{
+  24:Core/Src/ICM_20648.c **** //	//zg = ((uint16_t)read_byte(0x37) << 8) | ((uint16_t)read_byte(0x38));
+  25:Core/Src/ICM_20648.c **** //	uint8_t ret[2];
+  26:Core/Src/ICM_20648.c **** //	ret[0] = 0x37 | 0x80;
+  27:Core/Src/ICM_20648.c **** //	ret[1] = 0x38 | 0x80;
+  28:Core/Src/ICM_20648.c **** //	printf("%d, %d, %d, %d,%d\r\n\r\n", ret[0], ret[1], val[0], val[1],spi_dma_data);
+  29:Core/Src/ICM_20648.c **** //	//int a = HAL_SPI_TransmitReceive_DMA(&hspi2, (uint8_t *)ret, (uint8_t *)val, 2);
+ARM GAS  /tmp/cc0dBqlD.s 			page 2
+
+
+  30:Core/Src/ICM_20648.c **** //	//printf("%d\r\n",a);
+  31:Core/Src/ICM_20648.c **** //	if ( HAL_SPI_TransmitReceive_DMA(&hspi2, (uint8_t *)ret, (uint8_t *)val, 2) != HAL_OK )
+  32:Core/Src/ICM_20648.c **** //	{
+  33:Core/Src/ICM_20648.c **** //		printf("エラー1\r\n");
+  34:Core/Src/ICM_20648.c **** //		Error_Handler();
+  35:Core/Src/ICM_20648.c **** //		printf("エラー2\r\n");
+  36:Core/Src/ICM_20648.c **** //	}
+  37:Core/Src/ICM_20648.c **** //	printf("ok\r\n");
+  38:Core/Src/ICM_20648.c **** //}
+  39:Core/Src/ICM_20648.c **** inline uint8_t read_byte( uint8_t reg ) {
+  30              		.loc 1 39 41 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 39 41 is_stmt 0 view .LVU1
+  35 0000 30B5     		push	{r4, r5, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 12
+  38              		.cfi_offset 4, -12
+  39              		.cfi_offset 5, -8
+  40              		.cfi_offset 14, -4
+  41 0002 83B0     		sub	sp, sp, #12
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 24
+  40:Core/Src/ICM_20648.c **** 
+  41:Core/Src/ICM_20648.c **** 	uint8_t ret,val;
+  44              		.loc 1 41 2 is_stmt 1 view .LVU2
+  42:Core/Src/ICM_20648.c **** 
+  43:Core/Src/ICM_20648.c **** 	ret = reg | 0x80;
+  45              		.loc 1 43 2 view .LVU3
+  46              		.loc 1 43 6 is_stmt 0 view .LVU4
+  47 0004 60F07F00 		orn	r0, r0, #127
+  48              	.LVL1:
+  49              		.loc 1 43 6 view .LVU5
+  50 0008 8DF80700 		strb	r0, [sp, #7]
+  44:Core/Src/ICM_20648.c **** 	CS_RESET;
+  51              		.loc 1 44 2 is_stmt 1 view .LVU6
+  52 000c 0E4C     		ldr	r4, .L3
+  53 000e 0022     		movs	r2, #0
+  54 0010 0221     		movs	r1, #2
+  55 0012 2046     		mov	r0, r4
+  56 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  57              	.LVL2:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+  58              		.loc 1 45 2 view .LVU7
+  59 0018 0C4D     		ldr	r5, .L3+4
+  60 001a 6423     		movs	r3, #100
+  61 001c 0122     		movs	r2, #1
+  62 001e 0DF10701 		add	r1, sp, #7
+  63 0022 2846     		mov	r0, r5
+  64 0024 FFF7FEFF 		bl	HAL_SPI_Transmit
+  65              	.LVL3:
+  46:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+  66              		.loc 1 46 2 view .LVU8
+  67 0028 6423     		movs	r3, #100
+  68 002a 0122     		movs	r2, #1
+  69 002c 0DF10601 		add	r1, sp, #6
+ARM GAS  /tmp/cc0dBqlD.s 			page 3
+
+
+  70 0030 2846     		mov	r0, r5
+  71 0032 FFF7FEFF 		bl	HAL_SPI_Receive
+  72              	.LVL4:
+  47:Core/Src/ICM_20648.c **** 	CS_SET;
+  73              		.loc 1 47 2 view .LVU9
+  74 0036 0122     		movs	r2, #1
+  75 0038 0221     		movs	r1, #2
+  76 003a 2046     		mov	r0, r4
+  77 003c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  78              	.LVL5:
+  48:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+  49:Core/Src/ICM_20648.c **** 	//値の更新は4回分で0.8ms = 1.25kHz . 656250Bit/s 1回で131.25bit, 4回で525Bit=65.625byt
+  50:Core/Src/ICM_20648.c **** 	//値の取得は1msが妥当。2台目のエンコーダではどれくらいがいいか。as504
+  51:Core/Src/ICM_20648.c **** 	return val;
+  79              		.loc 1 51 2 view .LVU10
+  52:Core/Src/ICM_20648.c **** }
+  80              		.loc 1 52 1 is_stmt 0 view .LVU11
+  81 0040 9DF80600 		ldrb	r0, [sp, #6]	@ zero_extendqisi2
+  82 0044 03B0     		add	sp, sp, #12
+  83              	.LCFI2:
+  84              		.cfi_def_cfa_offset 12
+  85              		@ sp needed
+  86 0046 30BD     		pop	{r4, r5, pc}
+  87              	.L4:
+  88              		.align	2
+  89              	.L3:
+  90 0048 00040240 		.word	1073873920
+  91 004c 00000000 		.word	hspi2
+  92              		.cfi_endproc
+  93              	.LFE219:
+  95              		.section	.text.ReadIMU,"ax",%progbits
+  96              		.align	1
+  97              		.global	ReadIMU
+  98              		.syntax unified
+  99              		.thumb
+ 100              		.thumb_func
+ 101              		.fpu fpv4-sp-d16
+ 103              	ReadIMU:
+ 104              	.LVL6:
+ 105              	.LFB220:
+  53:Core/Src/ICM_20648.c **** inline float ReadIMU(uint8_t a, uint8_t b) {
+ 106              		.loc 1 53 44 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 8
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110              		.loc 1 53 44 is_stmt 0 view .LVU13
+ 111 0000 30B5     		push	{r4, r5, lr}
+ 112              	.LCFI3:
+ 113              		.cfi_def_cfa_offset 12
+ 114              		.cfi_offset 4, -12
+ 115              		.cfi_offset 5, -8
+ 116              		.cfi_offset 14, -4
+ 117 0002 83B0     		sub	sp, sp, #12
+ 118              	.LCFI4:
+ 119              		.cfi_def_cfa_offset 24
+  54:Core/Src/ICM_20648.c **** 
+  55:Core/Src/ICM_20648.c **** 	uint8_t ret1, ret2,val1,val2;
+ARM GAS  /tmp/cc0dBqlD.s 			page 4
+
+
+ 120              		.loc 1 55 2 is_stmt 1 view .LVU14
+  56:Core/Src/ICM_20648.c **** 	uint8_t ret[2] = {
+ 121              		.loc 1 56 2 view .LVU15
+  57:Core/Src/ICM_20648.c **** 			a,//0x37,
+  58:Core/Src/ICM_20648.c **** 			b//0x38,
+  59:Core/Src/ICM_20648.c **** 	};
+  60:Core/Src/ICM_20648.c **** 	int16_t law_data;
+ 122              		.loc 1 60 2 view .LVU16
+  61:Core/Src/ICM_20648.c **** 	float res;
+ 123              		.loc 1 61 2 view .LVU17
+  62:Core/Src/ICM_20648.c **** 	ret1 = ret[0] | 0x80;
+ 124              		.loc 1 62 2 view .LVU18
+ 125              		.loc 1 62 7 is_stmt 0 view .LVU19
+ 126 0004 60F07F00 		orn	r0, r0, #127
+ 127              	.LVL7:
+ 128              		.loc 1 62 7 view .LVU20
+ 129 0008 8DF80700 		strb	r0, [sp, #7]
+  63:Core/Src/ICM_20648.c **** 	ret2 = ret[1] | 0x80;
+ 130              		.loc 1 63 2 is_stmt 1 view .LVU21
+ 131              		.loc 1 63 7 is_stmt 0 view .LVU22
+ 132 000c 61F07F01 		orn	r1, r1, #127
+ 133              	.LVL8:
+ 134              		.loc 1 63 7 view .LVU23
+ 135 0010 8DF80610 		strb	r1, [sp, #6]
+  64:Core/Src/ICM_20648.c **** //	reg[0] = 0x37;
+  65:Core/Src/ICM_20648.c **** //	reg[1] = 0x38;
+  66:Core/Src/ICM_20648.c **** //
+  67:Core/Src/ICM_20648.c **** //	ret = reg[0] | 0x80;
+  68:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 136              		.loc 1 68 2 is_stmt 1 view .LVU24
+ 137 0014 1E4C     		ldr	r4, .L7
+ 138 0016 0022     		movs	r2, #0
+ 139 0018 0221     		movs	r1, #2
+ 140 001a 2046     		mov	r0, r4
+ 141 001c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 142              	.LVL9:
+  69:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret1,1,100);
+ 143              		.loc 1 69 2 view .LVU25
+ 144 0020 1C4D     		ldr	r5, .L7+4
+ 145 0022 6423     		movs	r3, #100
+ 146 0024 0122     		movs	r2, #1
+ 147 0026 0DF10701 		add	r1, sp, #7
+ 148 002a 2846     		mov	r0, r5
+ 149 002c FFF7FEFF 		bl	HAL_SPI_Transmit
+ 150              	.LVL10:
+  70:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val1,1,100);
+ 151              		.loc 1 70 2 view .LVU26
+ 152 0030 6423     		movs	r3, #100
+ 153 0032 0122     		movs	r2, #1
+ 154 0034 0DF10501 		add	r1, sp, #5
+ 155 0038 2846     		mov	r0, r5
+ 156 003a FFF7FEFF 		bl	HAL_SPI_Receive
+ 157              	.LVL11:
+  71:Core/Src/ICM_20648.c **** 	CS_SET;
+ 158              		.loc 1 71 2 view .LVU27
+ 159 003e 0122     		movs	r2, #1
+ 160 0040 0221     		movs	r1, #2
+ARM GAS  /tmp/cc0dBqlD.s 			page 5
+
+
+ 161 0042 2046     		mov	r0, r4
+ 162 0044 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 163              	.LVL12:
+  72:Core/Src/ICM_20648.c **** 
+  73:Core/Src/ICM_20648.c **** //	ret = reg[1] | 0x80;
+  74:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 164              		.loc 1 74 2 view .LVU28
+ 165 0048 0022     		movs	r2, #0
+ 166 004a 0221     		movs	r1, #2
+ 167 004c 2046     		mov	r0, r4
+ 168 004e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 169              	.LVL13:
+  75:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret2,1,100);
+ 170              		.loc 1 75 2 view .LVU29
+ 171 0052 6423     		movs	r3, #100
+ 172 0054 0122     		movs	r2, #1
+ 173 0056 0DF10601 		add	r1, sp, #6
+ 174 005a 2846     		mov	r0, r5
+ 175 005c FFF7FEFF 		bl	HAL_SPI_Transmit
+ 176              	.LVL14:
+  76:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val2,1,100);
+ 177              		.loc 1 76 2 view .LVU30
+ 178 0060 6423     		movs	r3, #100
+ 179 0062 0122     		movs	r2, #1
+ 180 0064 01A9     		add	r1, sp, #4
+ 181 0066 2846     		mov	r0, r5
+ 182 0068 FFF7FEFF 		bl	HAL_SPI_Receive
+ 183              	.LVL15:
+  77:Core/Src/ICM_20648.c **** 	CS_SET;
+ 184              		.loc 1 77 2 view .LVU31
+ 185 006c 0122     		movs	r2, #1
+ 186 006e 0221     		movs	r1, #2
+ 187 0070 2046     		mov	r0, r4
+ 188 0072 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 189              	.LVL16:
+  78:Core/Src/ICM_20648.c **** 	law_data = ( ((uint16_t)val1 << 8) | ((uint16_t)val2) );//何で8bitシフトかというと、ロ
+ 190              		.loc 1 78 2 view .LVU32
+ 191              		.loc 1 78 16 is_stmt 0 view .LVU33
+ 192 0076 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 193              		.loc 1 78 31 view .LVU34
+ 194 007a 1B02     		lsls	r3, r3, #8
+ 195              		.loc 1 78 37 view .LVU35
+ 196 007c 1BB2     		sxth	r3, r3
+ 197 007e 9DF80420 		ldrb	r2, [sp, #4]	@ zero_extendqisi2
+ 198              		.loc 1 78 11 view .LVU36
+ 199 0082 1343     		orrs	r3, r3, r2
+ 200 0084 00EE103A 		vmov	s0, r3	@ int
+ 201              	.LVL17:
+  79:Core/Src/ICM_20648.c **** 	res = (float)law_data;
+ 202              		.loc 1 79 2 is_stmt 1 view .LVU37
+  80:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+  81:Core/Src/ICM_20648.c **** 	//値の更新は4回分で0.8ms = 1.25kHz . 656250Bit/s 1回で131.25bit, 4回で525Bit=65.625byt
+  82:Core/Src/ICM_20648.c **** 	//値の取得は1msが妥当。2台目のエンコーダではどれくらいがいいか。as504
+  83:Core/Src/ICM_20648.c **** 	return res;
+ 203              		.loc 1 83 2 view .LVU38
+  84:Core/Src/ICM_20648.c **** }
+ 204              		.loc 1 84 1 is_stmt 0 view .LVU39
+ARM GAS  /tmp/cc0dBqlD.s 			page 6
+
+
+ 205 0088 B8EEC00A 		vcvt.f32.s32	s0, s0
+ 206              	.LVL18:
+ 207              		.loc 1 84 1 view .LVU40
+ 208 008c 03B0     		add	sp, sp, #12
+ 209              	.LCFI5:
+ 210              		.cfi_def_cfa_offset 12
+ 211              		@ sp needed
+ 212 008e 30BD     		pop	{r4, r5, pc}
+ 213              	.L8:
+ 214              		.align	2
+ 215              	.L7:
+ 216 0090 00040240 		.word	1073873920
+ 217 0094 00000000 		.word	hspi2
+ 218              		.cfi_endproc
+ 219              	.LFE220:
+ 221              		.section	.text.write_byte,"ax",%progbits
+ 222              		.align	1
+ 223              		.global	write_byte
+ 224              		.syntax unified
+ 225              		.thumb
+ 226              		.thumb_func
+ 227              		.fpu fpv4-sp-d16
+ 229              	write_byte:
+ 230              	.LVL19:
+ 231              	.LFB221:
+  85:Core/Src/ICM_20648.c **** void write_byte( uint8_t reg, uint8_t val )  {
+ 232              		.loc 1 85 46 is_stmt 1 view -0
+ 233              		.cfi_startproc
+ 234              		@ args = 0, pretend = 0, frame = 16
+ 235              		@ frame_needed = 0, uses_anonymous_args = 0
+ 236              		.loc 1 85 46 is_stmt 0 view .LVU42
+ 237 0000 30B5     		push	{r4, r5, lr}
+ 238              	.LCFI6:
+ 239              		.cfi_def_cfa_offset 12
+ 240              		.cfi_offset 4, -12
+ 241              		.cfi_offset 5, -8
+ 242              		.cfi_offset 14, -4
+ 243 0002 85B0     		sub	sp, sp, #20
+ 244              	.LCFI7:
+ 245              		.cfi_def_cfa_offset 32
+ 246 0004 8DF80710 		strb	r1, [sp, #7]
+  86:Core/Src/ICM_20648.c **** 	uint8_t ret;
+ 247              		.loc 1 86 2 is_stmt 1 view .LVU43
+  87:Core/Src/ICM_20648.c **** 
+  88:Core/Src/ICM_20648.c **** 	ret = reg & 0x7F;
+ 248              		.loc 1 88 2 view .LVU44
+ 249              		.loc 1 88 12 is_stmt 0 view .LVU45
+ 250 0008 00F07F00 		and	r0, r0, #127
+ 251              	.LVL20:
+ 252              		.loc 1 88 6 view .LVU46
+ 253 000c 8DF80F00 		strb	r0, [sp, #15]
+  89:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 254              		.loc 1 89 2 is_stmt 1 view .LVU47
+ 255 0010 0D4C     		ldr	r4, .L11
+ 256 0012 0022     		movs	r2, #0
+ 257 0014 0221     		movs	r1, #2
+ 258              	.LVL21:
+ARM GAS  /tmp/cc0dBqlD.s 			page 7
+
+
+ 259              		.loc 1 89 2 is_stmt 0 view .LVU48
+ 260 0016 2046     		mov	r0, r4
+ 261 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 262              	.LVL22:
+  90:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 263              		.loc 1 90 2 is_stmt 1 view .LVU49
+ 264 001c 0B4D     		ldr	r5, .L11+4
+ 265 001e 6423     		movs	r3, #100
+ 266 0020 0122     		movs	r2, #1
+ 267 0022 0DF10F01 		add	r1, sp, #15
+ 268 0026 2846     		mov	r0, r5
+ 269 0028 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 270              	.LVL23:
+  91:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&val,1,100);
+ 271              		.loc 1 91 2 view .LVU50
+ 272 002c 6423     		movs	r3, #100
+ 273 002e 0122     		movs	r2, #1
+ 274 0030 0DF10701 		add	r1, sp, #7
+ 275 0034 2846     		mov	r0, r5
+ 276 0036 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 277              	.LVL24:
+  92:Core/Src/ICM_20648.c **** 	CS_SET;
+ 278              		.loc 1 92 2 view .LVU51
+ 279 003a 0122     		movs	r2, #1
+ 280 003c 0221     		movs	r1, #2
+ 281 003e 2046     		mov	r0, r4
+ 282 0040 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 283              	.LVL25:
+  93:Core/Src/ICM_20648.c **** }
+ 284              		.loc 1 93 1 is_stmt 0 view .LVU52
+ 285 0044 05B0     		add	sp, sp, #20
+ 286              	.LCFI8:
+ 287              		.cfi_def_cfa_offset 12
+ 288              		@ sp needed
+ 289 0046 30BD     		pop	{r4, r5, pc}
+ 290              	.L12:
+ 291              		.align	2
+ 292              	.L11:
+ 293 0048 00040240 		.word	1073873920
+ 294 004c 00000000 		.word	hspi2
+ 295              		.cfi_endproc
+ 296              	.LFE221:
+ 298              		.section	.text.IMU_init,"ax",%progbits
+ 299              		.align	1
+ 300              		.global	IMU_init
+ 301              		.syntax unified
+ 302              		.thumb
+ 303              		.thumb_func
+ 304              		.fpu fpv4-sp-d16
+ 306              	IMU_init:
+ 307              	.LFB222:
+  94:Core/Src/ICM_20648.c **** 
+  95:Core/Src/ICM_20648.c **** uint8_t IMU_init() {
+ 308              		.loc 1 95 20 is_stmt 1 view -0
+ 309              		.cfi_startproc
+ 310              		@ args = 0, pretend = 0, frame = 8
+ 311              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cc0dBqlD.s 			page 8
+
+
+ 312 0000 30B5     		push	{r4, r5, lr}
+ 313              	.LCFI9:
+ 314              		.cfi_def_cfa_offset 12
+ 315              		.cfi_offset 4, -12
+ 316              		.cfi_offset 5, -8
+ 317              		.cfi_offset 14, -4
+ 318 0002 83B0     		sub	sp, sp, #12
+ 319              	.LCFI10:
+ 320              		.cfi_def_cfa_offset 24
+  96:Core/Src/ICM_20648.c **** 	uint8_t who_am_i,ret;
+ 321              		.loc 1 96 2 view .LVU54
+  97:Core/Src/ICM_20648.c **** 
+  98:Core/Src/ICM_20648.c **** 	who_am_i = read_byte(0x00);	//IMU動作確認　0xE0が送られてくればおｋ
+ 322              		.loc 1 98 2 view .LVU55
+ 323              	.LVL26:
+ 324              	.LBB4:
+ 325              	.LBI4:
+  39:Core/Src/ICM_20648.c **** 
+ 326              		.loc 1 39 16 view .LVU56
+ 327              	.LBB5:
+  41:Core/Src/ICM_20648.c **** 
+ 328              		.loc 1 41 2 view .LVU57
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 329              		.loc 1 43 2 view .LVU58
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 330              		.loc 1 43 6 is_stmt 0 view .LVU59
+ 331 0004 8023     		movs	r3, #128
+ 332 0006 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 333              		.loc 1 44 2 is_stmt 1 view .LVU60
+ 334 000a 1D4C     		ldr	r4, .L17
+ 335 000c 0022     		movs	r2, #0
+ 336 000e 0221     		movs	r1, #2
+ 337 0010 2046     		mov	r0, r4
+ 338 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 339              	.LVL27:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 340              		.loc 1 45 2 view .LVU61
+ 341 0016 1B4D     		ldr	r5, .L17+4
+ 342 0018 6423     		movs	r3, #100
+ 343 001a 0122     		movs	r2, #1
+ 344 001c 0DF10601 		add	r1, sp, #6
+ 345 0020 2846     		mov	r0, r5
+ 346 0022 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 347              	.LVL28:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 348              		.loc 1 46 2 view .LVU62
+ 349 0026 6423     		movs	r3, #100
+ 350 0028 0122     		movs	r2, #1
+ 351 002a 0DF10701 		add	r1, sp, #7
+ 352 002e 2846     		mov	r0, r5
+ 353 0030 FFF7FEFF 		bl	HAL_SPI_Receive
+ 354              	.LVL29:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 355              		.loc 1 47 2 view .LVU63
+ 356 0034 0122     		movs	r2, #1
+ 357 0036 0221     		movs	r1, #2
+ARM GAS  /tmp/cc0dBqlD.s 			page 9
+
+
+ 358 0038 2046     		mov	r0, r4
+ 359 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 360              	.LVL30:
+  51:Core/Src/ICM_20648.c **** }
+ 361              		.loc 1 51 2 view .LVU64
+  51:Core/Src/ICM_20648.c **** }
+ 362              		.loc 1 51 9 is_stmt 0 view .LVU65
+ 363 003e 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 364              	.LVL31:
+  51:Core/Src/ICM_20648.c **** }
+ 365              		.loc 1 51 9 view .LVU66
+ 366              	.LBE5:
+ 367              	.LBE4:
+  99:Core/Src/ICM_20648.c **** 	if ( who_am_i == 0xE0 ) {
+ 368              		.loc 1 99 2 is_stmt 1 view .LVU67
+ 369              		.loc 1 99 5 is_stmt 0 view .LVU68
+ 370 0042 E02B     		cmp	r3, #224
+ 371 0044 02D0     		beq	.L16
+ 372              	.LVL32:
+ 373              	.L14:
+ 100:Core/Src/ICM_20648.c **** 		ret = 1;
+ 101:Core/Src/ICM_20648.c **** 		write_byte(0x06,0x01);	//PWR_MGMT_1	スリープﾓｰﾄﾞ解除
+ 102:Core/Src/ICM_20648.c **** 		write_byte(0x03,0x10);	//USER_CTRL	諸々機能無効　SPIonly
+ 103:Core/Src/ICM_20648.c **** 		write_byte(0x7F,0x20);	//USER_BANK2
+ 104:Core/Src/ICM_20648.c **** 
+ 105:Core/Src/ICM_20648.c **** 		//write_byte(0x01,0x06);	//	レンジ±2000dps DLPF disable
+ 106:Core/Src/ICM_20648.c **** 		//write_byte(0x01,0x07);	//range±2000dps DLPF enable DLPFCFG = 0
+ 107:Core/Src/ICM_20648.c **** 		//write_byte(0x01,0x0F);	//range±2000dps DLPF enable DLPFCFG = 1
+ 108:Core/Src/ICM_20648.c **** 		write_byte(0x01,0x17);	//range±2000dps DLPF enable DLPFCFG = 2
+ 109:Core/Src/ICM_20648.c **** 		//2:1 GYRO_FS_SEL[1:0] 00:±250	01:±500 10:±1000 11:±2000
+ 110:Core/Src/ICM_20648.c **** 
+ 111:Core/Src/ICM_20648.c **** 		write_byte(0x14,0x17);	//	レンジ±16g 0x06
+ 112:Core/Src/ICM_20648.c **** 		//2:1 ACCEL_FS_SEL[1:0] 00:±2	01:±4 10:±8 11:±16
+ 113:Core/Src/ICM_20648.c **** 
+ 114:Core/Src/ICM_20648.c **** 		write_byte(0x7F,0x00);	//USER_BANK0
+ 115:Core/Src/ICM_20648.c **** 	}
+ 116:Core/Src/ICM_20648.c **** 	return ret;
+ 374              		.loc 1 116 2 is_stmt 1 view .LVU69
+ 117:Core/Src/ICM_20648.c **** 	//0x14, 0x7F : 0000 1110, 0111 1111
+ 118:Core/Src/ICM_20648.c **** 	//retはregのまま。
+ 119:Core/Src/ICM_20648.c **** }
+ 375              		.loc 1 119 1 is_stmt 0 view .LVU70
+ 376 0046 0120     		movs	r0, #1
+ 377 0048 03B0     		add	sp, sp, #12
+ 378              	.LCFI11:
+ 379              		.cfi_remember_state
+ 380              		.cfi_def_cfa_offset 12
+ 381              		@ sp needed
+ 382 004a 30BD     		pop	{r4, r5, pc}
+ 383              	.LVL33:
+ 384              	.L16:
+ 385              	.LCFI12:
+ 386              		.cfi_restore_state
+ 100:Core/Src/ICM_20648.c **** 		ret = 1;
+ 387              		.loc 1 100 3 is_stmt 1 view .LVU71
+ 101:Core/Src/ICM_20648.c **** 		write_byte(0x03,0x10);	//USER_CTRL	諸々機能無効　SPIonly
+ 388              		.loc 1 101 3 view .LVU72
+ARM GAS  /tmp/cc0dBqlD.s 			page 10
+
+
+ 389 004c 0121     		movs	r1, #1
+ 390 004e 0620     		movs	r0, #6
+ 391 0050 FFF7FEFF 		bl	write_byte
+ 392              	.LVL34:
+ 102:Core/Src/ICM_20648.c **** 		write_byte(0x7F,0x20);	//USER_BANK2
+ 393              		.loc 1 102 3 view .LVU73
+ 394 0054 1021     		movs	r1, #16
+ 395 0056 0320     		movs	r0, #3
+ 396 0058 FFF7FEFF 		bl	write_byte
+ 397              	.LVL35:
+ 103:Core/Src/ICM_20648.c **** 
+ 398              		.loc 1 103 3 view .LVU74
+ 399 005c 2021     		movs	r1, #32
+ 400 005e 7F20     		movs	r0, #127
+ 401 0060 FFF7FEFF 		bl	write_byte
+ 402              	.LVL36:
+ 108:Core/Src/ICM_20648.c **** 		//2:1 GYRO_FS_SEL[1:0] 00:±250	01:±500 10:±1000 11:±2000
+ 403              		.loc 1 108 3 view .LVU75
+ 404 0064 1721     		movs	r1, #23
+ 405 0066 0120     		movs	r0, #1
+ 406 0068 FFF7FEFF 		bl	write_byte
+ 407              	.LVL37:
+ 111:Core/Src/ICM_20648.c **** 		//2:1 ACCEL_FS_SEL[1:0] 00:±2	01:±4 10:±8 11:±16
+ 408              		.loc 1 111 3 view .LVU76
+ 409 006c 1721     		movs	r1, #23
+ 410 006e 1420     		movs	r0, #20
+ 411 0070 FFF7FEFF 		bl	write_byte
+ 412              	.LVL38:
+ 114:Core/Src/ICM_20648.c **** 	}
+ 413              		.loc 1 114 3 view .LVU77
+ 414 0074 0021     		movs	r1, #0
+ 415 0076 7F20     		movs	r0, #127
+ 416 0078 FFF7FEFF 		bl	write_byte
+ 417              	.LVL39:
+ 418 007c E3E7     		b	.L14
+ 419              	.L18:
+ 420 007e 00BF     		.align	2
+ 421              	.L17:
+ 422 0080 00040240 		.word	1073873920
+ 423 0084 00000000 		.word	hspi2
+ 424              		.cfi_endproc
+ 425              	.LFE222:
+ 427              		.section	.text.read_gyro_data,"ax",%progbits
+ 428              		.align	1
+ 429              		.global	read_gyro_data
+ 430              		.syntax unified
+ 431              		.thumb
+ 432              		.thumb_func
+ 433              		.fpu fpv4-sp-d16
+ 435              	read_gyro_data:
+ 436              	.LFB223:
+ 120:Core/Src/ICM_20648.c **** 
+ 121:Core/Src/ICM_20648.c **** void read_gyro_data() {
+ 437              		.loc 1 121 23 view -0
+ 438              		.cfi_startproc
+ 439              		@ args = 0, pretend = 0, frame = 8
+ 440              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cc0dBqlD.s 			page 11
+
+
+ 441 0000 70B5     		push	{r4, r5, r6, lr}
+ 442              	.LCFI13:
+ 443              		.cfi_def_cfa_offset 16
+ 444              		.cfi_offset 4, -16
+ 445              		.cfi_offset 5, -12
+ 446              		.cfi_offset 6, -8
+ 447              		.cfi_offset 14, -4
+ 448 0002 82B0     		sub	sp, sp, #8
+ 449              	.LCFI14:
+ 450              		.cfi_def_cfa_offset 24
+ 122:Core/Src/ICM_20648.c **** 	xg = ((uint16_t)read_byte(0x33) << 8) | ((uint16_t)read_byte(0x34));
+ 451              		.loc 1 122 2 view .LVU79
+ 452              	.LVL40:
+ 453              	.LBB18:
+ 454              	.LBI18:
+  39:Core/Src/ICM_20648.c **** 
+ 455              		.loc 1 39 16 view .LVU80
+ 456              	.LBB19:
+  41:Core/Src/ICM_20648.c **** 
+ 457              		.loc 1 41 2 view .LVU81
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 458              		.loc 1 43 2 view .LVU82
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 459              		.loc 1 43 6 is_stmt 0 view .LVU83
+ 460 0004 B323     		movs	r3, #179
+ 461 0006 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 462              		.loc 1 44 2 is_stmt 1 view .LVU84
+ 463 000a 5F4C     		ldr	r4, .L21
+ 464 000c 0022     		movs	r2, #0
+ 465 000e 0221     		movs	r1, #2
+ 466 0010 2046     		mov	r0, r4
+ 467 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 468              	.LVL41:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 469              		.loc 1 45 2 view .LVU85
+ 470 0016 5D4D     		ldr	r5, .L21+4
+ 471 0018 6423     		movs	r3, #100
+ 472 001a 0122     		movs	r2, #1
+ 473 001c 0DF10601 		add	r1, sp, #6
+ 474 0020 2846     		mov	r0, r5
+ 475 0022 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 476              	.LVL42:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 477              		.loc 1 46 2 view .LVU86
+ 478 0026 6423     		movs	r3, #100
+ 479 0028 0122     		movs	r2, #1
+ 480 002a 0DF10701 		add	r1, sp, #7
+ 481 002e 2846     		mov	r0, r5
+ 482 0030 FFF7FEFF 		bl	HAL_SPI_Receive
+ 483              	.LVL43:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 484              		.loc 1 47 2 view .LVU87
+ 485 0034 0122     		movs	r2, #1
+ 486 0036 0221     		movs	r1, #2
+ 487 0038 2046     		mov	r0, r4
+ 488 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ARM GAS  /tmp/cc0dBqlD.s 			page 12
+
+
+ 489              	.LVL44:
+  51:Core/Src/ICM_20648.c **** }
+ 490              		.loc 1 51 2 view .LVU88
+  51:Core/Src/ICM_20648.c **** }
+ 491              		.loc 1 51 9 is_stmt 0 view .LVU89
+ 492 003e 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 493              	.LVL45:
+  51:Core/Src/ICM_20648.c **** }
+ 494              		.loc 1 51 9 view .LVU90
+ 495              	.LBE19:
+ 496              	.LBE18:
+ 497              		.loc 1 122 34 view .LVU91
+ 498 0042 1E02     		lsls	r6, r3, #8
+ 499              	.LVL46:
+ 500              	.LBB20:
+ 501              	.LBI20:
+  39:Core/Src/ICM_20648.c **** 
+ 502              		.loc 1 39 16 is_stmt 1 view .LVU92
+ 503              	.LBB21:
+  41:Core/Src/ICM_20648.c **** 
+ 504              		.loc 1 41 2 view .LVU93
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 505              		.loc 1 43 2 view .LVU94
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 506              		.loc 1 43 6 is_stmt 0 view .LVU95
+ 507 0044 B423     		movs	r3, #180
+ 508 0046 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 509              		.loc 1 44 2 is_stmt 1 view .LVU96
+ 510 004a 0022     		movs	r2, #0
+ 511 004c 0221     		movs	r1, #2
+ 512 004e 2046     		mov	r0, r4
+ 513 0050 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 514              	.LVL47:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 515              		.loc 1 45 2 view .LVU97
+ 516 0054 6423     		movs	r3, #100
+ 517 0056 0122     		movs	r2, #1
+ 518 0058 0DF10601 		add	r1, sp, #6
+ 519 005c 2846     		mov	r0, r5
+ 520 005e FFF7FEFF 		bl	HAL_SPI_Transmit
+ 521              	.LVL48:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 522              		.loc 1 46 2 view .LVU98
+ 523 0062 6423     		movs	r3, #100
+ 524 0064 0122     		movs	r2, #1
+ 525 0066 0DF10701 		add	r1, sp, #7
+ 526 006a 2846     		mov	r0, r5
+ 527 006c FFF7FEFF 		bl	HAL_SPI_Receive
+ 528              	.LVL49:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 529              		.loc 1 47 2 view .LVU99
+ 530 0070 0122     		movs	r2, #1
+ 531 0072 0221     		movs	r1, #2
+ 532 0074 2046     		mov	r0, r4
+ 533 0076 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 534              	.LVL50:
+ARM GAS  /tmp/cc0dBqlD.s 			page 13
+
+
+  51:Core/Src/ICM_20648.c **** }
+ 535              		.loc 1 51 2 view .LVU100
+  51:Core/Src/ICM_20648.c **** }
+ 536              		.loc 1 51 2 is_stmt 0 view .LVU101
+ 537              	.LBE21:
+ 538              	.LBE20:
+ 539              		.loc 1 122 53 view .LVU102
+ 540 007a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 541              		.loc 1 122 40 view .LVU103
+ 542 007e 3343     		orrs	r3, r3, r6
+ 543 0080 1BB2     		sxth	r3, r3
+ 544              		.loc 1 122 5 view .LVU104
+ 545 0082 434A     		ldr	r2, .L21+8
+ 546 0084 1380     		strh	r3, [r2]	@ movhi
+ 123:Core/Src/ICM_20648.c **** 	yg = ((uint16_t)read_byte(0x35) << 8) | ((uint16_t)read_byte(0x36));
+ 547              		.loc 1 123 2 is_stmt 1 view .LVU105
+ 548              	.LVL51:
+ 549              	.LBB22:
+ 550              	.LBI22:
+  39:Core/Src/ICM_20648.c **** 
+ 551              		.loc 1 39 16 view .LVU106
+ 552              	.LBB23:
+  41:Core/Src/ICM_20648.c **** 
+ 553              		.loc 1 41 2 view .LVU107
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 554              		.loc 1 43 2 view .LVU108
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 555              		.loc 1 43 6 is_stmt 0 view .LVU109
+ 556 0086 B523     		movs	r3, #181
+ 557 0088 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 558              		.loc 1 44 2 is_stmt 1 view .LVU110
+ 559 008c 0022     		movs	r2, #0
+ 560 008e 0221     		movs	r1, #2
+ 561 0090 2046     		mov	r0, r4
+ 562 0092 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 563              	.LVL52:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 564              		.loc 1 45 2 view .LVU111
+ 565 0096 6423     		movs	r3, #100
+ 566 0098 0122     		movs	r2, #1
+ 567 009a 0DF10601 		add	r1, sp, #6
+ 568 009e 2846     		mov	r0, r5
+ 569 00a0 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 570              	.LVL53:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 571              		.loc 1 46 2 view .LVU112
+ 572 00a4 6423     		movs	r3, #100
+ 573 00a6 0122     		movs	r2, #1
+ 574 00a8 0DF10701 		add	r1, sp, #7
+ 575 00ac 2846     		mov	r0, r5
+ 576 00ae FFF7FEFF 		bl	HAL_SPI_Receive
+ 577              	.LVL54:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 578              		.loc 1 47 2 view .LVU113
+ 579 00b2 0122     		movs	r2, #1
+ 580 00b4 0221     		movs	r1, #2
+ARM GAS  /tmp/cc0dBqlD.s 			page 14
+
+
+ 581 00b6 2046     		mov	r0, r4
+ 582 00b8 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 583              	.LVL55:
+  51:Core/Src/ICM_20648.c **** }
+ 584              		.loc 1 51 2 view .LVU114
+  51:Core/Src/ICM_20648.c **** }
+ 585              		.loc 1 51 9 is_stmt 0 view .LVU115
+ 586 00bc 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 587              	.LVL56:
+  51:Core/Src/ICM_20648.c **** }
+ 588              		.loc 1 51 9 view .LVU116
+ 589              	.LBE23:
+ 590              	.LBE22:
+ 591              		.loc 1 123 34 view .LVU117
+ 592 00c0 1E02     		lsls	r6, r3, #8
+ 593              	.LVL57:
+ 594              	.LBB24:
+ 595              	.LBI24:
+  39:Core/Src/ICM_20648.c **** 
+ 596              		.loc 1 39 16 is_stmt 1 view .LVU118
+ 597              	.LBB25:
+  41:Core/Src/ICM_20648.c **** 
+ 598              		.loc 1 41 2 view .LVU119
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 599              		.loc 1 43 2 view .LVU120
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 600              		.loc 1 43 6 is_stmt 0 view .LVU121
+ 601 00c2 B623     		movs	r3, #182
+ 602 00c4 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 603              		.loc 1 44 2 is_stmt 1 view .LVU122
+ 604 00c8 0022     		movs	r2, #0
+ 605 00ca 0221     		movs	r1, #2
+ 606 00cc 2046     		mov	r0, r4
+ 607 00ce FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 608              	.LVL58:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 609              		.loc 1 45 2 view .LVU123
+ 610 00d2 6423     		movs	r3, #100
+ 611 00d4 0122     		movs	r2, #1
+ 612 00d6 0DF10601 		add	r1, sp, #6
+ 613 00da 2846     		mov	r0, r5
+ 614 00dc FFF7FEFF 		bl	HAL_SPI_Transmit
+ 615              	.LVL59:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 616              		.loc 1 46 2 view .LVU124
+ 617 00e0 6423     		movs	r3, #100
+ 618 00e2 0122     		movs	r2, #1
+ 619 00e4 0DF10701 		add	r1, sp, #7
+ 620 00e8 2846     		mov	r0, r5
+ 621 00ea FFF7FEFF 		bl	HAL_SPI_Receive
+ 622              	.LVL60:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 623              		.loc 1 47 2 view .LVU125
+ 624 00ee 0122     		movs	r2, #1
+ 625 00f0 0221     		movs	r1, #2
+ 626 00f2 2046     		mov	r0, r4
+ARM GAS  /tmp/cc0dBqlD.s 			page 15
+
+
+ 627 00f4 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 628              	.LVL61:
+  51:Core/Src/ICM_20648.c **** }
+ 629              		.loc 1 51 2 view .LVU126
+  51:Core/Src/ICM_20648.c **** }
+ 630              		.loc 1 51 2 is_stmt 0 view .LVU127
+ 631              	.LBE25:
+ 632              	.LBE24:
+ 633              		.loc 1 123 53 view .LVU128
+ 634 00f8 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 635              		.loc 1 123 40 view .LVU129
+ 636 00fc 3343     		orrs	r3, r3, r6
+ 637 00fe 1BB2     		sxth	r3, r3
+ 638              		.loc 1 123 5 view .LVU130
+ 639 0100 244A     		ldr	r2, .L21+12
+ 640 0102 1380     		strh	r3, [r2]	@ movhi
+ 124:Core/Src/ICM_20648.c **** 	zg = ((uint16_t)read_byte(0x37) << 8) | ((uint16_t)read_byte(0x38));
+ 641              		.loc 1 124 2 is_stmt 1 view .LVU131
+ 642              	.LVL62:
+ 643              	.LBB26:
+ 644              	.LBI26:
+  39:Core/Src/ICM_20648.c **** 
+ 645              		.loc 1 39 16 view .LVU132
+ 646              	.LBB27:
+  41:Core/Src/ICM_20648.c **** 
+ 647              		.loc 1 41 2 view .LVU133
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 648              		.loc 1 43 2 view .LVU134
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 649              		.loc 1 43 6 is_stmt 0 view .LVU135
+ 650 0104 B723     		movs	r3, #183
+ 651 0106 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 652              		.loc 1 44 2 is_stmt 1 view .LVU136
+ 653 010a 0022     		movs	r2, #0
+ 654 010c 0221     		movs	r1, #2
+ 655 010e 2046     		mov	r0, r4
+ 656 0110 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 657              	.LVL63:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 658              		.loc 1 45 2 view .LVU137
+ 659 0114 6423     		movs	r3, #100
+ 660 0116 0122     		movs	r2, #1
+ 661 0118 0DF10601 		add	r1, sp, #6
+ 662 011c 2846     		mov	r0, r5
+ 663 011e FFF7FEFF 		bl	HAL_SPI_Transmit
+ 664              	.LVL64:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 665              		.loc 1 46 2 view .LVU138
+ 666 0122 6423     		movs	r3, #100
+ 667 0124 0122     		movs	r2, #1
+ 668 0126 0DF10701 		add	r1, sp, #7
+ 669 012a 2846     		mov	r0, r5
+ 670 012c FFF7FEFF 		bl	HAL_SPI_Receive
+ 671              	.LVL65:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 672              		.loc 1 47 2 view .LVU139
+ARM GAS  /tmp/cc0dBqlD.s 			page 16
+
+
+ 673 0130 0122     		movs	r2, #1
+ 674 0132 0221     		movs	r1, #2
+ 675 0134 2046     		mov	r0, r4
+ 676 0136 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 677              	.LVL66:
+  51:Core/Src/ICM_20648.c **** }
+ 678              		.loc 1 51 2 view .LVU140
+  51:Core/Src/ICM_20648.c **** }
+ 679              		.loc 1 51 9 is_stmt 0 view .LVU141
+ 680 013a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 681              	.LVL67:
+  51:Core/Src/ICM_20648.c **** }
+ 682              		.loc 1 51 9 view .LVU142
+ 683              	.LBE27:
+ 684              	.LBE26:
+ 685              		.loc 1 124 34 view .LVU143
+ 686 013e 1E02     		lsls	r6, r3, #8
+ 687              	.LVL68:
+ 688              	.LBB28:
+ 689              	.LBI28:
+  39:Core/Src/ICM_20648.c **** 
+ 690              		.loc 1 39 16 is_stmt 1 view .LVU144
+ 691              	.LBB29:
+  41:Core/Src/ICM_20648.c **** 
+ 692              		.loc 1 41 2 view .LVU145
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 693              		.loc 1 43 2 view .LVU146
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 694              		.loc 1 43 6 is_stmt 0 view .LVU147
+ 695 0140 B823     		movs	r3, #184
+ 696 0142 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 697              		.loc 1 44 2 is_stmt 1 view .LVU148
+ 698 0146 0022     		movs	r2, #0
+ 699 0148 0221     		movs	r1, #2
+ 700 014a 2046     		mov	r0, r4
+ 701 014c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 702              	.LVL69:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 703              		.loc 1 45 2 view .LVU149
+ 704 0150 6423     		movs	r3, #100
+ 705 0152 0122     		movs	r2, #1
+ 706 0154 0DF10601 		add	r1, sp, #6
+ 707 0158 2846     		mov	r0, r5
+ 708 015a FFF7FEFF 		bl	HAL_SPI_Transmit
+ 709              	.LVL70:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 710              		.loc 1 46 2 view .LVU150
+ 711 015e 6423     		movs	r3, #100
+ 712 0160 0122     		movs	r2, #1
+ 713 0162 0DF10701 		add	r1, sp, #7
+ 714 0166 2846     		mov	r0, r5
+ 715 0168 FFF7FEFF 		bl	HAL_SPI_Receive
+ 716              	.LVL71:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 717              		.loc 1 47 2 view .LVU151
+ 718 016c 0122     		movs	r2, #1
+ARM GAS  /tmp/cc0dBqlD.s 			page 17
+
+
+ 719 016e 0221     		movs	r1, #2
+ 720 0170 2046     		mov	r0, r4
+ 721 0172 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 722              	.LVL72:
+  51:Core/Src/ICM_20648.c **** }
+ 723              		.loc 1 51 2 view .LVU152
+  51:Core/Src/ICM_20648.c **** }
+ 724              		.loc 1 51 2 is_stmt 0 view .LVU153
+ 725              	.LBE29:
+ 726              	.LBE28:
+ 727              		.loc 1 124 53 view .LVU154
+ 728 0176 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 729              		.loc 1 124 40 view .LVU155
+ 730 017a 3343     		orrs	r3, r3, r6
+ 731 017c 1BB2     		sxth	r3, r3
+ 732              		.loc 1 124 5 view .LVU156
+ 733 017e 064A     		ldr	r2, .L21+16
+ 734 0180 1380     		strh	r3, [r2]	@ movhi
+ 125:Core/Src/ICM_20648.c **** }
+ 735              		.loc 1 125 1 view .LVU157
+ 736 0182 02B0     		add	sp, sp, #8
+ 737              	.LCFI15:
+ 738              		.cfi_def_cfa_offset 16
+ 739              		@ sp needed
+ 740 0184 70BD     		pop	{r4, r5, r6, pc}
+ 741              	.L22:
+ 742 0186 00BF     		.align	2
+ 743              	.L21:
+ 744 0188 00040240 		.word	1073873920
+ 745 018c 00000000 		.word	hspi2
+ 746 0190 00000000 		.word	xg
+ 747 0194 00000000 		.word	yg
+ 748 0198 00000000 		.word	zg
+ 749              		.cfi_endproc
+ 750              	.LFE223:
+ 752              		.section	.text.read_zg_data,"ax",%progbits
+ 753              		.align	1
+ 754              		.global	read_zg_data
+ 755              		.syntax unified
+ 756              		.thumb
+ 757              		.thumb_func
+ 758              		.fpu fpv4-sp-d16
+ 760              	read_zg_data:
+ 761              	.LFB224:
+ 126:Core/Src/ICM_20648.c **** void read_zg_data()
+ 127:Core/Src/ICM_20648.c **** {
+ 762              		.loc 1 127 1 is_stmt 1 view -0
+ 763              		.cfi_startproc
+ 764              		@ args = 0, pretend = 0, frame = 8
+ 765              		@ frame_needed = 0, uses_anonymous_args = 0
+ 766 0000 70B5     		push	{r4, r5, r6, lr}
+ 767              	.LCFI16:
+ 768              		.cfi_def_cfa_offset 16
+ 769              		.cfi_offset 4, -16
+ 770              		.cfi_offset 5, -12
+ 771              		.cfi_offset 6, -8
+ 772              		.cfi_offset 14, -4
+ARM GAS  /tmp/cc0dBqlD.s 			page 18
+
+
+ 773 0002 82B0     		sub	sp, sp, #8
+ 774              	.LCFI17:
+ 775              		.cfi_def_cfa_offset 24
+ 128:Core/Src/ICM_20648.c **** 	zg = ((uint16_t)read_byte(0x37) << 8) | ((uint16_t)read_byte(0x38));
+ 776              		.loc 1 128 2 view .LVU159
+ 777              	.LVL73:
+ 778              	.LBB34:
+ 779              	.LBI34:
+  39:Core/Src/ICM_20648.c **** 
+ 780              		.loc 1 39 16 view .LVU160
+ 781              	.LBB35:
+  41:Core/Src/ICM_20648.c **** 
+ 782              		.loc 1 41 2 view .LVU161
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 783              		.loc 1 43 2 view .LVU162
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 784              		.loc 1 43 6 is_stmt 0 view .LVU163
+ 785 0004 B723     		movs	r3, #183
+ 786 0006 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 787              		.loc 1 44 2 is_stmt 1 view .LVU164
+ 788 000a 204C     		ldr	r4, .L25
+ 789 000c 0022     		movs	r2, #0
+ 790 000e 0221     		movs	r1, #2
+ 791 0010 2046     		mov	r0, r4
+ 792 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 793              	.LVL74:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 794              		.loc 1 45 2 view .LVU165
+ 795 0016 1E4D     		ldr	r5, .L25+4
+ 796 0018 6423     		movs	r3, #100
+ 797 001a 0122     		movs	r2, #1
+ 798 001c 0DF10601 		add	r1, sp, #6
+ 799 0020 2846     		mov	r0, r5
+ 800 0022 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 801              	.LVL75:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 802              		.loc 1 46 2 view .LVU166
+ 803 0026 6423     		movs	r3, #100
+ 804 0028 0122     		movs	r2, #1
+ 805 002a 0DF10701 		add	r1, sp, #7
+ 806 002e 2846     		mov	r0, r5
+ 807 0030 FFF7FEFF 		bl	HAL_SPI_Receive
+ 808              	.LVL76:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 809              		.loc 1 47 2 view .LVU167
+ 810 0034 0122     		movs	r2, #1
+ 811 0036 0221     		movs	r1, #2
+ 812 0038 2046     		mov	r0, r4
+ 813 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 814              	.LVL77:
+  51:Core/Src/ICM_20648.c **** }
+ 815              		.loc 1 51 2 view .LVU168
+  51:Core/Src/ICM_20648.c **** }
+ 816              		.loc 1 51 9 is_stmt 0 view .LVU169
+ 817 003e 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 818              	.LVL78:
+ARM GAS  /tmp/cc0dBqlD.s 			page 19
+
+
+  51:Core/Src/ICM_20648.c **** }
+ 819              		.loc 1 51 9 view .LVU170
+ 820              	.LBE35:
+ 821              	.LBE34:
+ 822              		.loc 1 128 34 view .LVU171
+ 823 0042 1E02     		lsls	r6, r3, #8
+ 824              	.LVL79:
+ 825              	.LBB36:
+ 826              	.LBI36:
+  39:Core/Src/ICM_20648.c **** 
+ 827              		.loc 1 39 16 is_stmt 1 view .LVU172
+ 828              	.LBB37:
+  41:Core/Src/ICM_20648.c **** 
+ 829              		.loc 1 41 2 view .LVU173
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 830              		.loc 1 43 2 view .LVU174
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 831              		.loc 1 43 6 is_stmt 0 view .LVU175
+ 832 0044 B823     		movs	r3, #184
+ 833 0046 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 834              		.loc 1 44 2 is_stmt 1 view .LVU176
+ 835 004a 0022     		movs	r2, #0
+ 836 004c 0221     		movs	r1, #2
+ 837 004e 2046     		mov	r0, r4
+ 838 0050 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 839              	.LVL80:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 840              		.loc 1 45 2 view .LVU177
+ 841 0054 6423     		movs	r3, #100
+ 842 0056 0122     		movs	r2, #1
+ 843 0058 0DF10601 		add	r1, sp, #6
+ 844 005c 2846     		mov	r0, r5
+ 845 005e FFF7FEFF 		bl	HAL_SPI_Transmit
+ 846              	.LVL81:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 847              		.loc 1 46 2 view .LVU178
+ 848 0062 6423     		movs	r3, #100
+ 849 0064 0122     		movs	r2, #1
+ 850 0066 0DF10701 		add	r1, sp, #7
+ 851 006a 2846     		mov	r0, r5
+ 852 006c FFF7FEFF 		bl	HAL_SPI_Receive
+ 853              	.LVL82:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 854              		.loc 1 47 2 view .LVU179
+ 855 0070 0122     		movs	r2, #1
+ 856 0072 0221     		movs	r1, #2
+ 857 0074 2046     		mov	r0, r4
+ 858 0076 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 859              	.LVL83:
+  51:Core/Src/ICM_20648.c **** }
+ 860              		.loc 1 51 2 view .LVU180
+  51:Core/Src/ICM_20648.c **** }
+ 861              		.loc 1 51 2 is_stmt 0 view .LVU181
+ 862              	.LBE37:
+ 863              	.LBE36:
+ 864              		.loc 1 128 53 view .LVU182
+ARM GAS  /tmp/cc0dBqlD.s 			page 20
+
+
+ 865 007a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 866              		.loc 1 128 40 view .LVU183
+ 867 007e 3343     		orrs	r3, r3, r6
+ 868 0080 1BB2     		sxth	r3, r3
+ 869              		.loc 1 128 5 view .LVU184
+ 870 0082 044A     		ldr	r2, .L25+8
+ 871 0084 1380     		strh	r3, [r2]	@ movhi
+ 129:Core/Src/ICM_20648.c **** }
+ 872              		.loc 1 129 1 view .LVU185
+ 873 0086 02B0     		add	sp, sp, #8
+ 874              	.LCFI18:
+ 875              		.cfi_def_cfa_offset 16
+ 876              		@ sp needed
+ 877 0088 70BD     		pop	{r4, r5, r6, pc}
+ 878              	.L26:
+ 879 008a 00BF     		.align	2
+ 880              	.L25:
+ 881 008c 00040240 		.word	1073873920
+ 882 0090 00000000 		.word	hspi2
+ 883 0094 00000000 		.word	zg
+ 884              		.cfi_endproc
+ 885              	.LFE224:
+ 887              		.section	.text.read_accel_data,"ax",%progbits
+ 888              		.align	1
+ 889              		.global	read_accel_data
+ 890              		.syntax unified
+ 891              		.thumb
+ 892              		.thumb_func
+ 893              		.fpu fpv4-sp-d16
+ 895              	read_accel_data:
+ 896              	.LFB225:
+ 130:Core/Src/ICM_20648.c **** 
+ 131:Core/Src/ICM_20648.c **** void read_accel_data() {
+ 897              		.loc 1 131 24 is_stmt 1 view -0
+ 898              		.cfi_startproc
+ 899              		@ args = 0, pretend = 0, frame = 8
+ 900              		@ frame_needed = 0, uses_anonymous_args = 0
+ 901 0000 70B5     		push	{r4, r5, r6, lr}
+ 902              	.LCFI19:
+ 903              		.cfi_def_cfa_offset 16
+ 904              		.cfi_offset 4, -16
+ 905              		.cfi_offset 5, -12
+ 906              		.cfi_offset 6, -8
+ 907              		.cfi_offset 14, -4
+ 908 0002 82B0     		sub	sp, sp, #8
+ 909              	.LCFI20:
+ 910              		.cfi_def_cfa_offset 24
+ 132:Core/Src/ICM_20648.c **** 
+ 133:Core/Src/ICM_20648.c **** 	xa = ((uint16_t)read_byte(0x2D) << 8) | ((uint16_t)read_byte(0x2E));
+ 911              		.loc 1 133 2 view .LVU187
+ 912              	.LVL84:
+ 913              	.LBB50:
+ 914              	.LBI50:
+  39:Core/Src/ICM_20648.c **** 
+ 915              		.loc 1 39 16 view .LVU188
+ 916              	.LBB51:
+  41:Core/Src/ICM_20648.c **** 
+ARM GAS  /tmp/cc0dBqlD.s 			page 21
+
+
+ 917              		.loc 1 41 2 view .LVU189
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 918              		.loc 1 43 2 view .LVU190
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 919              		.loc 1 43 6 is_stmt 0 view .LVU191
+ 920 0004 AD23     		movs	r3, #173
+ 921 0006 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 922              		.loc 1 44 2 is_stmt 1 view .LVU192
+ 923 000a 5F4C     		ldr	r4, .L29
+ 924 000c 0022     		movs	r2, #0
+ 925 000e 0221     		movs	r1, #2
+ 926 0010 2046     		mov	r0, r4
+ 927 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 928              	.LVL85:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 929              		.loc 1 45 2 view .LVU193
+ 930 0016 5D4D     		ldr	r5, .L29+4
+ 931 0018 6423     		movs	r3, #100
+ 932 001a 0122     		movs	r2, #1
+ 933 001c 0DF10601 		add	r1, sp, #6
+ 934 0020 2846     		mov	r0, r5
+ 935 0022 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 936              	.LVL86:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 937              		.loc 1 46 2 view .LVU194
+ 938 0026 6423     		movs	r3, #100
+ 939 0028 0122     		movs	r2, #1
+ 940 002a 0DF10701 		add	r1, sp, #7
+ 941 002e 2846     		mov	r0, r5
+ 942 0030 FFF7FEFF 		bl	HAL_SPI_Receive
+ 943              	.LVL87:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 944              		.loc 1 47 2 view .LVU195
+ 945 0034 0122     		movs	r2, #1
+ 946 0036 0221     		movs	r1, #2
+ 947 0038 2046     		mov	r0, r4
+ 948 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 949              	.LVL88:
+  51:Core/Src/ICM_20648.c **** }
+ 950              		.loc 1 51 2 view .LVU196
+  51:Core/Src/ICM_20648.c **** }
+ 951              		.loc 1 51 9 is_stmt 0 view .LVU197
+ 952 003e 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 953              	.LVL89:
+  51:Core/Src/ICM_20648.c **** }
+ 954              		.loc 1 51 9 view .LVU198
+ 955              	.LBE51:
+ 956              	.LBE50:
+ 957              		.loc 1 133 34 view .LVU199
+ 958 0042 1E02     		lsls	r6, r3, #8
+ 959              	.LVL90:
+ 960              	.LBB52:
+ 961              	.LBI52:
+  39:Core/Src/ICM_20648.c **** 
+ 962              		.loc 1 39 16 is_stmt 1 view .LVU200
+ 963              	.LBB53:
+ARM GAS  /tmp/cc0dBqlD.s 			page 22
+
+
+  41:Core/Src/ICM_20648.c **** 
+ 964              		.loc 1 41 2 view .LVU201
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 965              		.loc 1 43 2 view .LVU202
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 966              		.loc 1 43 6 is_stmt 0 view .LVU203
+ 967 0044 AE23     		movs	r3, #174
+ 968 0046 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 969              		.loc 1 44 2 is_stmt 1 view .LVU204
+ 970 004a 0022     		movs	r2, #0
+ 971 004c 0221     		movs	r1, #2
+ 972 004e 2046     		mov	r0, r4
+ 973 0050 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 974              	.LVL91:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 975              		.loc 1 45 2 view .LVU205
+ 976 0054 6423     		movs	r3, #100
+ 977 0056 0122     		movs	r2, #1
+ 978 0058 0DF10601 		add	r1, sp, #6
+ 979 005c 2846     		mov	r0, r5
+ 980 005e FFF7FEFF 		bl	HAL_SPI_Transmit
+ 981              	.LVL92:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 982              		.loc 1 46 2 view .LVU206
+ 983 0062 6423     		movs	r3, #100
+ 984 0064 0122     		movs	r2, #1
+ 985 0066 0DF10701 		add	r1, sp, #7
+ 986 006a 2846     		mov	r0, r5
+ 987 006c FFF7FEFF 		bl	HAL_SPI_Receive
+ 988              	.LVL93:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 989              		.loc 1 47 2 view .LVU207
+ 990 0070 0122     		movs	r2, #1
+ 991 0072 0221     		movs	r1, #2
+ 992 0074 2046     		mov	r0, r4
+ 993 0076 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 994              	.LVL94:
+  51:Core/Src/ICM_20648.c **** }
+ 995              		.loc 1 51 2 view .LVU208
+  51:Core/Src/ICM_20648.c **** }
+ 996              		.loc 1 51 2 is_stmt 0 view .LVU209
+ 997              	.LBE53:
+ 998              	.LBE52:
+ 999              		.loc 1 133 53 view .LVU210
+ 1000 007a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1001              		.loc 1 133 40 view .LVU211
+ 1002 007e 3343     		orrs	r3, r3, r6
+ 1003 0080 1BB2     		sxth	r3, r3
+ 1004              		.loc 1 133 5 view .LVU212
+ 1005 0082 434A     		ldr	r2, .L29+8
+ 1006 0084 1380     		strh	r3, [r2]	@ movhi
+ 134:Core/Src/ICM_20648.c **** 	ya = ((uint16_t)read_byte(0x2F) << 8) | ((uint16_t)read_byte(0x30));
+ 1007              		.loc 1 134 2 is_stmt 1 view .LVU213
+ 1008              	.LVL95:
+ 1009              	.LBB54:
+ 1010              	.LBI54:
+ARM GAS  /tmp/cc0dBqlD.s 			page 23
+
+
+  39:Core/Src/ICM_20648.c **** 
+ 1011              		.loc 1 39 16 view .LVU214
+ 1012              	.LBB55:
+  41:Core/Src/ICM_20648.c **** 
+ 1013              		.loc 1 41 2 view .LVU215
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 1014              		.loc 1 43 2 view .LVU216
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 1015              		.loc 1 43 6 is_stmt 0 view .LVU217
+ 1016 0086 AF23     		movs	r3, #175
+ 1017 0088 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 1018              		.loc 1 44 2 is_stmt 1 view .LVU218
+ 1019 008c 0022     		movs	r2, #0
+ 1020 008e 0221     		movs	r1, #2
+ 1021 0090 2046     		mov	r0, r4
+ 1022 0092 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1023              	.LVL96:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 1024              		.loc 1 45 2 view .LVU219
+ 1025 0096 6423     		movs	r3, #100
+ 1026 0098 0122     		movs	r2, #1
+ 1027 009a 0DF10601 		add	r1, sp, #6
+ 1028 009e 2846     		mov	r0, r5
+ 1029 00a0 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 1030              	.LVL97:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 1031              		.loc 1 46 2 view .LVU220
+ 1032 00a4 6423     		movs	r3, #100
+ 1033 00a6 0122     		movs	r2, #1
+ 1034 00a8 0DF10701 		add	r1, sp, #7
+ 1035 00ac 2846     		mov	r0, r5
+ 1036 00ae FFF7FEFF 		bl	HAL_SPI_Receive
+ 1037              	.LVL98:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 1038              		.loc 1 47 2 view .LVU221
+ 1039 00b2 0122     		movs	r2, #1
+ 1040 00b4 0221     		movs	r1, #2
+ 1041 00b6 2046     		mov	r0, r4
+ 1042 00b8 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1043              	.LVL99:
+  51:Core/Src/ICM_20648.c **** }
+ 1044              		.loc 1 51 2 view .LVU222
+  51:Core/Src/ICM_20648.c **** }
+ 1045              		.loc 1 51 9 is_stmt 0 view .LVU223
+ 1046 00bc 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1047              	.LVL100:
+  51:Core/Src/ICM_20648.c **** }
+ 1048              		.loc 1 51 9 view .LVU224
+ 1049              	.LBE55:
+ 1050              	.LBE54:
+ 1051              		.loc 1 134 34 view .LVU225
+ 1052 00c0 1E02     		lsls	r6, r3, #8
+ 1053              	.LVL101:
+ 1054              	.LBB56:
+ 1055              	.LBI56:
+  39:Core/Src/ICM_20648.c **** 
+ARM GAS  /tmp/cc0dBqlD.s 			page 24
+
+
+ 1056              		.loc 1 39 16 is_stmt 1 view .LVU226
+ 1057              	.LBB57:
+  41:Core/Src/ICM_20648.c **** 
+ 1058              		.loc 1 41 2 view .LVU227
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 1059              		.loc 1 43 2 view .LVU228
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 1060              		.loc 1 43 6 is_stmt 0 view .LVU229
+ 1061 00c2 B023     		movs	r3, #176
+ 1062 00c4 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 1063              		.loc 1 44 2 is_stmt 1 view .LVU230
+ 1064 00c8 0022     		movs	r2, #0
+ 1065 00ca 0221     		movs	r1, #2
+ 1066 00cc 2046     		mov	r0, r4
+ 1067 00ce FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1068              	.LVL102:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 1069              		.loc 1 45 2 view .LVU231
+ 1070 00d2 6423     		movs	r3, #100
+ 1071 00d4 0122     		movs	r2, #1
+ 1072 00d6 0DF10601 		add	r1, sp, #6
+ 1073 00da 2846     		mov	r0, r5
+ 1074 00dc FFF7FEFF 		bl	HAL_SPI_Transmit
+ 1075              	.LVL103:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 1076              		.loc 1 46 2 view .LVU232
+ 1077 00e0 6423     		movs	r3, #100
+ 1078 00e2 0122     		movs	r2, #1
+ 1079 00e4 0DF10701 		add	r1, sp, #7
+ 1080 00e8 2846     		mov	r0, r5
+ 1081 00ea FFF7FEFF 		bl	HAL_SPI_Receive
+ 1082              	.LVL104:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 1083              		.loc 1 47 2 view .LVU233
+ 1084 00ee 0122     		movs	r2, #1
+ 1085 00f0 0221     		movs	r1, #2
+ 1086 00f2 2046     		mov	r0, r4
+ 1087 00f4 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1088              	.LVL105:
+  51:Core/Src/ICM_20648.c **** }
+ 1089              		.loc 1 51 2 view .LVU234
+  51:Core/Src/ICM_20648.c **** }
+ 1090              		.loc 1 51 2 is_stmt 0 view .LVU235
+ 1091              	.LBE57:
+ 1092              	.LBE56:
+ 1093              		.loc 1 134 53 view .LVU236
+ 1094 00f8 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1095              		.loc 1 134 40 view .LVU237
+ 1096 00fc 3343     		orrs	r3, r3, r6
+ 1097 00fe 1BB2     		sxth	r3, r3
+ 1098              		.loc 1 134 5 view .LVU238
+ 1099 0100 244A     		ldr	r2, .L29+12
+ 1100 0102 1380     		strh	r3, [r2]	@ movhi
+ 135:Core/Src/ICM_20648.c **** 	za = ((uint16_t)read_byte(0x31) << 8) | ((uint16_t)read_byte(0x32));
+ 1101              		.loc 1 135 2 is_stmt 1 view .LVU239
+ 1102              	.LVL106:
+ARM GAS  /tmp/cc0dBqlD.s 			page 25
+
+
+ 1103              	.LBB58:
+ 1104              	.LBI58:
+  39:Core/Src/ICM_20648.c **** 
+ 1105              		.loc 1 39 16 view .LVU240
+ 1106              	.LBB59:
+  41:Core/Src/ICM_20648.c **** 
+ 1107              		.loc 1 41 2 view .LVU241
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 1108              		.loc 1 43 2 view .LVU242
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 1109              		.loc 1 43 6 is_stmt 0 view .LVU243
+ 1110 0104 B123     		movs	r3, #177
+ 1111 0106 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 1112              		.loc 1 44 2 is_stmt 1 view .LVU244
+ 1113 010a 0022     		movs	r2, #0
+ 1114 010c 0221     		movs	r1, #2
+ 1115 010e 2046     		mov	r0, r4
+ 1116 0110 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1117              	.LVL107:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 1118              		.loc 1 45 2 view .LVU245
+ 1119 0114 6423     		movs	r3, #100
+ 1120 0116 0122     		movs	r2, #1
+ 1121 0118 0DF10601 		add	r1, sp, #6
+ 1122 011c 2846     		mov	r0, r5
+ 1123 011e FFF7FEFF 		bl	HAL_SPI_Transmit
+ 1124              	.LVL108:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 1125              		.loc 1 46 2 view .LVU246
+ 1126 0122 6423     		movs	r3, #100
+ 1127 0124 0122     		movs	r2, #1
+ 1128 0126 0DF10701 		add	r1, sp, #7
+ 1129 012a 2846     		mov	r0, r5
+ 1130 012c FFF7FEFF 		bl	HAL_SPI_Receive
+ 1131              	.LVL109:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 1132              		.loc 1 47 2 view .LVU247
+ 1133 0130 0122     		movs	r2, #1
+ 1134 0132 0221     		movs	r1, #2
+ 1135 0134 2046     		mov	r0, r4
+ 1136 0136 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1137              	.LVL110:
+  51:Core/Src/ICM_20648.c **** }
+ 1138              		.loc 1 51 2 view .LVU248
+  51:Core/Src/ICM_20648.c **** }
+ 1139              		.loc 1 51 9 is_stmt 0 view .LVU249
+ 1140 013a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1141              	.LVL111:
+  51:Core/Src/ICM_20648.c **** }
+ 1142              		.loc 1 51 9 view .LVU250
+ 1143              	.LBE59:
+ 1144              	.LBE58:
+ 1145              		.loc 1 135 34 view .LVU251
+ 1146 013e 1E02     		lsls	r6, r3, #8
+ 1147              	.LVL112:
+ 1148              	.LBB60:
+ARM GAS  /tmp/cc0dBqlD.s 			page 26
+
+
+ 1149              	.LBI60:
+  39:Core/Src/ICM_20648.c **** 
+ 1150              		.loc 1 39 16 is_stmt 1 view .LVU252
+ 1151              	.LBB61:
+  41:Core/Src/ICM_20648.c **** 
+ 1152              		.loc 1 41 2 view .LVU253
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 1153              		.loc 1 43 2 view .LVU254
+  43:Core/Src/ICM_20648.c **** 	CS_RESET;
+ 1154              		.loc 1 43 6 is_stmt 0 view .LVU255
+ 1155 0140 B223     		movs	r3, #178
+ 1156 0142 8DF80630 		strb	r3, [sp, #6]
+  44:Core/Src/ICM_20648.c **** 	HAL_SPI_Transmit(&hspi2,&ret,1,100);
+ 1157              		.loc 1 44 2 is_stmt 1 view .LVU256
+ 1158 0146 0022     		movs	r2, #0
+ 1159 0148 0221     		movs	r1, #2
+ 1160 014a 2046     		mov	r0, r4
+ 1161 014c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1162              	.LVL113:
+  45:Core/Src/ICM_20648.c **** 	HAL_SPI_Receive(&hspi2,&val,1,100);
+ 1163              		.loc 1 45 2 view .LVU257
+ 1164 0150 6423     		movs	r3, #100
+ 1165 0152 0122     		movs	r2, #1
+ 1166 0154 0DF10601 		add	r1, sp, #6
+ 1167 0158 2846     		mov	r0, r5
+ 1168 015a FFF7FEFF 		bl	HAL_SPI_Transmit
+ 1169              	.LVL114:
+  46:Core/Src/ICM_20648.c **** 	CS_SET;
+ 1170              		.loc 1 46 2 view .LVU258
+ 1171 015e 6423     		movs	r3, #100
+ 1172 0160 0122     		movs	r2, #1
+ 1173 0162 0DF10701 		add	r1, sp, #7
+ 1174 0166 2846     		mov	r0, r5
+ 1175 0168 FFF7FEFF 		bl	HAL_SPI_Receive
+ 1176              	.LVL115:
+  47:Core/Src/ICM_20648.c **** 	//1回の取得は0.2msだった
+ 1177              		.loc 1 47 2 view .LVU259
+ 1178 016c 0122     		movs	r2, #1
+ 1179 016e 0221     		movs	r1, #2
+ 1180 0170 2046     		mov	r0, r4
+ 1181 0172 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1182              	.LVL116:
+  51:Core/Src/ICM_20648.c **** }
+ 1183              		.loc 1 51 2 view .LVU260
+  51:Core/Src/ICM_20648.c **** }
+ 1184              		.loc 1 51 2 is_stmt 0 view .LVU261
+ 1185              	.LBE61:
+ 1186              	.LBE60:
+ 1187              		.loc 1 135 53 view .LVU262
+ 1188 0176 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1189              		.loc 1 135 40 view .LVU263
+ 1190 017a 3343     		orrs	r3, r3, r6
+ 1191 017c 1BB2     		sxth	r3, r3
+ 1192              		.loc 1 135 5 view .LVU264
+ 1193 017e 064A     		ldr	r2, .L29+16
+ 1194 0180 1380     		strh	r3, [r2]	@ movhi
+ 136:Core/Src/ICM_20648.c **** }
+ARM GAS  /tmp/cc0dBqlD.s 			page 27
+
+
+ 1195              		.loc 1 136 1 view .LVU265
+ 1196 0182 02B0     		add	sp, sp, #8
+ 1197              	.LCFI21:
+ 1198              		.cfi_def_cfa_offset 16
+ 1199              		@ sp needed
+ 1200 0184 70BD     		pop	{r4, r5, r6, pc}
+ 1201              	.L30:
+ 1202 0186 00BF     		.align	2
+ 1203              	.L29:
+ 1204 0188 00040240 		.word	1073873920
+ 1205 018c 00000000 		.word	hspi2
+ 1206 0190 00000000 		.word	xa
+ 1207 0194 00000000 		.word	ya
+ 1208 0198 00000000 		.word	za
+ 1209              		.cfi_endproc
+ 1210              	.LFE225:
+ 1212              		.section	.text.IMU_Calib,"ax",%progbits
+ 1213              		.align	1
+ 1214              		.global	IMU_Calib
+ 1215              		.syntax unified
+ 1216              		.thumb
+ 1217              		.thumb_func
+ 1218              		.fpu fpv4-sp-d16
+ 1220              	IMU_Calib:
+ 1221              	.LFB226:
+ 137:Core/Src/ICM_20648.c **** 
+ 138:Core/Src/ICM_20648.c **** void IMU_Calib(){
+ 1222              		.loc 1 138 17 is_stmt 1 view -0
+ 1223              		.cfi_startproc
+ 1224              		@ args = 0, pretend = 0, frame = 0
+ 1225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1226 0000 10B5     		push	{r4, lr}
+ 1227              	.LCFI22:
+ 1228              		.cfi_def_cfa_offset 8
+ 1229              		.cfi_offset 4, -8
+ 1230              		.cfi_offset 14, -4
+ 1231 0002 2DED028B 		vpush.64	{d8}
+ 1232              	.LCFI23:
+ 1233              		.cfi_def_cfa_offset 16
+ 1234              		.cfi_offset 80, -16
+ 1235              		.cfi_offset 81, -12
+ 139:Core/Src/ICM_20648.c **** 
+ 140:Core/Src/ICM_20648.c **** 
+ 141:Core/Src/ICM_20648.c **** 	HAL_Delay(500);
+ 1236              		.loc 1 141 2 view .LVU267
+ 1237 0006 4FF4FA70 		mov	r0, #500
+ 1238 000a FFF7FEFF 		bl	HAL_Delay
+ 1239              	.LVL117:
+ 142:Core/Src/ICM_20648.c **** 
+ 143:Core/Src/ICM_20648.c **** 	int num = 2000;
+ 1240              		.loc 1 143 2 view .LVU268
+ 144:Core/Src/ICM_20648.c **** 	float zg_vals[2000]={0.0f};
+ 1241              		.loc 1 144 2 view .LVU269
+ 145:Core/Src/ICM_20648.c **** 	float sum=0;
+ 1242              		.loc 1 145 2 view .LVU270
+ 146:Core/Src/ICM_20648.c **** 	for(int i = 0; i < num; i++){
+ 1243              		.loc 1 146 2 view .LVU271
+ARM GAS  /tmp/cc0dBqlD.s 			page 28
+
+
+ 1244              	.LBB62:
+ 1245              		.loc 1 146 6 view .LVU272
+ 1246              		.loc 1 146 10 is_stmt 0 view .LVU273
+ 1247 000e 0024     		movs	r4, #0
+ 1248              	.LBE62:
+ 145:Core/Src/ICM_20648.c **** 	float sum=0;
+ 1249              		.loc 1 145 8 view .LVU274
+ 1250 0010 9FED0C8A 		vldr.32	s16, .L36
+ 1251              	.LVL118:
+ 1252              	.L32:
+ 1253              	.LBB63:
+ 1254              		.loc 1 146 17 is_stmt 1 discriminator 1 view .LVU275
+ 1255              		.loc 1 146 2 is_stmt 0 discriminator 1 view .LVU276
+ 1256 0014 B4F5FA6F 		cmp	r4, #2000
+ 1257 0018 09DA     		bge	.L35
+ 147:Core/Src/ICM_20648.c **** 		zg_vals[i] = ZGyro;
+ 1258              		.loc 1 147 3 is_stmt 1 discriminator 3 view .LVU277
+ 1259              		.loc 1 147 14 is_stmt 0 discriminator 3 view .LVU278
+ 1260 001a 0B4B     		ldr	r3, .L36+4
+ 1261 001c D3ED007A 		vldr.32	s15, [r3]
+ 148:Core/Src/ICM_20648.c **** 		sum += zg_vals[i];
+ 1262              		.loc 1 148 3 is_stmt 1 discriminator 3 view .LVU279
+ 1263              		.loc 1 148 7 is_stmt 0 discriminator 3 view .LVU280
+ 1264 0020 38EE278A 		vadd.f32	s16, s16, s15
+ 1265              	.LVL119:
+ 149:Core/Src/ICM_20648.c **** 		HAL_Delay(2);
+ 1266              		.loc 1 149 3 is_stmt 1 discriminator 3 view .LVU281
+ 1267 0024 0220     		movs	r0, #2
+ 1268 0026 FFF7FEFF 		bl	HAL_Delay
+ 1269              	.LVL120:
+ 146:Core/Src/ICM_20648.c **** 		zg_vals[i] = ZGyro;
+ 1270              		.loc 1 146 26 discriminator 3 view .LVU282
+ 146:Core/Src/ICM_20648.c **** 		zg_vals[i] = ZGyro;
+ 1271              		.loc 1 146 27 is_stmt 0 discriminator 3 view .LVU283
+ 1272 002a 0134     		adds	r4, r4, #1
+ 1273              	.LVL121:
+ 146:Core/Src/ICM_20648.c **** 		zg_vals[i] = ZGyro;
+ 1274              		.loc 1 146 27 discriminator 3 view .LVU284
+ 1275 002c F2E7     		b	.L32
+ 1276              	.L35:
+ 146:Core/Src/ICM_20648.c **** 		zg_vals[i] = ZGyro;
+ 1277              		.loc 1 146 27 discriminator 3 view .LVU285
+ 1278              	.LBE63:
+ 150:Core/Src/ICM_20648.c **** 	}
+ 151:Core/Src/ICM_20648.c **** //	for(int i=0; i < num; i++)
+ 152:Core/Src/ICM_20648.c **** //	{
+ 153:Core/Src/ICM_20648.c **** //		printf("zg_vals[%d]: %lf\r\n",i,zg_vals[i]);
+ 154:Core/Src/ICM_20648.c **** //	}
+ 155:Core/Src/ICM_20648.c **** //	printf("sum:%lf",sum);
+ 156:Core/Src/ICM_20648.c **** 	zg_offset = sum / 2000.0f;
+ 1279              		.loc 1 156 2 is_stmt 1 view .LVU286
+ 1280              		.loc 1 156 18 is_stmt 0 view .LVU287
+ 1281 002e 9FED077A 		vldr.32	s14, .L36+8
+ 1282 0032 C8EE077A 		vdiv.f32	s15, s16, s14
+ 1283              		.loc 1 156 12 view .LVU288
+ 1284 0036 064B     		ldr	r3, .L36+12
+ 1285 0038 C3ED007A 		vstr.32	s15, [r3]
+ARM GAS  /tmp/cc0dBqlD.s 			page 29
+
+
+ 157:Core/Src/ICM_20648.c **** }
+ 1286              		.loc 1 157 1 view .LVU289
+ 1287 003c BDEC028B 		vldm	sp!, {d8}
+ 1288              	.LCFI24:
+ 1289              		.cfi_restore 80
+ 1290              		.cfi_restore 81
+ 1291              		.cfi_def_cfa_offset 8
+ 1292              	.LVL122:
+ 1293              		.loc 1 157 1 view .LVU290
+ 1294 0040 10BD     		pop	{r4, pc}
+ 1295              	.LVL123:
+ 1296              	.L37:
+ 1297              		.loc 1 157 1 view .LVU291
+ 1298 0042 00BF     		.align	2
+ 1299              	.L36:
+ 1300 0044 00000000 		.word	0
+ 1301 0048 00000000 		.word	.LANCHOR0
+ 1302 004c 0000FA44 		.word	1157234688
+ 1303 0050 00000000 		.word	.LANCHOR1
+ 1304              		.cfi_endproc
+ 1305              	.LFE226:
+ 1307              		.global	__aeabi_dmul
+ 1308              		.global	__aeabi_dsub
+ 1309              		.global	__aeabi_dadd
+ 1310              		.section	.text.lowpass_filter_double,"ax",%progbits
+ 1311              		.align	1
+ 1312              		.global	lowpass_filter_double
+ 1313              		.syntax unified
+ 1314              		.thumb
+ 1315              		.thumb_func
+ 1316              		.fpu fpv4-sp-d16
+ 1318              	lowpass_filter_double:
+ 1319              	.LVL124:
+ 1320              	.LFB227:
+ 158:Core/Src/ICM_20648.c **** double lowpass_filter_double(double x, double x0, double r)
+ 159:Core/Src/ICM_20648.c **** {
+ 1321              		.loc 1 159 1 is_stmt 1 view -0
+ 1322              		.cfi_startproc
+ 1323              		@ args = 0, pretend = 0, frame = 0
+ 1324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1325              		.loc 1 159 1 is_stmt 0 view .LVU293
+ 1326 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 1327              	.LCFI25:
+ 1328              		.cfi_def_cfa_offset 32
+ 1329              		.cfi_offset 3, -32
+ 1330              		.cfi_offset 4, -28
+ 1331              		.cfi_offset 5, -24
+ 1332              		.cfi_offset 6, -20
+ 1333              		.cfi_offset 7, -16
+ 1334              		.cfi_offset 8, -12
+ 1335              		.cfi_offset 9, -8
+ 1336              		.cfi_offset 14, -4
+ 1337 0004 53EC102B 		vmov	r2, r3, d0
+ 1338 0008 59EC118B 		vmov	r8, r9, d1
+ 1339 000c 55EC124B 		vmov	r4, r5, d2
+ 160:Core/Src/ICM_20648.c **** 	return ((r)*(x) + (1.0 - (r))* (x0));
+ 1340              		.loc 1 160 2 is_stmt 1 view .LVU294
+ARM GAS  /tmp/cc0dBqlD.s 			page 30
+
+
+ 1341              		.loc 1 160 13 is_stmt 0 view .LVU295
+ 1342 0010 12EE100A 		vmov	r0, s4	@ int
+ 1343 0014 2946     		mov	r1, r5
+ 1344 0016 FFF7FEFF 		bl	__aeabi_dmul
+ 1345              	.LVL125:
+ 1346              		.loc 1 160 13 view .LVU296
+ 1347 001a 0646     		mov	r6, r0
+ 1348 001c 0F46     		mov	r7, r1
+ 1349              		.loc 1 160 25 view .LVU297
+ 1350 001e 2246     		mov	r2, r4
+ 1351 0020 2B46     		mov	r3, r5
+ 1352 0022 0020     		movs	r0, #0
+ 1353 0024 0849     		ldr	r1, .L40
+ 1354 0026 FFF7FEFF 		bl	__aeabi_dsub
+ 1355              	.LVL126:
+ 1356              		.loc 1 160 31 view .LVU298
+ 1357 002a 4246     		mov	r2, r8
+ 1358 002c 4B46     		mov	r3, r9
+ 1359 002e FFF7FEFF 		bl	__aeabi_dmul
+ 1360              	.LVL127:
+ 1361 0032 0246     		mov	r2, r0
+ 1362 0034 0B46     		mov	r3, r1
+ 1363              		.loc 1 160 18 view .LVU299
+ 1364 0036 3046     		mov	r0, r6
+ 1365 0038 3946     		mov	r1, r7
+ 1366 003a FFF7FEFF 		bl	__aeabi_dadd
+ 1367              	.LVL128:
+ 161:Core/Src/ICM_20648.c **** }
+ 1368              		.loc 1 161 1 view .LVU300
+ 1369 003e 41EC100B 		vmov	d0, r0, r1
+ 1370 0042 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 1371              	.LVL129:
+ 1372              	.L41:
+ 1373              		.loc 1 161 1 view .LVU301
+ 1374 0046 00BF     		.align	2
+ 1375              	.L40:
+ 1376 0048 0000F03F 		.word	1072693248
+ 1377              		.cfi_endproc
+ 1378              	.LFE227:
+ 1380              		.global	__aeabi_f2d
+ 1381              		.global	__aeabi_d2f
+ 1382              		.section	.text.lowpass_filter_float,"ax",%progbits
+ 1383              		.align	1
+ 1384              		.global	lowpass_filter_float
+ 1385              		.syntax unified
+ 1386              		.thumb
+ 1387              		.thumb_func
+ 1388              		.fpu fpv4-sp-d16
+ 1390              	lowpass_filter_float:
+ 1391              	.LVL130:
+ 1392              	.LFB228:
+ 162:Core/Src/ICM_20648.c **** float lowpass_filter_float(float x, float x0, float r)
+ 163:Core/Src/ICM_20648.c **** {
+ 1393              		.loc 1 163 1 is_stmt 1 view -0
+ 1394              		.cfi_startproc
+ 1395              		@ args = 0, pretend = 0, frame = 0
+ 1396              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cc0dBqlD.s 			page 31
+
+
+ 1397              		.loc 1 163 1 is_stmt 0 view .LVU303
+ 1398 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1399              	.LCFI26:
+ 1400              		.cfi_def_cfa_offset 24
+ 1401              		.cfi_offset 4, -24
+ 1402              		.cfi_offset 5, -20
+ 1403              		.cfi_offset 6, -16
+ 1404              		.cfi_offset 7, -12
+ 1405              		.cfi_offset 8, -8
+ 1406              		.cfi_offset 14, -4
+ 1407 0004 2DED028B 		vpush.64	{d8}
+ 1408              	.LCFI27:
+ 1409              		.cfi_def_cfa_offset 32
+ 1410              		.cfi_offset 80, -32
+ 1411              		.cfi_offset 81, -28
+ 1412 0008 10EE908A 		vmov	r8, s1
+ 1413 000c B0EE418A 		vmov.f32	s16, s2
+ 164:Core/Src/ICM_20648.c **** 	return ((r)*(x) + (1.0 - (r))* (x0));
+ 1414              		.loc 1 164 2 is_stmt 1 view .LVU304
+ 1415              		.loc 1 164 13 is_stmt 0 view .LVU305
+ 1416 0010 61EE007A 		vmul.f32	s15, s2, s0
+ 1417 0014 17EE900A 		vmov	r0, s15
+ 1418 0018 FFF7FEFF 		bl	__aeabi_f2d
+ 1419              	.LVL131:
+ 1420              		.loc 1 164 13 view .LVU306
+ 1421 001c 0446     		mov	r4, r0
+ 1422 001e 0D46     		mov	r5, r1
+ 1423              		.loc 1 164 25 view .LVU307
+ 1424 0020 18EE100A 		vmov	r0, s16
+ 1425 0024 FFF7FEFF 		bl	__aeabi_f2d
+ 1426              	.LVL132:
+ 1427 0028 0246     		mov	r2, r0
+ 1428 002a 0B46     		mov	r3, r1
+ 1429 002c 0020     		movs	r0, #0
+ 1430 002e 0D49     		ldr	r1, .L44
+ 1431 0030 FFF7FEFF 		bl	__aeabi_dsub
+ 1432              	.LVL133:
+ 1433 0034 0646     		mov	r6, r0
+ 1434 0036 0F46     		mov	r7, r1
+ 1435              		.loc 1 164 31 view .LVU308
+ 1436 0038 4046     		mov	r0, r8	@ float
+ 1437 003a FFF7FEFF 		bl	__aeabi_f2d
+ 1438              	.LVL134:
+ 1439 003e 3246     		mov	r2, r6
+ 1440 0040 3B46     		mov	r3, r7
+ 1441 0042 FFF7FEFF 		bl	__aeabi_dmul
+ 1442              	.LVL135:
+ 1443 0046 0246     		mov	r2, r0
+ 1444 0048 0B46     		mov	r3, r1
+ 1445              		.loc 1 164 18 view .LVU309
+ 1446 004a 2046     		mov	r0, r4
+ 1447 004c 2946     		mov	r1, r5
+ 1448 004e FFF7FEFF 		bl	__aeabi_dadd
+ 1449              	.LVL136:
+ 1450 0052 FFF7FEFF 		bl	__aeabi_d2f
+ 1451              	.LVL137:
+ 165:Core/Src/ICM_20648.c **** }
+ARM GAS  /tmp/cc0dBqlD.s 			page 32
+
+
+ 1452              		.loc 1 165 1 view .LVU310
+ 1453 0056 00EE100A 		vmov	s0, r0
+ 1454 005a BDEC028B 		vldm	sp!, {d8}
+ 1455              	.LCFI28:
+ 1456              		.cfi_restore 80
+ 1457              		.cfi_restore 81
+ 1458              		.cfi_def_cfa_offset 24
+ 1459              	.LVL138:
+ 1460              		.loc 1 165 1 view .LVU311
+ 1461 005e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1462              	.LVL139:
+ 1463              	.L45:
+ 1464              		.loc 1 165 1 view .LVU312
+ 1465 0062 00BF     		.align	2
+ 1466              	.L44:
+ 1467 0064 0000F03F 		.word	1072693248
+ 1468              		.cfi_endproc
+ 1469              	.LFE228:
+ 1471              		.global	YAccel
+ 1472              		.global	ZGyro
+ 1473              		.global	ya_offset
+ 1474              		.global	zg_offset
+ 1475              		.comm	zg,2,2
+ 1476              		.comm	yg,2,2
+ 1477              		.comm	xg,2,2
+ 1478              		.comm	za,2,2
+ 1479              		.comm	ya,2,2
+ 1480              		.comm	xa,2,2
+ 1481              		.section	.bss.YAccel,"aw",%nobits
+ 1482              		.align	2
+ 1485              	YAccel:
+ 1486 0000 00000000 		.space	4
+ 1487              		.section	.bss.ZGyro,"aw",%nobits
+ 1488              		.align	2
+ 1489              		.set	.LANCHOR0,. + 0
+ 1492              	ZGyro:
+ 1493 0000 00000000 		.space	4
+ 1494              		.section	.bss.ya_offset,"aw",%nobits
+ 1495              		.align	2
+ 1498              	ya_offset:
+ 1499 0000 00000000 		.space	4
+ 1500              		.section	.bss.zg_offset,"aw",%nobits
+ 1501              		.align	2
+ 1502              		.set	.LANCHOR1,. + 0
+ 1505              	zg_offset:
+ 1506 0000 00000000 		.space	4
+ 1507              		.text
+ 1508              	.Letext0:
+ 1509              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 1510              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
+ 1511              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 1512              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f412cx.h"
+ 1513              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 1514              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 1515              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 1516              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h"
+ 1517              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /tmp/cc0dBqlD.s 			page 33
+
+
+ 1518              		.file 11 "Core/Inc/ICM_20648.h"
+ 1519              		.file 12 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 1520              		.file 13 "/usr/include/newlib/sys/_types.h"
+ 1521              		.file 14 "/usr/include/newlib/sys/reent.h"
+ 1522              		.file 15 "/usr/include/newlib/sys/lock.h"
+ARM GAS  /tmp/cc0dBqlD.s 			page 34
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ICM_20648.c
+     /tmp/cc0dBqlD.s:18     .text.read_byte:0000000000000000 $t
+     /tmp/cc0dBqlD.s:26     .text.read_byte:0000000000000000 read_byte
+     /tmp/cc0dBqlD.s:90     .text.read_byte:0000000000000048 $d
+     /tmp/cc0dBqlD.s:96     .text.ReadIMU:0000000000000000 $t
+     /tmp/cc0dBqlD.s:103    .text.ReadIMU:0000000000000000 ReadIMU
+     /tmp/cc0dBqlD.s:216    .text.ReadIMU:0000000000000090 $d
+     /tmp/cc0dBqlD.s:222    .text.write_byte:0000000000000000 $t
+     /tmp/cc0dBqlD.s:229    .text.write_byte:0000000000000000 write_byte
+     /tmp/cc0dBqlD.s:293    .text.write_byte:0000000000000048 $d
+     /tmp/cc0dBqlD.s:299    .text.IMU_init:0000000000000000 $t
+     /tmp/cc0dBqlD.s:306    .text.IMU_init:0000000000000000 IMU_init
+     /tmp/cc0dBqlD.s:422    .text.IMU_init:0000000000000080 $d
+     /tmp/cc0dBqlD.s:428    .text.read_gyro_data:0000000000000000 $t
+     /tmp/cc0dBqlD.s:435    .text.read_gyro_data:0000000000000000 read_gyro_data
+     /tmp/cc0dBqlD.s:744    .text.read_gyro_data:0000000000000188 $d
+                            *COM*:0000000000000002 xg
+                            *COM*:0000000000000002 yg
+                            *COM*:0000000000000002 zg
+     /tmp/cc0dBqlD.s:753    .text.read_zg_data:0000000000000000 $t
+     /tmp/cc0dBqlD.s:760    .text.read_zg_data:0000000000000000 read_zg_data
+     /tmp/cc0dBqlD.s:881    .text.read_zg_data:000000000000008c $d
+     /tmp/cc0dBqlD.s:888    .text.read_accel_data:0000000000000000 $t
+     /tmp/cc0dBqlD.s:895    .text.read_accel_data:0000000000000000 read_accel_data
+     /tmp/cc0dBqlD.s:1204   .text.read_accel_data:0000000000000188 $d
+                            *COM*:0000000000000002 xa
+                            *COM*:0000000000000002 ya
+                            *COM*:0000000000000002 za
+     /tmp/cc0dBqlD.s:1213   .text.IMU_Calib:0000000000000000 $t
+     /tmp/cc0dBqlD.s:1220   .text.IMU_Calib:0000000000000000 IMU_Calib
+     /tmp/cc0dBqlD.s:1300   .text.IMU_Calib:0000000000000044 $d
+     /tmp/cc0dBqlD.s:1311   .text.lowpass_filter_double:0000000000000000 $t
+     /tmp/cc0dBqlD.s:1318   .text.lowpass_filter_double:0000000000000000 lowpass_filter_double
+     /tmp/cc0dBqlD.s:1376   .text.lowpass_filter_double:0000000000000048 $d
+     /tmp/cc0dBqlD.s:1383   .text.lowpass_filter_float:0000000000000000 $t
+     /tmp/cc0dBqlD.s:1390   .text.lowpass_filter_float:0000000000000000 lowpass_filter_float
+     /tmp/cc0dBqlD.s:1467   .text.lowpass_filter_float:0000000000000064 $d
+     /tmp/cc0dBqlD.s:1485   .bss.YAccel:0000000000000000 YAccel
+     /tmp/cc0dBqlD.s:1492   .bss.ZGyro:0000000000000000 ZGyro
+     /tmp/cc0dBqlD.s:1498   .bss.ya_offset:0000000000000000 ya_offset
+     /tmp/cc0dBqlD.s:1505   .bss.zg_offset:0000000000000000 zg_offset
+     /tmp/cc0dBqlD.s:1482   .bss.YAccel:0000000000000000 $d
+     /tmp/cc0dBqlD.s:1488   .bss.ZGyro:0000000000000000 $d
+     /tmp/cc0dBqlD.s:1495   .bss.ya_offset:0000000000000000 $d
+     /tmp/cc0dBqlD.s:1501   .bss.zg_offset:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_SPI_Transmit
+HAL_SPI_Receive
+hspi2
+HAL_Delay
+__aeabi_dmul
+__aeabi_dsub
+__aeabi_dadd
+__aeabi_f2d
+ARM GAS  /tmp/cc0dBqlD.s 			page 35
+
+
+__aeabi_d2f

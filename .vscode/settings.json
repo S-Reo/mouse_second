@@ -1,3 +1,9 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode"
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "icm_20648.h": "c",
+        "motor_driver.h": "c",
+        "stdint.h": "c"
+    },
+    "ros.distro": "noetic"
 }

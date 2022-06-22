@@ -1,0 +1,15 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "VSCode側で表示するデバッガ名",
+            "type": "gdb",
+            "request": "launch",
+            "program": "ファイルパスを記述する",
+            "stopOnEntry": "trueの場合、最初の行で停止する"
+        }
+    ]
+}

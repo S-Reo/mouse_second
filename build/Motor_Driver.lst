@@ -1,0 +1,439 @@
+ARM GAS  /tmp/cchgH3gm.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"Motor_Driver.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Motor_PWM_Start,"ax",%progbits
+  18              		.align	1
+  19              		.global	Motor_PWM_Start
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	Motor_PWM_Start:
+  27              	.LFB216:
+  28              		.file 1 "Core/Src/Motor_Driver.c"
+   1:Core/Src/Motor_Driver.c **** /*
+   2:Core/Src/Motor_Driver.c ****  * Motor_Driver.c
+   3:Core/Src/Motor_Driver.c ****  *
+   4:Core/Src/Motor_Driver.c ****  *  Created on: 2022/02/15
+   5:Core/Src/Motor_Driver.c ****  *      Author: leopi
+   6:Core/Src/Motor_Driver.c ****  */
+   7:Core/Src/Motor_Driver.c **** 
+   8:Core/Src/Motor_Driver.c **** #include "Motor_Driver.h"
+   9:Core/Src/Motor_Driver.c **** //A1,12
+  10:Core/Src/Motor_Driver.c **** 
+  11:Core/Src/Motor_Driver.c **** ////
+  12:Core/Src/Motor_Driver.c **** void Motor_PWM_Start(){ // モータPWMの開始とCCR値の
+  29              		.loc 1 12 23 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  13:Core/Src/Motor_Driver.c **** #if 1
+  14:Core/Src/Motor_Driver.c ****   if (HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1) != HAL_OK)
+  38              		.loc 1 14 3 view .LVU1
+  39              		.loc 1 14 7 is_stmt 0 view .LVU2
+  40 0002 0021     		movs	r1, #0
+  41 0004 0B48     		ldr	r0, .L9
+  42 0006 FFF7FEFF 		bl	HAL_TIM_PWM_Start
+  43              	.LVL0:
+  44              		.loc 1 14 6 view .LVU3
+ARM GAS  /tmp/cchgH3gm.s 			page 2
+
+
+  45 000a 50B9     		cbnz	r0, .L6
+  46              	.L2:
+  15:Core/Src/Motor_Driver.c ****   {
+  16:Core/Src/Motor_Driver.c **** 	  Error_Handler();
+  17:Core/Src/Motor_Driver.c ****   }
+  18:Core/Src/Motor_Driver.c ****   if (HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_1) != HAL_OK)
+  47              		.loc 1 18 3 is_stmt 1 view .LVU4
+  48              		.loc 1 18 7 is_stmt 0 view .LVU5
+  49 000c 0021     		movs	r1, #0
+  50 000e 0A48     		ldr	r0, .L9+4
+  51 0010 FFF7FEFF 		bl	HAL_TIM_PWM_Start
+  52              	.LVL1:
+  53              		.loc 1 18 6 view .LVU6
+  54 0014 40B9     		cbnz	r0, .L7
+  55              	.L3:
+  19:Core/Src/Motor_Driver.c ****   {
+  20:Core/Src/Motor_Driver.c **** 	  Error_Handler();
+  21:Core/Src/Motor_Driver.c ****   }
+  22:Core/Src/Motor_Driver.c ****   if (HAL_TIM_PWM_Start(&htim10, TIM_CHANNEL_1) != HAL_OK)
+  56              		.loc 1 22 3 is_stmt 1 view .LVU7
+  57              		.loc 1 22 7 is_stmt 0 view .LVU8
+  58 0016 0021     		movs	r1, #0
+  59 0018 0848     		ldr	r0, .L9+8
+  60 001a FFF7FEFF 		bl	HAL_TIM_PWM_Start
+  61              	.LVL2:
+  62              		.loc 1 22 6 view .LVU9
+  63 001e 30B9     		cbnz	r0, .L8
+  64              	.L1:
+  23:Core/Src/Motor_Driver.c ****   {
+  24:Core/Src/Motor_Driver.c **** 	  Error_Handler();
+  25:Core/Src/Motor_Driver.c ****   }
+  26:Core/Src/Motor_Driver.c **** #endif
+  27:Core/Src/Motor_Driver.c **** }
+  65              		.loc 1 27 1 view .LVU10
+  66 0020 08BD     		pop	{r3, pc}
+  67              	.L6:
+  16:Core/Src/Motor_Driver.c ****   }
+  68              		.loc 1 16 4 is_stmt 1 view .LVU11
+  69 0022 FFF7FEFF 		bl	Error_Handler
+  70              	.LVL3:
+  71 0026 F1E7     		b	.L2
+  72              	.L7:
+  20:Core/Src/Motor_Driver.c ****   }
+  73              		.loc 1 20 4 view .LVU12
+  74 0028 FFF7FEFF 		bl	Error_Handler
+  75              	.LVL4:
+  76 002c F3E7     		b	.L3
+  77              	.L8:
+  24:Core/Src/Motor_Driver.c ****   }
+  78              		.loc 1 24 4 view .LVU13
+  79 002e FFF7FEFF 		bl	Error_Handler
+  80              	.LVL5:
+  81              		.loc 1 27 1 is_stmt 0 view .LVU14
+  82 0032 F5E7     		b	.L1
+  83              	.L10:
+  84              		.align	2
+  85              	.L9:
+ARM GAS  /tmp/cchgH3gm.s 			page 3
+
+
+  86 0034 00000000 		.word	htim2
+  87 0038 00000000 		.word	htim5
+  88 003c 00000000 		.word	htim10
+  89              		.cfi_endproc
+  90              	.LFE216:
+  92              		.section	.text.Motor_PWM_Stop,"ax",%progbits
+  93              		.align	1
+  94              		.global	Motor_PWM_Stop
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  98              		.fpu fpv4-sp-d16
+ 100              	Motor_PWM_Stop:
+ 101              	.LFB217:
+  28:Core/Src/Motor_Driver.c **** 
+  29:Core/Src/Motor_Driver.c **** void Motor_PWM_Stop(){ // モータPWMの開始とCCR値の設
+ 102              		.loc 1 29 22 is_stmt 1 view -0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106 0000 08B5     		push	{r3, lr}
+ 107              	.LCFI1:
+ 108              		.cfi_def_cfa_offset 8
+ 109              		.cfi_offset 3, -8
+ 110              		.cfi_offset 14, -4
+  30:Core/Src/Motor_Driver.c **** #if 1
+  31:Core/Src/Motor_Driver.c ****   if (HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1) != HAL_OK)
+ 111              		.loc 1 31 3 view .LVU16
+ 112              		.loc 1 31 7 is_stmt 0 view .LVU17
+ 113 0002 0021     		movs	r1, #0
+ 114 0004 0B48     		ldr	r0, .L19
+ 115 0006 FFF7FEFF 		bl	HAL_TIM_PWM_Stop
+ 116              	.LVL6:
+ 117              		.loc 1 31 6 view .LVU18
+ 118 000a 50B9     		cbnz	r0, .L16
+ 119              	.L12:
+  32:Core/Src/Motor_Driver.c ****   {
+  33:Core/Src/Motor_Driver.c **** 	  Error_Handler();
+  34:Core/Src/Motor_Driver.c ****   }
+  35:Core/Src/Motor_Driver.c ****   if (HAL_TIM_PWM_Stop(&htim5, TIM_CHANNEL_1) != HAL_OK)
+ 120              		.loc 1 35 3 is_stmt 1 view .LVU19
+ 121              		.loc 1 35 7 is_stmt 0 view .LVU20
+ 122 000c 0021     		movs	r1, #0
+ 123 000e 0A48     		ldr	r0, .L19+4
+ 124 0010 FFF7FEFF 		bl	HAL_TIM_PWM_Stop
+ 125              	.LVL7:
+ 126              		.loc 1 35 6 view .LVU21
+ 127 0014 40B9     		cbnz	r0, .L17
+ 128              	.L13:
+  36:Core/Src/Motor_Driver.c ****   {
+  37:Core/Src/Motor_Driver.c **** 	  Error_Handler();
+  38:Core/Src/Motor_Driver.c ****   }
+  39:Core/Src/Motor_Driver.c ****   if (HAL_TIM_PWM_Stop(&htim10, TIM_CHANNEL_1) != HAL_OK)
+ 129              		.loc 1 39 3 is_stmt 1 view .LVU22
+ 130              		.loc 1 39 7 is_stmt 0 view .LVU23
+ 131 0016 0021     		movs	r1, #0
+ 132 0018 0848     		ldr	r0, .L19+8
+ARM GAS  /tmp/cchgH3gm.s 			page 4
+
+
+ 133 001a FFF7FEFF 		bl	HAL_TIM_PWM_Stop
+ 134              	.LVL8:
+ 135              		.loc 1 39 6 view .LVU24
+ 136 001e 30B9     		cbnz	r0, .L18
+ 137              	.L11:
+  40:Core/Src/Motor_Driver.c ****   {
+  41:Core/Src/Motor_Driver.c **** 	  Error_Handler();
+  42:Core/Src/Motor_Driver.c ****   }
+  43:Core/Src/Motor_Driver.c **** #endif
+  44:Core/Src/Motor_Driver.c **** }
+ 138              		.loc 1 44 1 view .LVU25
+ 139 0020 08BD     		pop	{r3, pc}
+ 140              	.L16:
+  33:Core/Src/Motor_Driver.c ****   }
+ 141              		.loc 1 33 4 is_stmt 1 view .LVU26
+ 142 0022 FFF7FEFF 		bl	Error_Handler
+ 143              	.LVL9:
+ 144 0026 F1E7     		b	.L12
+ 145              	.L17:
+  37:Core/Src/Motor_Driver.c ****   }
+ 146              		.loc 1 37 4 view .LVU27
+ 147 0028 FFF7FEFF 		bl	Error_Handler
+ 148              	.LVL10:
+ 149 002c F3E7     		b	.L13
+ 150              	.L18:
+  41:Core/Src/Motor_Driver.c ****   }
+ 151              		.loc 1 41 4 view .LVU28
+ 152 002e FFF7FEFF 		bl	Error_Handler
+ 153              	.LVL11:
+ 154              		.loc 1 44 1 is_stmt 0 view .LVU29
+ 155 0032 F5E7     		b	.L11
+ 156              	.L20:
+ 157              		.align	2
+ 158              	.L19:
+ 159 0034 00000000 		.word	htim2
+ 160 0038 00000000 		.word	htim5
+ 161 003c 00000000 		.word	htim10
+ 162              		.cfi_endproc
+ 163              	.LFE217:
+ 165              		.section	.text.Motor_Switch,"ax",%progbits
+ 166              		.align	1
+ 167              		.global	Motor_Switch
+ 168              		.syntax unified
+ 169              		.thumb
+ 170              		.thumb_func
+ 171              		.fpu fpv4-sp-d16
+ 173              	Motor_Switch:
+ 174              	.LVL12:
+ 175              	.LFB218:
+  45:Core/Src/Motor_Driver.c **** inline void Motor_Switch(int left, int right){
+ 176              		.loc 1 45 46 is_stmt 1 view -0
+ 177              		.cfi_startproc
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180              		.loc 1 45 46 is_stmt 0 view .LVU31
+ 181 0000 38B5     		push	{r3, r4, r5, lr}
+ 182              	.LCFI2:
+ARM GAS  /tmp/cchgH3gm.s 			page 5
+
+
+ 183              		.cfi_def_cfa_offset 16
+ 184              		.cfi_offset 3, -16
+ 185              		.cfi_offset 4, -12
+ 186              		.cfi_offset 5, -8
+ 187              		.cfi_offset 14, -4
+ 188 0002 0C46     		mov	r4, r1
+  46:Core/Src/Motor_Driver.c **** 	if (left > 0 ){
+ 189              		.loc 1 46 2 is_stmt 1 view .LVU32
+ 190              		.loc 1 46 5 is_stmt 0 view .LVU33
+ 191 0004 051E     		subs	r5, r0, #0
+ 192 0006 16DC     		bgt	.L31
+  47:Core/Src/Motor_Driver.c **** 		//to -
+  48:Core/Src/Motor_Driver.c **** 		HAL_GPIO_WritePin(GPIO_LEFT, GPIO_L_PIN_NUM, GPIO_PIN_SET); //A2が左SET:1で正転
+  49:Core/Src/Motor_Driver.c **** 
+  50:Core/Src/Motor_Driver.c **** 	}
+  51:Core/Src/Motor_Driver.c **** 	else  if (left < 0){
+ 193              		.loc 1 51 8 is_stmt 1 view .LVU34
+ 194              		.loc 1 51 11 is_stmt 0 view .LVU35
+ 195 0008 002D     		cmp	r5, #0
+ 196 000a 1BDB     		blt	.L32
+ 197              	.LVL13:
+ 198              	.L23:
+  52:Core/Src/Motor_Driver.c **** 		//to +
+  53:Core/Src/Motor_Driver.c **** 		HAL_GPIO_WritePin(GPIO_LEFT, GPIO_L_PIN_NUM, GPIO_PIN_RESET); //A2が左,RESET:0で転
+  54:Core/Src/Motor_Driver.c **** 		left = -left;
+  55:Core/Src/Motor_Driver.c **** 	}
+  56:Core/Src/Motor_Driver.c **** 	if (right > 0){
+ 199              		.loc 1 56 2 is_stmt 1 view .LVU36
+ 200              		.loc 1 56 5 is_stmt 0 view .LVU37
+ 201 000c 002C     		cmp	r4, #0
+ 202 000e 21DC     		bgt	.L33
+  57:Core/Src/Motor_Driver.c **** 		//to -
+  58:Core/Src/Motor_Driver.c **** 		HAL_GPIO_WritePin(GPIO_RIGHT, GPIO_R_PIN_NUM, GPIO_PIN_SET); //A0が右,RESET:0で転
+  59:Core/Src/Motor_Driver.c **** 
+  60:Core/Src/Motor_Driver.c **** 	}
+  61:Core/Src/Motor_Driver.c **** 
+  62:Core/Src/Motor_Driver.c **** 	else if (right < 0){
+ 203              		.loc 1 62 7 is_stmt 1 view .LVU38
+ 204              		.loc 1 62 10 is_stmt 0 view .LVU39
+ 205 0010 002C     		cmp	r4, #0
+ 206 0012 25DB     		blt	.L34
+ 207              	.L25:
+  63:Core/Src/Motor_Driver.c **** 	  	//to +
+  64:Core/Src/Motor_Driver.c **** 	  	HAL_GPIO_WritePin(GPIO_RIGHT, GPIO_R_PIN_NUM, GPIO_PIN_RESET); //A0が右,SET:1で正転
+  65:Core/Src/Motor_Driver.c **** 	  	right = -right;
+  66:Core/Src/Motor_Driver.c **** 	}
+  67:Core/Src/Motor_Driver.c **** 
+  68:Core/Src/Motor_Driver.c **** 	//上限はマクロで設定
+  69:Core/Src/Motor_Driver.c **** 	if(left > 2000*0.8) left = 2000*0.8;
+ 208              		.loc 1 69 2 is_stmt 1 view .LVU40
+ 209              		.loc 1 69 4 is_stmt 0 view .LVU41
+ 210 0014 B5F5C86F 		cmp	r5, #1600
+ 211 0018 01DD     		ble	.L26
+ 212              		.loc 1 69 27 view .LVU42
+ 213 001a 4FF4C865 		mov	r5, #1600
+ 214              	.LVL14:
+ 215              	.L26:
+ARM GAS  /tmp/cchgH3gm.s 			page 6
+
+
+  70:Core/Src/Motor_Driver.c **** 	if(right > 2000*0.8) right = 2000*0.8;
+ 216              		.loc 1 70 2 is_stmt 1 view .LVU43
+ 217              		.loc 1 70 4 is_stmt 0 view .LVU44
+ 218 001e B4F5C86F 		cmp	r4, #1600
+ 219 0022 01DD     		ble	.L27
+ 220              		.loc 1 70 29 view .LVU45
+ 221 0024 4FF4C864 		mov	r4, #1600
+ 222              	.LVL15:
+ 223              	.L27:
+  71:Core/Src/Motor_Driver.c **** 
+  72:Core/Src/Motor_Driver.c **** 	  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, left); //tim2ch1が左
+ 224              		.loc 1 72 4 is_stmt 1 view .LVU46
+ 225 0028 114B     		ldr	r3, .L35
+ 226 002a 1B68     		ldr	r3, [r3]
+ 227 002c 5D63     		str	r5, [r3, #52]
+  73:Core/Src/Motor_Driver.c **** 	  __HAL_TIM_SET_COMPARE(&htim5, TIM_CHANNEL_1, right); //tim5ch1が右
+ 228              		.loc 1 73 4 view .LVU47
+ 229 002e 114B     		ldr	r3, .L35+4
+ 230 0030 1B68     		ldr	r3, [r3]
+ 231 0032 5C63     		str	r4, [r3, #52]
+  74:Core/Src/Motor_Driver.c **** }
+ 232              		.loc 1 74 1 is_stmt 0 view .LVU48
+ 233 0034 38BD     		pop	{r3, r4, r5, pc}
+ 234              	.LVL16:
+ 235              	.L31:
+  48:Core/Src/Motor_Driver.c **** 
+ 236              		.loc 1 48 3 is_stmt 1 view .LVU49
+ 237 0036 0122     		movs	r2, #1
+ 238 0038 4FF48051 		mov	r1, #4096
+ 239              	.LVL17:
+  48:Core/Src/Motor_Driver.c **** 
+ 240              		.loc 1 48 3 is_stmt 0 view .LVU50
+ 241 003c 0E48     		ldr	r0, .L35+8
+ 242              	.LVL18:
+  48:Core/Src/Motor_Driver.c **** 
+ 243              		.loc 1 48 3 view .LVU51
+ 244 003e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 245              	.LVL19:
+ 246 0042 E3E7     		b	.L23
+ 247              	.LVL20:
+ 248              	.L32:
+  53:Core/Src/Motor_Driver.c **** 		left = -left;
+ 249              		.loc 1 53 3 is_stmt 1 view .LVU52
+ 250 0044 0022     		movs	r2, #0
+ 251 0046 4FF48051 		mov	r1, #4096
+ 252              	.LVL21:
+  53:Core/Src/Motor_Driver.c **** 		left = -left;
+ 253              		.loc 1 53 3 is_stmt 0 view .LVU53
+ 254 004a 0B48     		ldr	r0, .L35+8
+ 255              	.LVL22:
+  53:Core/Src/Motor_Driver.c **** 		left = -left;
+ 256              		.loc 1 53 3 view .LVU54
+ 257 004c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 258              	.LVL23:
+  54:Core/Src/Motor_Driver.c **** 	}
+ 259              		.loc 1 54 3 is_stmt 1 view .LVU55
+  54:Core/Src/Motor_Driver.c **** 	}
+ARM GAS  /tmp/cchgH3gm.s 			page 7
+
+
+ 260              		.loc 1 54 8 is_stmt 0 view .LVU56
+ 261 0050 6D42     		rsbs	r5, r5, #0
+ 262              	.LVL24:
+  54:Core/Src/Motor_Driver.c **** 	}
+ 263              		.loc 1 54 8 view .LVU57
+ 264 0052 DBE7     		b	.L23
+ 265              	.L33:
+  58:Core/Src/Motor_Driver.c **** 
+ 266              		.loc 1 58 3 is_stmt 1 view .LVU58
+ 267 0054 0122     		movs	r2, #1
+ 268 0056 0221     		movs	r1, #2
+ 269 0058 0748     		ldr	r0, .L35+8
+ 270 005a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 271              	.LVL25:
+ 272 005e D9E7     		b	.L25
+ 273              	.L34:
+  64:Core/Src/Motor_Driver.c **** 	  	right = -right;
+ 274              		.loc 1 64 5 view .LVU59
+ 275 0060 0022     		movs	r2, #0
+ 276 0062 0221     		movs	r1, #2
+ 277 0064 0448     		ldr	r0, .L35+8
+ 278 0066 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 279              	.LVL26:
+  65:Core/Src/Motor_Driver.c **** 	}
+ 280              		.loc 1 65 5 view .LVU60
+  65:Core/Src/Motor_Driver.c **** 	}
+ 281              		.loc 1 65 11 is_stmt 0 view .LVU61
+ 282 006a 6442     		rsbs	r4, r4, #0
+ 283              	.LVL27:
+  65:Core/Src/Motor_Driver.c **** 	}
+ 284              		.loc 1 65 11 view .LVU62
+ 285 006c D2E7     		b	.L25
+ 286              	.L36:
+ 287 006e 00BF     		.align	2
+ 288              	.L35:
+ 289 0070 00000000 		.word	htim2
+ 290 0074 00000000 		.word	htim5
+ 291 0078 00000240 		.word	1073872896
+ 292              		.cfi_endproc
+ 293              	.LFE218:
+ 295              		.text
+ 296              	.Letext0:
+ 297              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 298              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
+ 299              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 300              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f412cx.h"
+ 301              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 302              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 303              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 304              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 305              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 306              		.file 11 "Core/Inc/Motor_Driver.h"
+ 307              		.file 12 "Core/Inc/main.h"
+ARM GAS  /tmp/cchgH3gm.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Motor_Driver.c
+     /tmp/cchgH3gm.s:18     .text.Motor_PWM_Start:0000000000000000 $t
+     /tmp/cchgH3gm.s:26     .text.Motor_PWM_Start:0000000000000000 Motor_PWM_Start
+     /tmp/cchgH3gm.s:86     .text.Motor_PWM_Start:0000000000000034 $d
+     /tmp/cchgH3gm.s:93     .text.Motor_PWM_Stop:0000000000000000 $t
+     /tmp/cchgH3gm.s:100    .text.Motor_PWM_Stop:0000000000000000 Motor_PWM_Stop
+     /tmp/cchgH3gm.s:159    .text.Motor_PWM_Stop:0000000000000034 $d
+     /tmp/cchgH3gm.s:166    .text.Motor_Switch:0000000000000000 $t
+     /tmp/cchgH3gm.s:173    .text.Motor_Switch:0000000000000000 Motor_Switch
+     /tmp/cchgH3gm.s:289    .text.Motor_Switch:0000000000000070 $d
+
+UNDEFINED SYMBOLS
+HAL_TIM_PWM_Start
+Error_Handler
+htim2
+htim5
+htim10
+HAL_TIM_PWM_Stop
+HAL_GPIO_WritePin

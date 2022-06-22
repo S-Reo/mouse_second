@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccW8v7cy.s 			page 1
+ARM GAS  /tmp/ccpg37Lw.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -26,7 +26,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
   23              		.thumb_func
   24              		.fpu fpv4-sp-d16
   26              	NMI_Handler:
-  27              	.LFB130:
+  27              	.LFB216:
   28              		.file 1 "Core/Src/stm32f4xx_it.c"
    1:Core/Src/stm32f4xx_it.c **** /* USER CODE BEGIN Header */
    2:Core/Src/stm32f4xx_it.c **** /**
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
   28:Core/Src/stm32f4xx_it.c **** /* USER CODE BEGIN TD */
   29:Core/Src/stm32f4xx_it.c **** 
   30:Core/Src/stm32f4xx_it.c **** /* USER CODE END TD */
-ARM GAS  /tmp/ccW8v7cy.s 			page 2
+ARM GAS  /tmp/ccpg37Lw.s 			page 2
 
 
   31:Core/Src/stm32f4xx_it.c **** 
@@ -88,7 +88,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
   55:Core/Src/stm32f4xx_it.c **** /* USER CODE END 0 */
   56:Core/Src/stm32f4xx_it.c **** 
   57:Core/Src/stm32f4xx_it.c **** /* External variables --------------------------------------------------------*/
-  58:Core/Src/stm32f4xx_it.c **** 
+  58:Core/Src/stm32f4xx_it.c **** extern DMA_HandleTypeDef hdma_adc1;
   59:Core/Src/stm32f4xx_it.c **** /* USER CODE BEGIN EV */
   60:Core/Src/stm32f4xx_it.c **** 
   61:Core/Src/stm32f4xx_it.c **** /* USER CODE END EV */
@@ -118,13 +118,13 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
   77:Core/Src/stm32f4xx_it.c ****   }
   37              		.loc 1 77 3 discriminator 1 view .LVU2
   75:Core/Src/stm32f4xx_it.c ****   {
-ARM GAS  /tmp/ccW8v7cy.s 			page 3
+ARM GAS  /tmp/ccpg37Lw.s 			page 3
 
 
   38              		.loc 1 75 9 discriminator 1 view .LVU3
   39 0000 FEE7     		b	.L2
   40              		.cfi_endproc
-  41              	.LFE130:
+  41              	.LFE216:
   43              		.section	.text.HardFault_Handler,"ax",%progbits
   44              		.align	1
   45              		.global	HardFault_Handler
@@ -133,7 +133,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
   48              		.thumb_func
   49              		.fpu fpv4-sp-d16
   51              	HardFault_Handler:
-  52              	.LFB131:
+  52              	.LFB217:
   78:Core/Src/stm32f4xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 1 */
   79:Core/Src/stm32f4xx_it.c **** }
   80:Core/Src/stm32f4xx_it.c **** 
@@ -163,7 +163,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
   62              		.loc 1 89 9 discriminator 1 view .LVU7
   63 0000 FEE7     		b	.L4
   64              		.cfi_endproc
-  65              	.LFE131:
+  65              	.LFE217:
   67              		.section	.text.MemManage_Handler,"ax",%progbits
   68              		.align	1
   69              		.global	MemManage_Handler
@@ -172,13 +172,13 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
   72              		.thumb_func
   73              		.fpu fpv4-sp-d16
   75              	MemManage_Handler:
-  76              	.LFB132:
+  76              	.LFB218:
   94:Core/Src/stm32f4xx_it.c **** }
   95:Core/Src/stm32f4xx_it.c **** 
   96:Core/Src/stm32f4xx_it.c **** /**
   97:Core/Src/stm32f4xx_it.c ****   * @brief This function handles Memory management fault.
   98:Core/Src/stm32f4xx_it.c ****   */
-ARM GAS  /tmp/ccW8v7cy.s 			page 4
+ARM GAS  /tmp/ccpg37Lw.s 			page 4
 
 
   99:Core/Src/stm32f4xx_it.c **** void MemManage_Handler(void)
@@ -204,7 +204,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
   86              		.loc 1 104 9 discriminator 1 view .LVU11
   87 0000 FEE7     		b	.L6
   88              		.cfi_endproc
-  89              	.LFE132:
+  89              	.LFE218:
   91              		.section	.text.BusFault_Handler,"ax",%progbits
   92              		.align	1
   93              		.global	BusFault_Handler
@@ -213,7 +213,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
   96              		.thumb_func
   97              		.fpu fpv4-sp-d16
   99              	BusFault_Handler:
- 100              	.LFB133:
+ 100              	.LFB219:
  109:Core/Src/stm32f4xx_it.c **** }
  110:Core/Src/stm32f4xx_it.c **** 
  111:Core/Src/stm32f4xx_it.c **** /**
@@ -238,14 +238,14 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  122:Core/Src/stm32f4xx_it.c ****     /* USER CODE END W1_BusFault_IRQn 0 */
  123:Core/Src/stm32f4xx_it.c ****   }
  109              		.loc 1 123 3 discriminator 1 view .LVU14
-ARM GAS  /tmp/ccW8v7cy.s 			page 5
+ARM GAS  /tmp/ccpg37Lw.s 			page 5
 
 
  119:Core/Src/stm32f4xx_it.c ****   {
  110              		.loc 1 119 9 discriminator 1 view .LVU15
  111 0000 FEE7     		b	.L8
  112              		.cfi_endproc
- 113              	.LFE133:
+ 113              	.LFE219:
  115              		.section	.text.UsageFault_Handler,"ax",%progbits
  116              		.align	1
  117              		.global	UsageFault_Handler
@@ -254,7 +254,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  120              		.thumb_func
  121              		.fpu fpv4-sp-d16
  123              	UsageFault_Handler:
- 124              	.LFB134:
+ 124              	.LFB220:
  124:Core/Src/stm32f4xx_it.c **** }
  125:Core/Src/stm32f4xx_it.c **** 
  126:Core/Src/stm32f4xx_it.c **** /**
@@ -283,7 +283,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  134              		.loc 1 134 9 discriminator 1 view .LVU19
  135 0000 FEE7     		b	.L10
  136              		.cfi_endproc
- 137              	.LFE134:
+ 137              	.LFE220:
  139              		.section	.text.SVC_Handler,"ax",%progbits
  140              		.align	1
  141              		.global	SVC_Handler
@@ -292,13 +292,13 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  144              		.thumb_func
  145              		.fpu fpv4-sp-d16
  147              	SVC_Handler:
- 148              	.LFB135:
+ 148              	.LFB221:
  139:Core/Src/stm32f4xx_it.c **** }
  140:Core/Src/stm32f4xx_it.c **** 
  141:Core/Src/stm32f4xx_it.c **** /**
  142:Core/Src/stm32f4xx_it.c ****   * @brief This function handles System service call via SWI instruction.
  143:Core/Src/stm32f4xx_it.c ****   */
-ARM GAS  /tmp/ccW8v7cy.s 			page 6
+ARM GAS  /tmp/ccpg37Lw.s 			page 6
 
 
  144:Core/Src/stm32f4xx_it.c **** void SVC_Handler(void)
@@ -318,7 +318,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  154              		.loc 1 152 1 view .LVU21
  155 0000 7047     		bx	lr
  156              		.cfi_endproc
- 157              	.LFE135:
+ 157              	.LFE221:
  159              		.section	.text.DebugMon_Handler,"ax",%progbits
  160              		.align	1
  161              		.global	DebugMon_Handler
@@ -327,7 +327,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  164              		.thumb_func
  165              		.fpu fpv4-sp-d16
  167              	DebugMon_Handler:
- 168              	.LFB136:
+ 168              	.LFB222:
  153:Core/Src/stm32f4xx_it.c **** 
  154:Core/Src/stm32f4xx_it.c **** /**
  155:Core/Src/stm32f4xx_it.c ****   * @brief This function handles Debug monitor.
@@ -349,7 +349,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  174              		.loc 1 165 1 view .LVU23
  175 0000 7047     		bx	lr
  176              		.cfi_endproc
- 177              	.LFE136:
+ 177              	.LFE222:
  179              		.section	.text.PendSV_Handler,"ax",%progbits
  180              		.align	1
  181              		.global	PendSV_Handler
@@ -358,10 +358,10 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  184              		.thumb_func
  185              		.fpu fpv4-sp-d16
  187              	PendSV_Handler:
-ARM GAS  /tmp/ccW8v7cy.s 			page 7
+ARM GAS  /tmp/ccpg37Lw.s 			page 7
 
 
- 188              	.LFB137:
+ 188              	.LFB223:
  166:Core/Src/stm32f4xx_it.c **** 
  167:Core/Src/stm32f4xx_it.c **** /**
  168:Core/Src/stm32f4xx_it.c ****   * @brief This function handles Pendable request for system service.
@@ -383,7 +383,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  194              		.loc 1 178 1 view .LVU25
  195 0000 7047     		bx	lr
  196              		.cfi_endproc
- 197              	.LFE137:
+ 197              	.LFE223:
  199              		.section	.text.SysTick_Handler,"ax",%progbits
  200              		.align	1
  201              		.global	SysTick_Handler
@@ -392,7 +392,7 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  204              		.thumb_func
  205              		.fpu fpv4-sp-d16
  207              	SysTick_Handler:
- 208              	.LFB138:
+ 208              	.LFB224:
  179:Core/Src/stm32f4xx_it.c **** 
  180:Core/Src/stm32f4xx_it.c **** /**
  181:Core/Src/stm32f4xx_it.c ****   * @brief This function handles System tick timer.
@@ -418,43 +418,105 @@ ARM GAS  /tmp/ccW8v7cy.s 			page 1
  189:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN SysTick_IRQn 1 */
  190:Core/Src/stm32f4xx_it.c **** 
  191:Core/Src/stm32f4xx_it.c ****   /* USER CODE END SysTick_IRQn 1 */
-ARM GAS  /tmp/ccW8v7cy.s 			page 8
+ARM GAS  /tmp/ccpg37Lw.s 			page 8
 
 
  192:Core/Src/stm32f4xx_it.c **** }
  221              		.loc 1 192 1 is_stmt 0 view .LVU28
  222 0006 08BD     		pop	{r3, pc}
  223              		.cfi_endproc
- 224              	.LFE138:
- 226              		.text
- 227              	.Letext0:
- 228              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 229              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
- 230              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
- 231              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/ccW8v7cy.s 			page 9
+ 224              	.LFE224:
+ 226              		.section	.text.DMA2_Stream0_IRQHandler,"ax",%progbits
+ 227              		.align	1
+ 228              		.global	DMA2_Stream0_IRQHandler
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 232              		.fpu fpv4-sp-d16
+ 234              	DMA2_Stream0_IRQHandler:
+ 235              	.LFB225:
+ 193:Core/Src/stm32f4xx_it.c **** 
+ 194:Core/Src/stm32f4xx_it.c **** /******************************************************************************/
+ 195:Core/Src/stm32f4xx_it.c **** /* STM32F4xx Peripheral Interrupt Handlers                                    */
+ 196:Core/Src/stm32f4xx_it.c **** /* Add here the Interrupt Handlers for the used peripherals.                  */
+ 197:Core/Src/stm32f4xx_it.c **** /* For the available peripheral interrupt handler names,                      */
+ 198:Core/Src/stm32f4xx_it.c **** /* please refer to the startup file (startup_stm32f4xx.s).                    */
+ 199:Core/Src/stm32f4xx_it.c **** /******************************************************************************/
+ 200:Core/Src/stm32f4xx_it.c **** 
+ 201:Core/Src/stm32f4xx_it.c **** /**
+ 202:Core/Src/stm32f4xx_it.c ****   * @brief This function handles DMA2 stream0 global interrupt.
+ 203:Core/Src/stm32f4xx_it.c ****   */
+ 204:Core/Src/stm32f4xx_it.c **** void DMA2_Stream0_IRQHandler(void)
+ 205:Core/Src/stm32f4xx_it.c **** {
+ 236              		.loc 1 205 1 is_stmt 1 view -0
+ 237              		.cfi_startproc
+ 238              		@ args = 0, pretend = 0, frame = 0
+ 239              		@ frame_needed = 0, uses_anonymous_args = 0
+ 240 0000 08B5     		push	{r3, lr}
+ 241              	.LCFI1:
+ 242              		.cfi_def_cfa_offset 8
+ 243              		.cfi_offset 3, -8
+ 244              		.cfi_offset 14, -4
+ 206:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN DMA2_Stream0_IRQn 0 */
+ 207:Core/Src/stm32f4xx_it.c **** 
+ 208:Core/Src/stm32f4xx_it.c ****   /* USER CODE END DMA2_Stream0_IRQn 0 */
+ 209:Core/Src/stm32f4xx_it.c ****   HAL_DMA_IRQHandler(&hdma_adc1);
+ 245              		.loc 1 209 3 view .LVU30
+ 246 0002 0248     		ldr	r0, .L18
+ 247 0004 FFF7FEFF 		bl	HAL_DMA_IRQHandler
+ 248              	.LVL1:
+ 210:Core/Src/stm32f4xx_it.c ****   /* USER CODE BEGIN DMA2_Stream0_IRQn 1 */
+ 211:Core/Src/stm32f4xx_it.c **** 
+ 212:Core/Src/stm32f4xx_it.c ****   /* USER CODE END DMA2_Stream0_IRQn 1 */
+ 213:Core/Src/stm32f4xx_it.c **** }
+ 249              		.loc 1 213 1 is_stmt 0 view .LVU31
+ 250 0008 08BD     		pop	{r3, pc}
+ 251              	.L19:
+ 252 000a 00BF     		.align	2
+ 253              	.L18:
+ 254 000c 00000000 		.word	hdma_adc1
+ 255              		.cfi_endproc
+ 256              	.LFE225:
+ 258              		.text
+ARM GAS  /tmp/ccpg37Lw.s 			page 9
+
+
+ 259              	.Letext0:
+ 260              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 261              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
+ 262              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 263              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f412cx.h"
+ 264              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 265              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 266              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /tmp/ccpg37Lw.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_it.c
-     /tmp/ccW8v7cy.s:18     .text.NMI_Handler:0000000000000000 $t
-     /tmp/ccW8v7cy.s:26     .text.NMI_Handler:0000000000000000 NMI_Handler
-     /tmp/ccW8v7cy.s:44     .text.HardFault_Handler:0000000000000000 $t
-     /tmp/ccW8v7cy.s:51     .text.HardFault_Handler:0000000000000000 HardFault_Handler
-     /tmp/ccW8v7cy.s:68     .text.MemManage_Handler:0000000000000000 $t
-     /tmp/ccW8v7cy.s:75     .text.MemManage_Handler:0000000000000000 MemManage_Handler
-     /tmp/ccW8v7cy.s:92     .text.BusFault_Handler:0000000000000000 $t
-     /tmp/ccW8v7cy.s:99     .text.BusFault_Handler:0000000000000000 BusFault_Handler
-     /tmp/ccW8v7cy.s:116    .text.UsageFault_Handler:0000000000000000 $t
-     /tmp/ccW8v7cy.s:123    .text.UsageFault_Handler:0000000000000000 UsageFault_Handler
-     /tmp/ccW8v7cy.s:140    .text.SVC_Handler:0000000000000000 $t
-     /tmp/ccW8v7cy.s:147    .text.SVC_Handler:0000000000000000 SVC_Handler
-     /tmp/ccW8v7cy.s:160    .text.DebugMon_Handler:0000000000000000 $t
-     /tmp/ccW8v7cy.s:167    .text.DebugMon_Handler:0000000000000000 DebugMon_Handler
-     /tmp/ccW8v7cy.s:180    .text.PendSV_Handler:0000000000000000 $t
-     /tmp/ccW8v7cy.s:187    .text.PendSV_Handler:0000000000000000 PendSV_Handler
-     /tmp/ccW8v7cy.s:200    .text.SysTick_Handler:0000000000000000 $t
-     /tmp/ccW8v7cy.s:207    .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccpg37Lw.s:18     .text.NMI_Handler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:26     .text.NMI_Handler:0000000000000000 NMI_Handler
+     /tmp/ccpg37Lw.s:44     .text.HardFault_Handler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:51     .text.HardFault_Handler:0000000000000000 HardFault_Handler
+     /tmp/ccpg37Lw.s:68     .text.MemManage_Handler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:75     .text.MemManage_Handler:0000000000000000 MemManage_Handler
+     /tmp/ccpg37Lw.s:92     .text.BusFault_Handler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:99     .text.BusFault_Handler:0000000000000000 BusFault_Handler
+     /tmp/ccpg37Lw.s:116    .text.UsageFault_Handler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:123    .text.UsageFault_Handler:0000000000000000 UsageFault_Handler
+     /tmp/ccpg37Lw.s:140    .text.SVC_Handler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:147    .text.SVC_Handler:0000000000000000 SVC_Handler
+     /tmp/ccpg37Lw.s:160    .text.DebugMon_Handler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:167    .text.DebugMon_Handler:0000000000000000 DebugMon_Handler
+     /tmp/ccpg37Lw.s:180    .text.PendSV_Handler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:187    .text.PendSV_Handler:0000000000000000 PendSV_Handler
+     /tmp/ccpg37Lw.s:200    .text.SysTick_Handler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:207    .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccpg37Lw.s:227    .text.DMA2_Stream0_IRQHandler:0000000000000000 $t
+     /tmp/ccpg37Lw.s:234    .text.DMA2_Stream0_IRQHandler:0000000000000000 DMA2_Stream0_IRQHandler
+     /tmp/ccpg37Lw.s:254    .text.DMA2_Stream0_IRQHandler:000000000000000c $d
 
 UNDEFINED SYMBOLS
 HAL_IncTick
+HAL_DMA_IRQHandler
+hdma_adc1

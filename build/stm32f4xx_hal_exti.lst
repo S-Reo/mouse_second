@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccOM5bQu.s 			page 1
+ARM GAS  /tmp/ccX1TTwI.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -27,7 +27,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
   24              		.fpu fpv4-sp-d16
   26              	HAL_EXTI_SetConfigLine:
   27              	.LVL0:
-  28              	.LFB130:
+  28              	.LFB216:
   29              		.file 1 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c"
    1:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** /**
    2:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   ******************************************************************************
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
   27:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****     (+) Each Exti line can be configured within this driver.
   28:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
   29:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****     (+) Exti line can be configured in 3 different modes
-ARM GAS  /tmp/ccOM5bQu.s 			page 2
+ARM GAS  /tmp/ccX1TTwI.s 			page 2
 
 
   30:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****         (++) Interrupt
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
   84:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
   85:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** /* Includes ------------------------------------------------------------------*/
   86:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** #include "stm32f4xx_hal.h"
-ARM GAS  /tmp/ccOM5bQu.s 			page 3
+ARM GAS  /tmp/ccX1TTwI.s 			page 3
 
 
   87:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  141:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   */
  142:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** HAL_StatusTypeDef HAL_EXTI_SetConfigLine(EXTI_HandleTypeDef *hexti, EXTI_ConfigTypeDef *pExtiConfig
  143:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** {
-ARM GAS  /tmp/ccOM5bQu.s 			page 4
+ARM GAS  /tmp/ccX1TTwI.s 			page 4
 
 
   30              		.loc 1 143 1 view -0
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
   63              		.loc 1 163 3 is_stmt 1 view .LVU15
   64              		.loc 1 163 12 is_stmt 0 view .LVU16
   65 0012 0120     		movs	r0, #1
-ARM GAS  /tmp/ccOM5bQu.s 			page 5
+ARM GAS  /tmp/ccX1TTwI.s 			page 5
 
 
   66              	.LVL2:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
   98 0038 0443     		orrs	r4, r4, r0
   99 003a EC60     		str	r4, [r5, #12]
  100              	.L7:
-ARM GAS  /tmp/ccOM5bQu.s 			page 6
+ARM GAS  /tmp/ccX1TTwI.s 			page 6
 
 
  186:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****     }
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  217:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   /* Configure event mode : read current mode */
  218:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   /* Mask or set line */
  219:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   if ((pExtiConfig->Mode & EXTI_MODE_EVENT) != 0x00u)
-ARM GAS  /tmp/ccOM5bQu.s 			page 7
+ARM GAS  /tmp/ccX1TTwI.s 			page 7
 
 
  124              		.loc 1 219 3 is_stmt 1 view .LVU40
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  164 007a 154D     		ldr	r5, .L18
  165 007c EC68     		ldr	r4, [r5, #12]
  166 007e 24EA0004 		bic	r4, r4, r0
-ARM GAS  /tmp/ccOM5bQu.s 			page 8
+ARM GAS  /tmp/ccX1TTwI.s 			page 8
 
 
  167 0082 EC60     		str	r4, [r5, #12]
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  205              	.LVL12:
  206              	.L8:
  214:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   }
-ARM GAS  /tmp/ccOM5bQu.s 			page 9
+ARM GAS  /tmp/ccX1TTwI.s 			page 9
 
 
  207              		.loc 1 214 5 is_stmt 1 view .LVU68
@@ -533,12 +533,12 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  248 00d0 003C0140 		.word	1073822720
  249 00d4 00380140 		.word	1073821696
  250              		.cfi_endproc
- 251              	.LFE130:
+ 251              	.LFE216:
  253              		.section	.text.HAL_EXTI_GetConfigLine,"ax",%progbits
  254              		.align	1
  255              		.global	HAL_EXTI_GetConfigLine
  256              		.syntax unified
-ARM GAS  /tmp/ccOM5bQu.s 			page 10
+ARM GAS  /tmp/ccX1TTwI.s 			page 10
 
 
  257              		.thumb
@@ -546,7 +546,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  259              		.fpu fpv4-sp-d16
  261              	HAL_EXTI_GetConfigLine:
  262              	.LVL18:
- 263              	.LFB131:
+ 263              	.LFB217:
  230:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
  231:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** /**
  232:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   * @brief  Get configuration of a dedicated Exti line.
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  287 000a 0068     		ldr	r0, [r0]
  288              	.LVL19:
  289              		.loc 1 253 21 view .LVU89
-ARM GAS  /tmp/ccOM5bQu.s 			page 11
+ARM GAS  /tmp/ccX1TTwI.s 			page 11
 
 
  290 000c 0860     		str	r0, [r1]
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  322 002c 42F00202 		orr	r2, r2, #2
  323 0030 4A60     		str	r2, [r1, #4]
  324              	.L24:
-ARM GAS  /tmp/ccOM5bQu.s 			page 12
+ARM GAS  /tmp/ccX1TTwI.s 			page 12
 
 
  276:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   }
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  359              		.loc 1 295 28 view .LVU120
  360 0054 43F00203 		orr	r3, r3, #2
  361 0058 8B60     		str	r3, [r1, #8]
-ARM GAS  /tmp/ccOM5bQu.s 			page 13
+ARM GAS  /tmp/ccX1TTwI.s 			page 13
 
 
  362              	.L26:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  394 007a E343     		mvns	r3, r4
  395 007c 03F00303 		and	r3, r3, #3
  304:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****     }
-ARM GAS  /tmp/ccOM5bQu.s 			page 14
+ARM GAS  /tmp/ccX1TTwI.s 			page 14
 
 
  396              		.loc 1 304 68 view .LVU134
@@ -838,12 +838,12 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  442 009e 00BF     		.align	2
  443              	.L36:
  444 00a0 003C0140 		.word	1073822720
-ARM GAS  /tmp/ccOM5bQu.s 			page 15
+ARM GAS  /tmp/ccX1TTwI.s 			page 15
 
 
  445 00a4 00380140 		.word	1073821696
  446              		.cfi_endproc
- 447              	.LFE131:
+ 447              	.LFE217:
  449              		.section	.text.HAL_EXTI_ClearConfigLine,"ax",%progbits
  450              		.align	1
  451              		.global	HAL_EXTI_ClearConfigLine
@@ -853,7 +853,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  455              		.fpu fpv4-sp-d16
  457              	HAL_EXTI_ClearConfigLine:
  458              	.LVL33:
- 459              	.LFB132:
+ 459              	.LFB218:
  310:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
  311:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** /**
  312:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   * @brief  Clear whole configuration of a dedicated Exti line.
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  480              		.loc 1 329 3 is_stmt 1 view .LVU153
  330:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
  331:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   /* compute line mask */
-ARM GAS  /tmp/ccOM5bQu.s 			page 16
+ARM GAS  /tmp/ccX1TTwI.s 			page 16
 
 
  332:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   linepos = (hexti->Line & EXTI_PIN_MASK);
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  522              		.loc 1 344 16 view .LVU174
  523 0034 9A60     		str	r2, [r3, #8]
  345:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****     EXTI->FTSR = (EXTI->FTSR & ~maskline);
-ARM GAS  /tmp/ccOM5bQu.s 			page 17
+ARM GAS  /tmp/ccX1TTwI.s 			page 17
 
 
  524              		.loc 1 345 5 is_stmt 1 view .LVU175
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  559 0056 06F00306 		and	r6, r6, #3
  560              	.LVL42:
  353:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****       SYSCFG->EXTICR[linepos >> 2u] = regval;
-ARM GAS  /tmp/ccOM5bQu.s 			page 18
+ARM GAS  /tmp/ccX1TTwI.s 			page 18
 
 
  561              		.loc 1 353 69 view .LVU191
@@ -1078,13 +1078,13 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  608              	.L49:
  609              		.align	2
  610              	.L48:
-ARM GAS  /tmp/ccOM5bQu.s 			page 19
+ARM GAS  /tmp/ccX1TTwI.s 			page 19
 
 
  611 0078 003C0140 		.word	1073822720
  612 007c 00380140 		.word	1073821696
  613              		.cfi_endproc
- 614              	.LFE132:
+ 614              	.LFE218:
  616              		.section	.text.HAL_EXTI_RegisterCallback,"ax",%progbits
  617              		.align	1
  618              		.global	HAL_EXTI_RegisterCallback
@@ -1094,7 +1094,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  622              		.fpu fpv4-sp-d16
  624              	HAL_EXTI_RegisterCallback:
  625              	.LVL49:
- 626              	.LFB133:
+ 626              	.LFB219:
  360:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
  361:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** /**
  362:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   * @brief  Register callback for a dedicated Exti line.
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  380:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****       status = HAL_ERROR;
  647              		.loc 1 380 14 is_stmt 0 view .LVU210
  648 000a 0120     		movs	r0, #1
-ARM GAS  /tmp/ccOM5bQu.s 			page 20
+ARM GAS  /tmp/ccX1TTwI.s 			page 20
 
 
  649              	.LVL52:
@@ -1151,7 +1151,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  651              		.loc 1 385 1 is_stmt 0 view .LVU212
  652 000c 7047     		bx	lr
  653              		.cfi_endproc
- 654              	.LFE133:
+ 654              	.LFE219:
  656              		.section	.text.HAL_EXTI_GetHandle,"ax",%progbits
  657              		.align	1
  658              		.global	HAL_EXTI_GetHandle
@@ -1161,7 +1161,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  662              		.fpu fpv4-sp-d16
  664              	HAL_EXTI_GetHandle:
  665              	.LVL53:
- 666              	.LFB134:
+ 666              	.LFB220:
  386:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
  387:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** /**
  388:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   * @brief  Store line number as handle private field.
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  678 0002 0160     		str	r1, [r0]
  408:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
  409:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****     return HAL_OK;
-ARM GAS  /tmp/ccOM5bQu.s 			page 21
+ARM GAS  /tmp/ccX1TTwI.s 			page 21
 
 
  679              		.loc 1 409 5 is_stmt 1 view .LVU219
@@ -1218,7 +1218,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  690              		.loc 1 411 1 view .LVU223
  691 000a 7047     		bx	lr
  692              		.cfi_endproc
- 693              	.LFE134:
+ 693              	.LFE220:
  695              		.section	.text.HAL_EXTI_IRQHandler,"ax",%progbits
  696              		.align	1
  697              		.global	HAL_EXTI_IRQHandler
@@ -1228,7 +1228,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  701              		.fpu fpv4-sp-d16
  703              	HAL_EXTI_IRQHandler:
  704              	.LVL57:
- 705              	.LFB135:
+ 705              	.LFB221:
  412:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
  413:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** /**
  414:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   * @}
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  708              		@ args = 0, pretend = 0, frame = 0
  709              		@ frame_needed = 0, uses_anonymous_args = 0
  710              		.loc 1 435 1 is_stmt 0 view .LVU225
-ARM GAS  /tmp/ccOM5bQu.s 			page 22
+ARM GAS  /tmp/ccX1TTwI.s 			page 22
 
 
  711 0000 08B5     		push	{r3, lr}
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  748              		.loc 1 452 7 is_stmt 1 view .LVU242
  749 001c 9847     		blx	r3
  750              	.LVL62:
-ARM GAS  /tmp/ccOM5bQu.s 			page 23
+ARM GAS  /tmp/ccX1TTwI.s 			page 23
 
 
  751              	.L56:
@@ -1332,7 +1332,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  756              	.L59:
  757 0020 003C0140 		.word	1073822720
  758              		.cfi_endproc
- 759              	.LFE135:
+ 759              	.LFE221:
  761              		.section	.text.HAL_EXTI_GetPending,"ax",%progbits
  762              		.align	1
  763              		.global	HAL_EXTI_GetPending
@@ -1342,7 +1342,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  767              		.fpu fpv4-sp-d16
  769              	HAL_EXTI_GetPending:
  770              	.LVL63:
- 771              	.LFB136:
+ 771              	.LFB222:
  456:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
  457:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** /**
  458:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   * @brief  Get interrupt pending bit of a dedicated line.
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  477:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   /* Compute line mask */
  478:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   linepos = (hexti->Line & EXTI_PIN_MASK);
  783              		.loc 1 478 3 view .LVU251
-ARM GAS  /tmp/ccOM5bQu.s 			page 24
+ARM GAS  /tmp/ccX1TTwI.s 			page 24
 
 
  784              		.loc 1 478 19 is_stmt 0 view .LVU252
@@ -1419,7 +1419,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  813              	.L62:
  814 0018 003C0140 		.word	1073822720
  815              		.cfi_endproc
- 816              	.LFE136:
+ 816              	.LFE222:
  818              		.section	.text.HAL_EXTI_ClearPending,"ax",%progbits
  819              		.align	1
  820              		.global	HAL_EXTI_ClearPending
@@ -1429,7 +1429,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  824              		.fpu fpv4-sp-d16
  826              	HAL_EXTI_ClearPending:
  827              	.LVL70:
- 828              	.LFB137:
+ 828              	.LFB223:
  485:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
  486:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** /**
  487:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   * @brief  Clear interrupt pending bit of a dedicated line.
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  490:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   *         This parameter can be one of the following values:
  491:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   *           @arg @ref EXTI_TRIGGER_RISING_FALLING
  492:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   *         This parameter is kept for compatibility with other series.
-ARM GAS  /tmp/ccOM5bQu.s 			page 25
+ARM GAS  /tmp/ccX1TTwI.s 			page 25
 
 
  493:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c ****   * @retval None.
@@ -1487,7 +1487,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  855              	.L65:
  856 0010 003C0140 		.word	1073822720
  857              		.cfi_endproc
- 858              	.LFE137:
+ 858              	.LFE223:
  860              		.section	.text.HAL_EXTI_GenerateSWI,"ax",%progbits
  861              		.align	1
  862              		.global	HAL_EXTI_GenerateSWI
@@ -1497,8 +1497,8 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  866              		.fpu fpv4-sp-d16
  868              	HAL_EXTI_GenerateSWI:
  869              	.LVL72:
- 870              	.LFB138:
-ARM GAS  /tmp/ccOM5bQu.s 			page 26
+ 870              	.LFB224:
+ARM GAS  /tmp/ccX1TTwI.s 			page 26
 
 
  510:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c **** 
@@ -1549,7 +1549,7 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  896              	.L68:
  897 0010 003C0140 		.word	1073822720
  898              		.cfi_endproc
- 899              	.LFE138:
+ 899              	.LFE224:
  901              		.text
  902              	.Letext0:
  903              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
@@ -1558,39 +1558,39 @@ ARM GAS  /tmp/ccOM5bQu.s 			page 1
  906              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f412cx.h"
  907              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
  908              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h"
-ARM GAS  /tmp/ccOM5bQu.s 			page 27
+ARM GAS  /tmp/ccX1TTwI.s 			page 27
 
 
  909              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/ccOM5bQu.s 			page 28
+ARM GAS  /tmp/ccX1TTwI.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_hal_exti.c
-     /tmp/ccOM5bQu.s:18     .text.HAL_EXTI_SetConfigLine:0000000000000000 $t
-     /tmp/ccOM5bQu.s:26     .text.HAL_EXTI_SetConfigLine:0000000000000000 HAL_EXTI_SetConfigLine
-     /tmp/ccOM5bQu.s:248    .text.HAL_EXTI_SetConfigLine:00000000000000d0 $d
-     /tmp/ccOM5bQu.s:254    .text.HAL_EXTI_GetConfigLine:0000000000000000 $t
-     /tmp/ccOM5bQu.s:261    .text.HAL_EXTI_GetConfigLine:0000000000000000 HAL_EXTI_GetConfigLine
-     /tmp/ccOM5bQu.s:444    .text.HAL_EXTI_GetConfigLine:00000000000000a0 $d
-     /tmp/ccOM5bQu.s:450    .text.HAL_EXTI_ClearConfigLine:0000000000000000 $t
-     /tmp/ccOM5bQu.s:457    .text.HAL_EXTI_ClearConfigLine:0000000000000000 HAL_EXTI_ClearConfigLine
-     /tmp/ccOM5bQu.s:611    .text.HAL_EXTI_ClearConfigLine:0000000000000078 $d
-     /tmp/ccOM5bQu.s:617    .text.HAL_EXTI_RegisterCallback:0000000000000000 $t
-     /tmp/ccOM5bQu.s:624    .text.HAL_EXTI_RegisterCallback:0000000000000000 HAL_EXTI_RegisterCallback
-     /tmp/ccOM5bQu.s:657    .text.HAL_EXTI_GetHandle:0000000000000000 $t
-     /tmp/ccOM5bQu.s:664    .text.HAL_EXTI_GetHandle:0000000000000000 HAL_EXTI_GetHandle
-     /tmp/ccOM5bQu.s:696    .text.HAL_EXTI_IRQHandler:0000000000000000 $t
-     /tmp/ccOM5bQu.s:703    .text.HAL_EXTI_IRQHandler:0000000000000000 HAL_EXTI_IRQHandler
-     /tmp/ccOM5bQu.s:757    .text.HAL_EXTI_IRQHandler:0000000000000020 $d
-     /tmp/ccOM5bQu.s:762    .text.HAL_EXTI_GetPending:0000000000000000 $t
-     /tmp/ccOM5bQu.s:769    .text.HAL_EXTI_GetPending:0000000000000000 HAL_EXTI_GetPending
-     /tmp/ccOM5bQu.s:814    .text.HAL_EXTI_GetPending:0000000000000018 $d
-     /tmp/ccOM5bQu.s:819    .text.HAL_EXTI_ClearPending:0000000000000000 $t
-     /tmp/ccOM5bQu.s:826    .text.HAL_EXTI_ClearPending:0000000000000000 HAL_EXTI_ClearPending
-     /tmp/ccOM5bQu.s:856    .text.HAL_EXTI_ClearPending:0000000000000010 $d
-     /tmp/ccOM5bQu.s:861    .text.HAL_EXTI_GenerateSWI:0000000000000000 $t
-     /tmp/ccOM5bQu.s:868    .text.HAL_EXTI_GenerateSWI:0000000000000000 HAL_EXTI_GenerateSWI
-     /tmp/ccOM5bQu.s:897    .text.HAL_EXTI_GenerateSWI:0000000000000010 $d
+     /tmp/ccX1TTwI.s:18     .text.HAL_EXTI_SetConfigLine:0000000000000000 $t
+     /tmp/ccX1TTwI.s:26     .text.HAL_EXTI_SetConfigLine:0000000000000000 HAL_EXTI_SetConfigLine
+     /tmp/ccX1TTwI.s:248    .text.HAL_EXTI_SetConfigLine:00000000000000d0 $d
+     /tmp/ccX1TTwI.s:254    .text.HAL_EXTI_GetConfigLine:0000000000000000 $t
+     /tmp/ccX1TTwI.s:261    .text.HAL_EXTI_GetConfigLine:0000000000000000 HAL_EXTI_GetConfigLine
+     /tmp/ccX1TTwI.s:444    .text.HAL_EXTI_GetConfigLine:00000000000000a0 $d
+     /tmp/ccX1TTwI.s:450    .text.HAL_EXTI_ClearConfigLine:0000000000000000 $t
+     /tmp/ccX1TTwI.s:457    .text.HAL_EXTI_ClearConfigLine:0000000000000000 HAL_EXTI_ClearConfigLine
+     /tmp/ccX1TTwI.s:611    .text.HAL_EXTI_ClearConfigLine:0000000000000078 $d
+     /tmp/ccX1TTwI.s:617    .text.HAL_EXTI_RegisterCallback:0000000000000000 $t
+     /tmp/ccX1TTwI.s:624    .text.HAL_EXTI_RegisterCallback:0000000000000000 HAL_EXTI_RegisterCallback
+     /tmp/ccX1TTwI.s:657    .text.HAL_EXTI_GetHandle:0000000000000000 $t
+     /tmp/ccX1TTwI.s:664    .text.HAL_EXTI_GetHandle:0000000000000000 HAL_EXTI_GetHandle
+     /tmp/ccX1TTwI.s:696    .text.HAL_EXTI_IRQHandler:0000000000000000 $t
+     /tmp/ccX1TTwI.s:703    .text.HAL_EXTI_IRQHandler:0000000000000000 HAL_EXTI_IRQHandler
+     /tmp/ccX1TTwI.s:757    .text.HAL_EXTI_IRQHandler:0000000000000020 $d
+     /tmp/ccX1TTwI.s:762    .text.HAL_EXTI_GetPending:0000000000000000 $t
+     /tmp/ccX1TTwI.s:769    .text.HAL_EXTI_GetPending:0000000000000000 HAL_EXTI_GetPending
+     /tmp/ccX1TTwI.s:814    .text.HAL_EXTI_GetPending:0000000000000018 $d
+     /tmp/ccX1TTwI.s:819    .text.HAL_EXTI_ClearPending:0000000000000000 $t
+     /tmp/ccX1TTwI.s:826    .text.HAL_EXTI_ClearPending:0000000000000000 HAL_EXTI_ClearPending
+     /tmp/ccX1TTwI.s:856    .text.HAL_EXTI_ClearPending:0000000000000010 $d
+     /tmp/ccX1TTwI.s:861    .text.HAL_EXTI_GenerateSWI:0000000000000000 $t
+     /tmp/ccX1TTwI.s:868    .text.HAL_EXTI_GenerateSWI:0000000000000000 HAL_EXTI_GenerateSWI
+     /tmp/ccX1TTwI.s:897    .text.HAL_EXTI_GenerateSWI:0000000000000010 $d
 
 NO UNDEFINED SYMBOLS

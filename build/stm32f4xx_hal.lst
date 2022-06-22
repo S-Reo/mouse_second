@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cckTfPLa.s 			page 1
+ARM GAS  /tmp/ccyhPQAv.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -26,7 +26,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
   23              		.thumb_func
   24              		.fpu fpv4-sp-d16
   26              	HAL_MspInit:
-  27              	.LFB132:
+  27              	.LFB218:
   28              		.file 1 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c"
    1:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
    2:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   ******************************************************************************
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
   28:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****          (+) Common HAL APIs
   29:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****          (+) Services HAL APIs
   30:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
-ARM GAS  /tmp/cckTfPLa.s 			page 2
+ARM GAS  /tmp/ccyhPQAv.s 			page 2
 
 
   31:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   @endverbatim
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
   85:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
   86:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @}
   87:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   */
-ARM GAS  /tmp/cckTfPLa.s 			page 3
+ARM GAS  /tmp/ccyhPQAv.s 			page 3
 
 
   88:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  142:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   *         instruction to be executed in the main program (before to call any other
  143:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   *         HAL function), it performs the following:
  144:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   *           Configure the Flash prefetch, instruction and Data caches.
-ARM GAS  /tmp/cckTfPLa.s 			page 4
+ARM GAS  /tmp/ccyhPQAv.s 			page 4
 
 
  145:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   *           Configures the SysTick to generate an interrupt each 1 millisecond,
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  199:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   __HAL_RCC_AHB1_FORCE_RESET();
  200:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   __HAL_RCC_AHB1_RELEASE_RESET();
  201:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
-ARM GAS  /tmp/cckTfPLa.s 			page 5
+ARM GAS  /tmp/ccyhPQAv.s 			page 5
 
 
  202:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   __HAL_RCC_AHB2_FORCE_RESET();
@@ -272,7 +272,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
   34              		.loc 1 224 1 view .LVU1
   35 0000 7047     		bx	lr
   36              		.cfi_endproc
-  37              	.LFE132:
+  37              	.LFE218:
   39              		.section	.text.HAL_MspDeInit,"ax",%progbits
   40              		.align	1
   41              		.weak	HAL_MspDeInit
@@ -281,7 +281,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
   44              		.thumb_func
   45              		.fpu fpv4-sp-d16
   47              	HAL_MspDeInit:
-  48              	.LFB133:
+  48              	.LFB219:
  225:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  226:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  227:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  DeInitializes the MSP.
@@ -298,13 +298,13 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  233:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****             the HAL_MspDeInit could be implemented in the user file
  234:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****    */ 
  235:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** }
-ARM GAS  /tmp/cckTfPLa.s 			page 6
+ARM GAS  /tmp/ccyhPQAv.s 			page 6
 
 
   54              		.loc 1 235 1 view .LVU3
   55 0000 7047     		bx	lr
   56              		.cfi_endproc
-  57              	.LFE133:
+  57              	.LFE219:
   59              		.section	.text.HAL_DeInit,"ax",%progbits
   60              		.align	1
   61              		.global	HAL_DeInit
@@ -313,7 +313,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
   64              		.thumb_func
   65              		.fpu fpv4-sp-d16
   67              	HAL_DeInit:
-  68              	.LFB131:
+  68              	.LFB217:
  191:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   /* Reset of all peripherals */
   69              		.loc 1 191 1 view -0
   70              		.cfi_startproc
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  209:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****     
   99              		.loc 1 209 3 view .LVU15
  100 001a FFF7FEFF 		bl	HAL_MspDeInit
-ARM GAS  /tmp/cckTfPLa.s 			page 7
+ARM GAS  /tmp/ccyhPQAv.s 			page 7
 
 
  101              	.LVL0:
@@ -373,7 +373,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  108              	.L5:
  109 0024 00380240 		.word	1073887232
  110              		.cfi_endproc
- 111              	.LFE131:
+ 111              	.LFE217:
  113              		.section	.text.HAL_InitTick,"ax",%progbits
  114              		.align	1
  115              		.weak	HAL_InitTick
@@ -383,7 +383,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  119              		.fpu fpv4-sp-d16
  121              	HAL_InitTick:
  122              	.LVL1:
- 123              	.LFB134:
+ 123              	.LFB220:
  236:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  237:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  238:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief This function configures the source of the time base.
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  256:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   if (HAL_SYSTICK_Config(SystemCoreClock / (1000U / uwTickFreq)) > 0U)
  135              		.loc 1 256 3 is_stmt 1 view .LVU20
  136              		.loc 1 256 51 is_stmt 0 view .LVU21
-ARM GAS  /tmp/cckTfPLa.s 			page 8
+ARM GAS  /tmp/ccyhPQAv.s 			page 8
 
 
  137 0004 0E4B     		ldr	r3, .L13
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  171 0036 0020     		movs	r0, #0
  172 0038 00E0     		b	.L8
  173              	.L9:
-ARM GAS  /tmp/cckTfPLa.s 			page 9
+ARM GAS  /tmp/ccyhPQAv.s 			page 9
 
 
  258:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   }
@@ -497,7 +497,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  185 0044 00000000 		.word	SystemCoreClock
  186 0048 00000000 		.word	.LANCHOR1
  187              		.cfi_endproc
- 188              	.LFE134:
+ 188              	.LFE220:
  190              		.section	.text.HAL_Init,"ax",%progbits
  191              		.align	1
  192              		.global	HAL_Init
@@ -506,7 +506,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  195              		.thumb_func
  196              		.fpu fpv4-sp-d16
  198              	HAL_Init:
- 199              	.LFB130:
+ 199              	.LFB216:
  158:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   /* Configure Flash prefetch, Instruction cache, Data cache */ 
  200              		.loc 1 158 1 is_stmt 1 view -0
  201              		.cfi_startproc
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  223 001c 0320     		movs	r0, #3
  224 001e FFF7FEFF 		bl	HAL_NVIC_SetPriorityGrouping
  225              	.LVL6:
-ARM GAS  /tmp/cckTfPLa.s 			page 10
+ARM GAS  /tmp/ccyhPQAv.s 			page 10
 
 
  176:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
@@ -561,7 +561,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  239              	.L17:
  240 0030 003C0240 		.word	1073888256
  241              		.cfi_endproc
- 242              	.LFE130:
+ 242              	.LFE216:
  244              		.section	.text.HAL_IncTick,"ax",%progbits
  245              		.align	1
  246              		.weak	HAL_IncTick
@@ -570,7 +570,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  249              		.thumb_func
  250              		.fpu fpv4-sp-d16
  252              	HAL_IncTick:
- 253              	.LFB135:
+ 253              	.LFB221:
  275:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  276:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  277:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @}
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  299:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** @endverbatim
  300:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @{
  301:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   */
-ARM GAS  /tmp/cckTfPLa.s 			page 11
+ARM GAS  /tmp/ccyhPQAv.s 			page 11
 
 
  302:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
@@ -636,7 +636,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  272 0010 00000000 		.word	uwTick
  273 0014 00000000 		.word	.LANCHOR0
  274              		.cfi_endproc
- 275              	.LFE135:
+ 275              	.LFE221:
  277              		.section	.text.HAL_GetTick,"ax",%progbits
  278              		.align	1
  279              		.weak	HAL_GetTick
@@ -645,7 +645,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  282              		.thumb_func
  283              		.fpu fpv4-sp-d16
  285              	HAL_GetTick:
- 286              	.LFB136:
+ 286              	.LFB222:
  316:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  317:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  318:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief Provides a tick value in millisecond.
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  287              		.loc 1 324 1 is_stmt 1 view -0
  288              		.cfi_startproc
  289              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/cckTfPLa.s 			page 12
+ARM GAS  /tmp/ccyhPQAv.s 			page 12
 
 
  290              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -676,7 +676,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  300              	.L23:
  301 0008 00000000 		.word	uwTick
  302              		.cfi_endproc
- 303              	.LFE136:
+ 303              	.LFE222:
  305              		.section	.text.HAL_GetTickPrio,"ax",%progbits
  306              		.align	1
  307              		.global	HAL_GetTickPrio
@@ -685,7 +685,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  310              		.thumb_func
  311              		.fpu fpv4-sp-d16
  313              	HAL_GetTickPrio:
- 314              	.LFB137:
+ 314              	.LFB223:
  327:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  328:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  329:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief This function returns a tick priority.
@@ -710,7 +710,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  327              	.L26:
  328 0008 00000000 		.word	.LANCHOR1
  329              		.cfi_endproc
- 330              	.LFE137:
+ 330              	.LFE223:
  332              		.section	.text.HAL_SetTickFreq,"ax",%progbits
  333              		.align	1
  334              		.global	HAL_SetTickFreq
@@ -718,12 +718,12 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  336              		.thumb
  337              		.thumb_func
  338              		.fpu fpv4-sp-d16
-ARM GAS  /tmp/cckTfPLa.s 			page 13
+ARM GAS  /tmp/ccyhPQAv.s 			page 13
 
 
  340              	HAL_SetTickFreq:
  341              	.LVL9:
- 342              	.LFB138:
+ 342              	.LFB224:
  336:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  337:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  338:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief Set new tick Freq.
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  361:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****       /* Restore previous tick frequency */
  362:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****       uwTickFreq = prevTickFreq;
  363:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****     }
-ARM GAS  /tmp/cckTfPLa.s 			page 14
+ARM GAS  /tmp/ccyhPQAv.s 			page 14
 
 
  364:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   }
@@ -827,7 +827,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  397 0024 00000000 		.word	.LANCHOR0
  398 0028 00000000 		.word	.LANCHOR1
  399              		.cfi_endproc
- 400              	.LFE138:
+ 400              	.LFE224:
  402              		.section	.text.HAL_GetTickFreq,"ax",%progbits
  403              		.align	1
  404              		.global	HAL_GetTickFreq
@@ -836,9 +836,9 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  407              		.thumb_func
  408              		.fpu fpv4-sp-d16
  410              	HAL_GetTickFreq:
- 411              	.LFB139:
+ 411              	.LFB225:
  368:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
-ARM GAS  /tmp/cckTfPLa.s 			page 15
+ARM GAS  /tmp/ccyhPQAv.s 			page 15
 
 
  369:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
@@ -864,7 +864,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  424              	.L36:
  425 0008 00000000 		.word	.LANCHOR0
  426              		.cfi_endproc
- 427              	.LFE139:
+ 427              	.LFE225:
  429              		.section	.text.HAL_Delay,"ax",%progbits
  430              		.align	1
  431              		.weak	HAL_Delay
@@ -874,7 +874,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  435              		.fpu fpv4-sp-d16
  437              	HAL_Delay:
  438              	.LVL15:
- 439              	.LFB140:
+ 439              	.LFB226:
  377:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  378:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  379:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief This function provides minimum delay (in milliseconds) based 
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  446              	.LCFI4:
  447              		.cfi_def_cfa_offset 16
  448              		.cfi_offset 3, -16
-ARM GAS  /tmp/cckTfPLa.s 			page 16
+ARM GAS  /tmp/ccyhPQAv.s 			page 16
 
 
  449              		.cfi_offset 4, -12
@@ -958,13 +958,13 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  486              	.L43:
  487              		.loc 1 403 1 view .LVU97
  488 0022 00BF     		.align	2
-ARM GAS  /tmp/cckTfPLa.s 			page 17
+ARM GAS  /tmp/ccyhPQAv.s 			page 17
 
 
  489              	.L42:
  490 0024 00000000 		.word	.LANCHOR0
  491              		.cfi_endproc
- 492              	.LFE140:
+ 492              	.LFE226:
  494              		.section	.text.HAL_SuspendTick,"ax",%progbits
  495              		.align	1
  496              		.weak	HAL_SuspendTick
@@ -973,7 +973,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  499              		.thumb_func
  500              		.fpu fpv4-sp-d16
  502              	HAL_SuspendTick:
- 503              	.LFB141:
+ 503              	.LFB227:
  404:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  405:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  406:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief Suspend Tick increment.
@@ -1008,7 +1008,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  519              	.L45:
  520 000c 10E000E0 		.word	-536813552
  521              		.cfi_endproc
- 522              	.LFE141:
+ 522              	.LFE227:
  524              		.section	.text.HAL_ResumeTick,"ax",%progbits
  525              		.align	1
  526              		.weak	HAL_ResumeTick
@@ -1017,8 +1017,8 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  529              		.thumb_func
  530              		.fpu fpv4-sp-d16
  532              	HAL_ResumeTick:
- 533              	.LFB142:
-ARM GAS  /tmp/cckTfPLa.s 			page 18
+ 533              	.LFB228:
+ARM GAS  /tmp/ccyhPQAv.s 			page 18
 
 
  420:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
@@ -1055,7 +1055,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  549              	.L48:
  550 000c 10E000E0 		.word	-536813552
  551              		.cfi_endproc
- 552              	.LFE142:
+ 552              	.LFE228:
  554              		.section	.text.HAL_GetHalVersion,"ax",%progbits
  555              		.align	1
  556              		.global	HAL_GetHalVersion
@@ -1064,7 +1064,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  559              		.thumb_func
  560              		.fpu fpv4-sp-d16
  562              	HAL_GetHalVersion:
- 563              	.LFB143:
+ 563              	.LFB229:
  436:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  437:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  438:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Returns the HAL revision
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  567              		@ frame_needed = 0, uses_anonymous_args = 0
  568              		@ link register save eliminated.
  443:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   return __STM32F4xx_HAL_VERSION;
-ARM GAS  /tmp/cckTfPLa.s 			page 19
+ARM GAS  /tmp/ccyhPQAv.s 			page 19
 
 
  569              		.loc 1 443 3 view .LVU107
@@ -1087,7 +1087,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  571 0000 4FF08470 		mov	r0, #17301504
  572 0004 7047     		bx	lr
  573              		.cfi_endproc
- 574              	.LFE143:
+ 574              	.LFE229:
  576              		.section	.text.HAL_GetREVID,"ax",%progbits
  577              		.align	1
  578              		.global	HAL_GetREVID
@@ -1096,7 +1096,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  581              		.thumb_func
  582              		.fpu fpv4-sp-d16
  584              	HAL_GetREVID:
- 585              	.LFB144:
+ 585              	.LFB230:
  445:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  446:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  447:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Returns the device revision identifier.
@@ -1123,7 +1123,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  600              	.L52:
  601 0008 002004E0 		.word	-536600576
  602              		.cfi_endproc
- 603              	.LFE144:
+ 603              	.LFE230:
  605              		.section	.text.HAL_GetDEVID,"ax",%progbits
  606              		.align	1
  607              		.global	HAL_GetDEVID
@@ -1132,13 +1132,13 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  610              		.thumb_func
  611              		.fpu fpv4-sp-d16
  613              	HAL_GetDEVID:
- 614              	.LFB145:
+ 614              	.LFB231:
  454:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  455:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  456:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Returns the device identifier.
  457:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @retval Device identifier
  458:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   */
-ARM GAS  /tmp/cckTfPLa.s 			page 20
+ARM GAS  /tmp/ccyhPQAv.s 			page 20
 
 
  459:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** uint32_t HAL_GetDEVID(void)
@@ -1162,7 +1162,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  629              	.L55:
  630 000c 002004E0 		.word	-536600576
  631              		.cfi_endproc
- 632              	.LFE145:
+ 632              	.LFE231:
  634              		.section	.text.HAL_DBGMCU_EnableDBGSleepMode,"ax",%progbits
  635              		.align	1
  636              		.global	HAL_DBGMCU_EnableDBGSleepMode
@@ -1171,7 +1171,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  639              		.thumb_func
  640              		.fpu fpv4-sp-d16
  642              	HAL_DBGMCU_EnableDBGSleepMode:
- 643              	.LFB146:
+ 643              	.LFB232:
  463:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  464:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  465:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Enable the Debug Module during SLEEP mode
@@ -1198,10 +1198,10 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  658              	.L58:
  659 000c 002004E0 		.word	-536600576
  660              		.cfi_endproc
-ARM GAS  /tmp/cckTfPLa.s 			page 21
+ARM GAS  /tmp/ccyhPQAv.s 			page 21
 
 
- 661              	.LFE146:
+ 661              	.LFE232:
  663              		.section	.text.HAL_DBGMCU_DisableDBGSleepMode,"ax",%progbits
  664              		.align	1
  665              		.global	HAL_DBGMCU_DisableDBGSleepMode
@@ -1210,7 +1210,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  668              		.thumb_func
  669              		.fpu fpv4-sp-d16
  671              	HAL_DBGMCU_DisableDBGSleepMode:
- 672              	.LFB147:
+ 672              	.LFB233:
  472:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  473:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  474:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Disable the Debug Module during SLEEP mode
@@ -1237,7 +1237,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  687              	.L61:
  688 000c 002004E0 		.word	-536600576
  689              		.cfi_endproc
- 690              	.LFE147:
+ 690              	.LFE233:
  692              		.section	.text.HAL_DBGMCU_EnableDBGStopMode,"ax",%progbits
  693              		.align	1
  694              		.global	HAL_DBGMCU_EnableDBGStopMode
@@ -1246,7 +1246,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  697              		.thumb_func
  698              		.fpu fpv4-sp-d16
  700              	HAL_DBGMCU_EnableDBGStopMode:
- 701              	.LFB148:
+ 701              	.LFB234:
  481:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  482:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  483:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Enable the Debug Module during STOP mode
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  703              		.cfi_startproc
  704              		@ args = 0, pretend = 0, frame = 0
  705              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/cckTfPLa.s 			page 22
+ARM GAS  /tmp/ccyhPQAv.s 			page 22
 
 
  706              		@ link register save eliminated.
@@ -1276,7 +1276,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  716              	.L64:
  717 000c 002004E0 		.word	-536600576
  718              		.cfi_endproc
- 719              	.LFE148:
+ 719              	.LFE234:
  721              		.section	.text.HAL_DBGMCU_DisableDBGStopMode,"ax",%progbits
  722              		.align	1
  723              		.global	HAL_DBGMCU_DisableDBGStopMode
@@ -1285,7 +1285,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  726              		.thumb_func
  727              		.fpu fpv4-sp-d16
  729              	HAL_DBGMCU_DisableDBGStopMode:
- 730              	.LFB149:
+ 730              	.LFB235:
  490:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  491:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  492:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Disable the Debug Module during STOP mode
@@ -1312,19 +1312,19 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  745              	.L67:
  746 000c 002004E0 		.word	-536600576
  747              		.cfi_endproc
- 748              	.LFE149:
+ 748              	.LFE235:
  750              		.section	.text.HAL_DBGMCU_EnableDBGStandbyMode,"ax",%progbits
  751              		.align	1
  752              		.global	HAL_DBGMCU_EnableDBGStandbyMode
  753              		.syntax unified
  754              		.thumb
-ARM GAS  /tmp/cckTfPLa.s 			page 23
+ARM GAS  /tmp/ccyhPQAv.s 			page 23
 
 
  755              		.thumb_func
  756              		.fpu fpv4-sp-d16
  758              	HAL_DBGMCU_EnableDBGStandbyMode:
- 759              	.LFB150:
+ 759              	.LFB236:
  499:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  500:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  501:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Enable the Debug Module during STANDBY mode
@@ -1351,7 +1351,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  774              	.L70:
  775 000c 002004E0 		.word	-536600576
  776              		.cfi_endproc
- 777              	.LFE150:
+ 777              	.LFE236:
  779              		.section	.text.HAL_DBGMCU_DisableDBGStandbyMode,"ax",%progbits
  780              		.align	1
  781              		.global	HAL_DBGMCU_DisableDBGStandbyMode
@@ -1360,7 +1360,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  784              		.thumb_func
  785              		.fpu fpv4-sp-d16
  787              	HAL_DBGMCU_DisableDBGStandbyMode:
- 788              	.LFB151:
+ 788              	.LFB237:
  508:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  509:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  510:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Disable the Debug Module during STANDBY mode
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  795 0000 024A     		ldr	r2, .L73
  796 0002 5368     		ldr	r3, [r2, #4]
  797 0004 23F00403 		bic	r3, r3, #4
-ARM GAS  /tmp/cckTfPLa.s 			page 24
+ARM GAS  /tmp/ccyhPQAv.s 			page 24
 
 
  798 0008 5360     		str	r3, [r2, #4]
@@ -1390,7 +1390,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  803              	.L73:
  804 000c 002004E0 		.word	-536600576
  805              		.cfi_endproc
- 806              	.LFE151:
+ 806              	.LFE237:
  808              		.section	.text.HAL_EnableCompensationCell,"ax",%progbits
  809              		.align	1
  810              		.global	HAL_EnableCompensationCell
@@ -1399,7 +1399,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  813              		.thumb_func
  814              		.fpu fpv4-sp-d16
  816              	HAL_EnableCompensationCell:
- 817              	.LFB152:
+ 817              	.LFB238:
  517:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  518:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  519:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Enables the I/O Compensation Cell.
@@ -1428,7 +1428,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  832              	.L76:
  833 0008 00042742 		.word	1109853184
  834              		.cfi_endproc
- 835              	.LFE152:
+ 835              	.LFE238:
  837              		.section	.text.HAL_DisableCompensationCell,"ax",%progbits
  838              		.align	1
  839              		.global	HAL_DisableCompensationCell
@@ -1437,8 +1437,8 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  842              		.thumb_func
  843              		.fpu fpv4-sp-d16
  845              	HAL_DisableCompensationCell:
- 846              	.LFB153:
-ARM GAS  /tmp/cckTfPLa.s 			page 25
+ 846              	.LFB239:
+ARM GAS  /tmp/ccyhPQAv.s 			page 25
 
 
  528:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
@@ -1469,7 +1469,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  861              	.L79:
  862 0008 00042742 		.word	1109853184
  863              		.cfi_endproc
- 864              	.LFE153:
+ 864              	.LFE239:
  866              		.section	.text.HAL_GetUIDw0,"ax",%progbits
  867              		.align	1
  868              		.global	HAL_GetUIDw0
@@ -1478,7 +1478,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  871              		.thumb_func
  872              		.fpu fpv4-sp-d16
  874              	HAL_GetUIDw0:
- 875              	.LFB154:
+ 875              	.LFB240:
  539:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  540:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  541:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Returns first word of the unique device identifier (UID based on 96 bits)
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  883 0000 014B     		ldr	r3, .L82
  884 0002 1868     		ldr	r0, [r3]
  885 0004 7047     		bx	lr
-ARM GAS  /tmp/cckTfPLa.s 			page 26
+ARM GAS  /tmp/ccyhPQAv.s 			page 26
 
 
  886              	.L83:
@@ -1506,7 +1506,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  888              	.L82:
  889 0008 107AFF1F 		.word	536836624
  890              		.cfi_endproc
- 891              	.LFE154:
+ 891              	.LFE240:
  893              		.section	.text.HAL_GetUIDw1,"ax",%progbits
  894              		.align	1
  895              		.global	HAL_GetUIDw1
@@ -1515,7 +1515,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  898              		.thumb_func
  899              		.fpu fpv4-sp-d16
  901              	HAL_GetUIDw1:
- 902              	.LFB155:
+ 902              	.LFB241:
  548:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  549:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  550:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Returns second word of the unique device identifier (UID based on 96 bits)
@@ -1540,7 +1540,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  915              	.L85:
  916 0008 147AFF1F 		.word	536836628
  917              		.cfi_endproc
- 918              	.LFE155:
+ 918              	.LFE241:
  920              		.section	.text.HAL_GetUIDw2,"ax",%progbits
  921              		.align	1
  922              		.global	HAL_GetUIDw2
@@ -1549,7 +1549,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  925              		.thumb_func
  926              		.fpu fpv4-sp-d16
  928              	HAL_GetUIDw2:
- 929              	.LFB156:
+ 929              	.LFB242:
  557:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** 
  558:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** /**
  559:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c ****   * @brief  Returns third word of the unique device identifier (UID based on 96 bits)
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  562:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** uint32_t HAL_GetUIDw2(void)
  563:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c **** {
  930              		.loc 1 563 1 is_stmt 1 view -0
-ARM GAS  /tmp/cckTfPLa.s 			page 27
+ARM GAS  /tmp/ccyhPQAv.s 			page 27
 
 
  931              		.cfi_startproc
@@ -1577,7 +1577,7 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  942              	.L88:
  943 0008 187AFF1F 		.word	536836632
  944              		.cfi_endproc
- 945              	.LFE156:
+ 945              	.LFE242:
  947              		.global	uwTickFreq
  948              		.global	uwTickPrio
  949              		.comm	uwTick,4,4
@@ -1600,96 +1600,96 @@ ARM GAS  /tmp/cckTfPLa.s 			page 1
  970              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
  971              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
  972              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
-ARM GAS  /tmp/cckTfPLa.s 			page 28
+ARM GAS  /tmp/ccyhPQAv.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_hal.c
-     /tmp/cckTfPLa.s:18     .text.HAL_MspInit:0000000000000000 $t
-     /tmp/cckTfPLa.s:26     .text.HAL_MspInit:0000000000000000 HAL_MspInit
-     /tmp/cckTfPLa.s:40     .text.HAL_MspDeInit:0000000000000000 $t
-     /tmp/cckTfPLa.s:47     .text.HAL_MspDeInit:0000000000000000 HAL_MspDeInit
-     /tmp/cckTfPLa.s:60     .text.HAL_DeInit:0000000000000000 $t
-     /tmp/cckTfPLa.s:67     .text.HAL_DeInit:0000000000000000 HAL_DeInit
-     /tmp/cckTfPLa.s:109    .text.HAL_DeInit:0000000000000024 $d
-     /tmp/cckTfPLa.s:114    .text.HAL_InitTick:0000000000000000 $t
-     /tmp/cckTfPLa.s:121    .text.HAL_InitTick:0000000000000000 HAL_InitTick
-     /tmp/cckTfPLa.s:184    .text.HAL_InitTick:0000000000000040 $d
-     /tmp/cckTfPLa.s:191    .text.HAL_Init:0000000000000000 $t
-     /tmp/cckTfPLa.s:198    .text.HAL_Init:0000000000000000 HAL_Init
-     /tmp/cckTfPLa.s:240    .text.HAL_Init:0000000000000030 $d
-     /tmp/cckTfPLa.s:245    .text.HAL_IncTick:0000000000000000 $t
-     /tmp/cckTfPLa.s:252    .text.HAL_IncTick:0000000000000000 HAL_IncTick
-     /tmp/cckTfPLa.s:272    .text.HAL_IncTick:0000000000000010 $d
+     /tmp/ccyhPQAv.s:18     .text.HAL_MspInit:0000000000000000 $t
+     /tmp/ccyhPQAv.s:26     .text.HAL_MspInit:0000000000000000 HAL_MspInit
+     /tmp/ccyhPQAv.s:40     .text.HAL_MspDeInit:0000000000000000 $t
+     /tmp/ccyhPQAv.s:47     .text.HAL_MspDeInit:0000000000000000 HAL_MspDeInit
+     /tmp/ccyhPQAv.s:60     .text.HAL_DeInit:0000000000000000 $t
+     /tmp/ccyhPQAv.s:67     .text.HAL_DeInit:0000000000000000 HAL_DeInit
+     /tmp/ccyhPQAv.s:109    .text.HAL_DeInit:0000000000000024 $d
+     /tmp/ccyhPQAv.s:114    .text.HAL_InitTick:0000000000000000 $t
+     /tmp/ccyhPQAv.s:121    .text.HAL_InitTick:0000000000000000 HAL_InitTick
+     /tmp/ccyhPQAv.s:184    .text.HAL_InitTick:0000000000000040 $d
+     /tmp/ccyhPQAv.s:191    .text.HAL_Init:0000000000000000 $t
+     /tmp/ccyhPQAv.s:198    .text.HAL_Init:0000000000000000 HAL_Init
+     /tmp/ccyhPQAv.s:240    .text.HAL_Init:0000000000000030 $d
+     /tmp/ccyhPQAv.s:245    .text.HAL_IncTick:0000000000000000 $t
+     /tmp/ccyhPQAv.s:252    .text.HAL_IncTick:0000000000000000 HAL_IncTick
+     /tmp/ccyhPQAv.s:272    .text.HAL_IncTick:0000000000000010 $d
                             *COM*:0000000000000004 uwTick
-     /tmp/cckTfPLa.s:278    .text.HAL_GetTick:0000000000000000 $t
-     /tmp/cckTfPLa.s:285    .text.HAL_GetTick:0000000000000000 HAL_GetTick
-     /tmp/cckTfPLa.s:301    .text.HAL_GetTick:0000000000000008 $d
-     /tmp/cckTfPLa.s:306    .text.HAL_GetTickPrio:0000000000000000 $t
-     /tmp/cckTfPLa.s:313    .text.HAL_GetTickPrio:0000000000000000 HAL_GetTickPrio
-     /tmp/cckTfPLa.s:328    .text.HAL_GetTickPrio:0000000000000008 $d
-     /tmp/cckTfPLa.s:333    .text.HAL_SetTickFreq:0000000000000000 $t
-     /tmp/cckTfPLa.s:340    .text.HAL_SetTickFreq:0000000000000000 HAL_SetTickFreq
-     /tmp/cckTfPLa.s:397    .text.HAL_SetTickFreq:0000000000000024 $d
-     /tmp/cckTfPLa.s:403    .text.HAL_GetTickFreq:0000000000000000 $t
-     /tmp/cckTfPLa.s:410    .text.HAL_GetTickFreq:0000000000000000 HAL_GetTickFreq
-     /tmp/cckTfPLa.s:425    .text.HAL_GetTickFreq:0000000000000008 $d
-     /tmp/cckTfPLa.s:430    .text.HAL_Delay:0000000000000000 $t
-     /tmp/cckTfPLa.s:437    .text.HAL_Delay:0000000000000000 HAL_Delay
-     /tmp/cckTfPLa.s:490    .text.HAL_Delay:0000000000000024 $d
-     /tmp/cckTfPLa.s:495    .text.HAL_SuspendTick:0000000000000000 $t
-     /tmp/cckTfPLa.s:502    .text.HAL_SuspendTick:0000000000000000 HAL_SuspendTick
-     /tmp/cckTfPLa.s:520    .text.HAL_SuspendTick:000000000000000c $d
-     /tmp/cckTfPLa.s:525    .text.HAL_ResumeTick:0000000000000000 $t
-     /tmp/cckTfPLa.s:532    .text.HAL_ResumeTick:0000000000000000 HAL_ResumeTick
-     /tmp/cckTfPLa.s:550    .text.HAL_ResumeTick:000000000000000c $d
-     /tmp/cckTfPLa.s:555    .text.HAL_GetHalVersion:0000000000000000 $t
-     /tmp/cckTfPLa.s:562    .text.HAL_GetHalVersion:0000000000000000 HAL_GetHalVersion
-     /tmp/cckTfPLa.s:577    .text.HAL_GetREVID:0000000000000000 $t
-     /tmp/cckTfPLa.s:584    .text.HAL_GetREVID:0000000000000000 HAL_GetREVID
-     /tmp/cckTfPLa.s:601    .text.HAL_GetREVID:0000000000000008 $d
-     /tmp/cckTfPLa.s:606    .text.HAL_GetDEVID:0000000000000000 $t
-     /tmp/cckTfPLa.s:613    .text.HAL_GetDEVID:0000000000000000 HAL_GetDEVID
-     /tmp/cckTfPLa.s:630    .text.HAL_GetDEVID:000000000000000c $d
-     /tmp/cckTfPLa.s:635    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 $t
-     /tmp/cckTfPLa.s:642    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 HAL_DBGMCU_EnableDBGSleepMode
-     /tmp/cckTfPLa.s:659    .text.HAL_DBGMCU_EnableDBGSleepMode:000000000000000c $d
-     /tmp/cckTfPLa.s:664    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 $t
-     /tmp/cckTfPLa.s:671    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 HAL_DBGMCU_DisableDBGSleepMode
-     /tmp/cckTfPLa.s:688    .text.HAL_DBGMCU_DisableDBGSleepMode:000000000000000c $d
-     /tmp/cckTfPLa.s:693    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 $t
-     /tmp/cckTfPLa.s:700    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 HAL_DBGMCU_EnableDBGStopMode
-     /tmp/cckTfPLa.s:717    .text.HAL_DBGMCU_EnableDBGStopMode:000000000000000c $d
-ARM GAS  /tmp/cckTfPLa.s 			page 29
+     /tmp/ccyhPQAv.s:278    .text.HAL_GetTick:0000000000000000 $t
+     /tmp/ccyhPQAv.s:285    .text.HAL_GetTick:0000000000000000 HAL_GetTick
+     /tmp/ccyhPQAv.s:301    .text.HAL_GetTick:0000000000000008 $d
+     /tmp/ccyhPQAv.s:306    .text.HAL_GetTickPrio:0000000000000000 $t
+     /tmp/ccyhPQAv.s:313    .text.HAL_GetTickPrio:0000000000000000 HAL_GetTickPrio
+     /tmp/ccyhPQAv.s:328    .text.HAL_GetTickPrio:0000000000000008 $d
+     /tmp/ccyhPQAv.s:333    .text.HAL_SetTickFreq:0000000000000000 $t
+     /tmp/ccyhPQAv.s:340    .text.HAL_SetTickFreq:0000000000000000 HAL_SetTickFreq
+     /tmp/ccyhPQAv.s:397    .text.HAL_SetTickFreq:0000000000000024 $d
+     /tmp/ccyhPQAv.s:403    .text.HAL_GetTickFreq:0000000000000000 $t
+     /tmp/ccyhPQAv.s:410    .text.HAL_GetTickFreq:0000000000000000 HAL_GetTickFreq
+     /tmp/ccyhPQAv.s:425    .text.HAL_GetTickFreq:0000000000000008 $d
+     /tmp/ccyhPQAv.s:430    .text.HAL_Delay:0000000000000000 $t
+     /tmp/ccyhPQAv.s:437    .text.HAL_Delay:0000000000000000 HAL_Delay
+     /tmp/ccyhPQAv.s:490    .text.HAL_Delay:0000000000000024 $d
+     /tmp/ccyhPQAv.s:495    .text.HAL_SuspendTick:0000000000000000 $t
+     /tmp/ccyhPQAv.s:502    .text.HAL_SuspendTick:0000000000000000 HAL_SuspendTick
+     /tmp/ccyhPQAv.s:520    .text.HAL_SuspendTick:000000000000000c $d
+     /tmp/ccyhPQAv.s:525    .text.HAL_ResumeTick:0000000000000000 $t
+     /tmp/ccyhPQAv.s:532    .text.HAL_ResumeTick:0000000000000000 HAL_ResumeTick
+     /tmp/ccyhPQAv.s:550    .text.HAL_ResumeTick:000000000000000c $d
+     /tmp/ccyhPQAv.s:555    .text.HAL_GetHalVersion:0000000000000000 $t
+     /tmp/ccyhPQAv.s:562    .text.HAL_GetHalVersion:0000000000000000 HAL_GetHalVersion
+     /tmp/ccyhPQAv.s:577    .text.HAL_GetREVID:0000000000000000 $t
+     /tmp/ccyhPQAv.s:584    .text.HAL_GetREVID:0000000000000000 HAL_GetREVID
+     /tmp/ccyhPQAv.s:601    .text.HAL_GetREVID:0000000000000008 $d
+     /tmp/ccyhPQAv.s:606    .text.HAL_GetDEVID:0000000000000000 $t
+     /tmp/ccyhPQAv.s:613    .text.HAL_GetDEVID:0000000000000000 HAL_GetDEVID
+     /tmp/ccyhPQAv.s:630    .text.HAL_GetDEVID:000000000000000c $d
+     /tmp/ccyhPQAv.s:635    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 $t
+     /tmp/ccyhPQAv.s:642    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 HAL_DBGMCU_EnableDBGSleepMode
+     /tmp/ccyhPQAv.s:659    .text.HAL_DBGMCU_EnableDBGSleepMode:000000000000000c $d
+     /tmp/ccyhPQAv.s:664    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 $t
+     /tmp/ccyhPQAv.s:671    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 HAL_DBGMCU_DisableDBGSleepMode
+     /tmp/ccyhPQAv.s:688    .text.HAL_DBGMCU_DisableDBGSleepMode:000000000000000c $d
+     /tmp/ccyhPQAv.s:693    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 $t
+     /tmp/ccyhPQAv.s:700    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 HAL_DBGMCU_EnableDBGStopMode
+     /tmp/ccyhPQAv.s:717    .text.HAL_DBGMCU_EnableDBGStopMode:000000000000000c $d
+ARM GAS  /tmp/ccyhPQAv.s 			page 29
 
 
-     /tmp/cckTfPLa.s:722    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 $t
-     /tmp/cckTfPLa.s:729    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 HAL_DBGMCU_DisableDBGStopMode
-     /tmp/cckTfPLa.s:746    .text.HAL_DBGMCU_DisableDBGStopMode:000000000000000c $d
-     /tmp/cckTfPLa.s:751    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 $t
-     /tmp/cckTfPLa.s:758    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 HAL_DBGMCU_EnableDBGStandbyMode
-     /tmp/cckTfPLa.s:775    .text.HAL_DBGMCU_EnableDBGStandbyMode:000000000000000c $d
-     /tmp/cckTfPLa.s:780    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 $t
-     /tmp/cckTfPLa.s:787    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 HAL_DBGMCU_DisableDBGStandbyMode
-     /tmp/cckTfPLa.s:804    .text.HAL_DBGMCU_DisableDBGStandbyMode:000000000000000c $d
-     /tmp/cckTfPLa.s:809    .text.HAL_EnableCompensationCell:0000000000000000 $t
-     /tmp/cckTfPLa.s:816    .text.HAL_EnableCompensationCell:0000000000000000 HAL_EnableCompensationCell
-     /tmp/cckTfPLa.s:833    .text.HAL_EnableCompensationCell:0000000000000008 $d
-     /tmp/cckTfPLa.s:838    .text.HAL_DisableCompensationCell:0000000000000000 $t
-     /tmp/cckTfPLa.s:845    .text.HAL_DisableCompensationCell:0000000000000000 HAL_DisableCompensationCell
-     /tmp/cckTfPLa.s:862    .text.HAL_DisableCompensationCell:0000000000000008 $d
-     /tmp/cckTfPLa.s:867    .text.HAL_GetUIDw0:0000000000000000 $t
-     /tmp/cckTfPLa.s:874    .text.HAL_GetUIDw0:0000000000000000 HAL_GetUIDw0
-     /tmp/cckTfPLa.s:889    .text.HAL_GetUIDw0:0000000000000008 $d
-     /tmp/cckTfPLa.s:894    .text.HAL_GetUIDw1:0000000000000000 $t
-     /tmp/cckTfPLa.s:901    .text.HAL_GetUIDw1:0000000000000000 HAL_GetUIDw1
-     /tmp/cckTfPLa.s:916    .text.HAL_GetUIDw1:0000000000000008 $d
-     /tmp/cckTfPLa.s:921    .text.HAL_GetUIDw2:0000000000000000 $t
-     /tmp/cckTfPLa.s:928    .text.HAL_GetUIDw2:0000000000000000 HAL_GetUIDw2
-     /tmp/cckTfPLa.s:943    .text.HAL_GetUIDw2:0000000000000008 $d
-     /tmp/cckTfPLa.s:954    .data.uwTickFreq:0000000000000000 uwTickFreq
-     /tmp/cckTfPLa.s:961    .data.uwTickPrio:0000000000000000 uwTickPrio
-     /tmp/cckTfPLa.s:957    .data.uwTickPrio:0000000000000000 $d
+     /tmp/ccyhPQAv.s:722    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 $t
+     /tmp/ccyhPQAv.s:729    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 HAL_DBGMCU_DisableDBGStopMode
+     /tmp/ccyhPQAv.s:746    .text.HAL_DBGMCU_DisableDBGStopMode:000000000000000c $d
+     /tmp/ccyhPQAv.s:751    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 $t
+     /tmp/ccyhPQAv.s:758    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 HAL_DBGMCU_EnableDBGStandbyMode
+     /tmp/ccyhPQAv.s:775    .text.HAL_DBGMCU_EnableDBGStandbyMode:000000000000000c $d
+     /tmp/ccyhPQAv.s:780    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 $t
+     /tmp/ccyhPQAv.s:787    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 HAL_DBGMCU_DisableDBGStandbyMode
+     /tmp/ccyhPQAv.s:804    .text.HAL_DBGMCU_DisableDBGStandbyMode:000000000000000c $d
+     /tmp/ccyhPQAv.s:809    .text.HAL_EnableCompensationCell:0000000000000000 $t
+     /tmp/ccyhPQAv.s:816    .text.HAL_EnableCompensationCell:0000000000000000 HAL_EnableCompensationCell
+     /tmp/ccyhPQAv.s:833    .text.HAL_EnableCompensationCell:0000000000000008 $d
+     /tmp/ccyhPQAv.s:838    .text.HAL_DisableCompensationCell:0000000000000000 $t
+     /tmp/ccyhPQAv.s:845    .text.HAL_DisableCompensationCell:0000000000000000 HAL_DisableCompensationCell
+     /tmp/ccyhPQAv.s:862    .text.HAL_DisableCompensationCell:0000000000000008 $d
+     /tmp/ccyhPQAv.s:867    .text.HAL_GetUIDw0:0000000000000000 $t
+     /tmp/ccyhPQAv.s:874    .text.HAL_GetUIDw0:0000000000000000 HAL_GetUIDw0
+     /tmp/ccyhPQAv.s:889    .text.HAL_GetUIDw0:0000000000000008 $d
+     /tmp/ccyhPQAv.s:894    .text.HAL_GetUIDw1:0000000000000000 $t
+     /tmp/ccyhPQAv.s:901    .text.HAL_GetUIDw1:0000000000000000 HAL_GetUIDw1
+     /tmp/ccyhPQAv.s:916    .text.HAL_GetUIDw1:0000000000000008 $d
+     /tmp/ccyhPQAv.s:921    .text.HAL_GetUIDw2:0000000000000000 $t
+     /tmp/ccyhPQAv.s:928    .text.HAL_GetUIDw2:0000000000000000 HAL_GetUIDw2
+     /tmp/ccyhPQAv.s:943    .text.HAL_GetUIDw2:0000000000000008 $d
+     /tmp/ccyhPQAv.s:954    .data.uwTickFreq:0000000000000000 uwTickFreq
+     /tmp/ccyhPQAv.s:961    .data.uwTickPrio:0000000000000000 uwTickPrio
+     /tmp/ccyhPQAv.s:957    .data.uwTickPrio:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_SYSTICK_Config
